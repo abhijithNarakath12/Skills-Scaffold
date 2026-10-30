@@ -59,7 +59,7 @@ abstract class BaseProvider implements vscode.TreeDataProvider<TreeNode> {
         const item = new vscode.TreeItem(node.entry.title ?? node.entry.name, vscode.TreeItemCollapsibleState.None);
         item.description = node.installed ? 'installed' : node.reasons?.length ? node.reasons.join(', ') : undefined;
         item.tooltip = new vscode.MarkdownString(`**${node.entry.name}**\n\n${node.entry.description}` + (node.reasons?.length ? `\n\nDetected: ${node.reasons.join(', ')}` : '') + (node.entry.upstream?.length ? `\n\nCommunity versions: ${node.entry.upstream.map((u) => u.repo).join(', ')}` : ''));
-        item.contextValue = (node.installed ? 'skill-catalog-installed' : 'skill-available') + (node.entry.upstream?.length ? ' has-upstream' : '');
+        item.contextValue = (node.installed ? 'skill-catalog-installed' : 'skill-available') + (node.entry.upstream?.length ? ' has-upstream' : '') + (node.entry.run ? ' runnable' : '');
         item.iconPath = new vscode.ThemeIcon(node.installed ? 'check' : 'book');
         item.command = { command: 'agentSkills.openSkill', title: 'Open SKILL.md', arguments: [node] };
         return item;
@@ -78,7 +78,7 @@ abstract class BaseProvider implements vscode.TreeDataProvider<TreeNode> {
         }
         item.description = parts.join(' · ');
         item.tooltip = new vscode.MarkdownString(`**${node.skill.name}**\n\n${node.skill.description}\n\n\`${node.skill.path}\``);
-        item.contextValue = 'skill-installed' + (node.entry?.upstream?.length ? ' has-upstream' : '');
+        item.contextValue = 'skill-installed' + (node.entry?.upstream?.length ? ' has-upstream' : '') + (node.entry?.run ? ' runnable' : '');
         item.iconPath = new vscode.ThemeIcon(node.outdated ? 'arrow-circle-up' : 'verified');
         item.resourceUri = vscode.Uri.file(path.join(node.skill.path, 'SKILL.md'));
         item.command = { command: 'agentSkills.openSkill', title: 'Open SKILL.md', arguments: [node] };

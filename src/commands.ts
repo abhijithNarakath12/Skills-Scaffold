@@ -6,6 +6,7 @@ import { CATEGORY_LABELS, withRecommended } from './core/catalog';
 import { isValidSkillName } from './core/frontmatter';
 import { exists, installSkillDir, removeSkill, skillTemplate, type InstallResult } from './core/installer';
 import { applySkillIntegration, removeSkillIntegration } from './core/integration';
+import { claudeCommand, resolveRunMode } from './core/run';
 import { GitHubClient, parseGitHubReference, type RemoteSkill, type RemoteSource } from './core/remote';
 import { TARGETS } from './core/targets';
 import type { CatalogEntry, InstallManifest } from './core/types';
@@ -33,6 +34,7 @@ export function registerCommands(service: SkillService): vscode.Disposable[] {
     reg('agentSkills.refresh', () => service.refresh()),
     reg('agentSkills.selectTargets', () => selectTargets(service)),
     reg('agentSkills.syncIntegrations', () => syncIntegrations(service)),
+    reg('agentSkills.runSkill', (node) => runSkill(service, node as TreeNode | undefined)),
   ];
 }
 
@@ -393,6 +395,51 @@ async function integrate(service: SkillService, folder: vscode.WorkspaceFolder, 
     service.log(`Rules/commands written: ${[...touched].join(', ')}`);
   }
   return [...touched];
+}
+
+/** Starts the agent with a runnable skill's prompt, installing the skill first when needed. */
+async function runSkill(service: SkillService, node: TreeNode | undefined): Promise<void> {
+  const folder = await service.pickWorkspace();
+  if (!folder) {
+    return;
+  }
+  const catalog = await service.getCatalog();
+  let entry: CatalogEntry | undefined = node?.kind === 'skill' ? node.entry : node?.kind === 'installed' ? node.entry : undefined;
+  if (!entry) {
+    const runnable = catalog.skills.filter((e) => e.run);
+    const pick = await vscode.window.showQuickPick(
+      runnable.map((e) => ({ label: `$(play) ${e.run!.label}`, detail: e.description, entry: e })),
+      { title: 'Run a skill', matchOnDetail: true },
+    );
+    entry = pick?.entry;
+  }
+  if (!entry?.run) {
+    void vscode.window.showInformationMessage('This skill has no run action.');
+    return;
+  }
+  const installed = await service.getInstalled(folder);
+  if (!installed.some((s) => s.id === entry!.id)) {
+    await installEntries(service, folder, [entry]);
+  }
+  const mode = resolveRunMode(service.config.get<string>('runWith', 'auto'), service.targets[0].key);
+  const prompt = entry.run.prompt;
+  service.log(`Run ${entry.id} via ${mode}`);
+  if (mode === 'claude-terminal') {
+    const terminal = vscode.window.createTerminal({ name: entry.run.label, cwd: folder.uri.fsPath });
+    terminal.show();
+    terminal.sendText(claudeCommand(prompt));
+    return;
+  }
+  if (mode === 'copilot-chat') {
+    try {
+      await vscode.commands.executeCommand('workbench.action.chat.open', { query: prompt, mode: 'agent' });
+      return;
+    } catch (err) {
+      service.log(`Copilot Chat unavailable: ${(err as Error).message}`);
+    }
+  }
+  await vscode.env.clipboard.writeText(prompt);
+  void vscode.window.showInformationMessage(`${entry.run.label}: prompt copied. Paste it into your agent's chat.`);
 }
 
 /** Re-applies rules and slash commands for every installed bundled skill (e.g. after changing targets). */

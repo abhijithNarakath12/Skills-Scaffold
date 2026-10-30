@@ -8,4 +8,5 @@
 - Install to one or more agent directories (`.claude/skills`, `.agents/skills`, `.cursor/skills`, `.github/skills`, `.gemini/skills`, `.windsurf/skills`, `.opencode/skills`, custom), linking secondary targets to the primary copy.
 - Browse and install community skills from GitHub repositories (Anthropic, Vercel, Superpowers, or any `owner/repo`).
 - Always-on rules written to the agent instruction file (`plan-feature` is enforced on every task) and a generated `/design` slash command for Claude Code, Cursor, Copilot, Gemini CLI, Windsurf and OpenCode.
+- `appstore-review` skill: whole-project Apple App Store audit that writes a report document with every issue found.
 - Create new project-local skills from a template; update bundled skills when the extension ships newer versions.

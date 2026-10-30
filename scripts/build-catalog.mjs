@@ -92,6 +92,7 @@ for (const category of CATEGORIES) {
       recommends: meta.recommends,
       rule: meta.rule,
       commands: meta.commands,
+      run: meta.run,
       dir: `${category}/${id}`,
       version: await hashDir(dir),
     });

@@ -54,6 +54,15 @@ export interface SkillMeta {
   rule?: string;
   /** Slash commands generated for agents that support project-level commands. */
   commands?: SkillCommand[];
+  /** Makes the skill runnable from the extension view (play button). */
+  run?: SkillRun;
+}
+
+export interface SkillRun {
+  /** Button / notification label, e.g. "Run App Store audit". */
+  label: string;
+  /** Prompt sent to the agent. */
+  prompt: string;
 }
 
 export interface SkillCommand {

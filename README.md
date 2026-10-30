@@ -51,6 +51,12 @@ The block is delimited by `<!-- agent-skills-manager:begin -->` and `<!-- agent-
 | Agent Skills: Select Target Agents... | Choose which agent directories receive skills. |
 | Agent Skills: Re-apply Always-on Rules and Slash Commands | Rewrites the managed instruction block and command files for all installed skills. |
 
+### App Store review audit
+
+`appstore-review` is recommended automatically for iOS-capable projects (native Xcode, React Native, Expo, Flutter, Capacitor). Ask the agent to "audit this app for App Store review". It inspects the whole project against Apple's App Store Review Guidelines without changing code, and writes `docs/reviews/<date>-appstore-review.md`. The report has an issue register listing every problem found, with severity, guideline, `file:line` evidence, fix, effort and status, plus checklist coverage, items to confirm manually, and App Review notes to prepare.
+
+Click the **▶ play button** next to the skill in the Agent Skills view to start the audit directly. It installs the skill if needed, then opens a terminal running `claude` with the audit prompt (Claude Code), opens Copilot Chat in agent mode (Copilot), or copies the prompt to the clipboard (other agents). Change this with `agentSkills.runWith`.
+
 ## Where skills are installed
 
 | Target | Directory |
@@ -93,7 +99,7 @@ Run `Agent Skills: Add Skills to Project...` to see the full list. Categories:
 - **Languages**: TypeScript, JavaScript, Python, Go, Rust, Java, Kotlin, C#, C++, Swift, Ruby, PHP, Dart, Scala, SQL, Bash.
 - **Frameworks**: React, Next.js, Vue, Nuxt, Angular, Svelte/SvelteKit, React Router/Remix, Astro, React Native, Flutter, Express, NestJS, Fastify, Hono, FastAPI, Django, Flask, Spring Boot, Rails, Laravel, ASP.NET Core, Gin.
 - **Libraries**: Tailwind CSS, Prisma, Drizzle, SQLAlchemy, TanStack Query, Redux Toolkit, Zustand, Zod, GraphQL, Pydantic, pandas, React Hook Form, Socket.IO, HTTP clients.
-- **Tooling**: Docker, Kubernetes, Terraform, GitHub Actions, Vitest, Jest, pytest, Playwright, Cypress, PostgreSQL, MongoDB, Redis, ESLint/Prettier, Git workflow.
+- **Tooling**: Apple App Store review audit, Docker, Kubernetes, Terraform, GitHub Actions, Vitest, Jest, pytest, Playwright, Cypress, PostgreSQL, MongoDB, Redis, ESLint/Prettier, Git workflow.
 
 Where a community skill exists for the same topic, the catalog entry records it as a verified *upstream* source (189 entries across 66 topics, including official skills from Angular, Prisma, Laravel, Docker, HashiCorp, MongoDB, Redis, Pydantic, Flutter, Expo, Hono, Kotlin and .NET). Use **Install Community Version...** on a skill to fetch one of them from GitHub.
 

@@ -110,6 +110,12 @@
         "title": "Re-apply Always-on Rules and Slash Commands",
         "category": "Agent Skills",
         "icon": "$(law)"
+      },
+      {
+        "command": "agentSkills.runSkill",
+        "title": "Run Skill (start agent)",
+        "category": "Agent Skills",
+        "icon": "$(play)"
       }
     ],
     "viewsContainers": {
@@ -187,6 +193,11 @@
       ],
       "view/item/context": [
         {
+          "command": "agentSkills.runSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /runnable/",
+          "group": "inline@0"
+        },
+        {
           "command": "agentSkills.installSkill",
           "when": "view =~ /^agentSkills\\./ && viewItem =~ /skill-available/",
           "group": "inline@1"
@@ -225,6 +236,11 @@
           "command": "agentSkills.installUpstream",
           "when": "view =~ /^agentSkills\\./ && viewItem =~ /has-upstream/",
           "group": "1_actions@4"
+        },
+        {
+          "command": "agentSkills.runSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /runnable/",
+          "group": "1_actions@0"
         }
       ],
       "commandPalette": [
@@ -361,6 +377,23 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "Generate project slash commands declared by skills (currently `/design`) for agents that support them (Claude Code, Cursor, Copilot, Gemini CLI, Windsurf, OpenCode)."
+        },
+        "agentSkills.runWith": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "claude-terminal",
+            "copilot-chat",
+            "clipboard"
+          ],
+          "enumDescriptions": [
+            "Claude Code terminal when the primary target is Claude, Copilot Chat when it is Copilot, otherwise clipboard",
+            "Open a terminal and run `claude` with the prompt",
+            "Open Copilot Chat in agent mode with the prompt",
+            "Copy the prompt to the clipboard"
+          ],
+          "markdownDescription": "How the play button on runnable skills (for example the App Store review audit) starts the agent."
         }
       }
     }

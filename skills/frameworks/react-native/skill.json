@@ -25,6 +25,11 @@
   ],
   "upstream": [
     {
+      "repo": "github/awesome-copilot",
+      "path": "skills/apple-appstore-reviewer",
+      "note": "apple-appstore-reviewer: audits an iOS app's code and metadata for App Store rejection risks and optimizations (GitHub awesome-copilot)"
+    },
+    {
       "repo": "vercel-labs/agent-skills",
       "path": "skills/react-native-skills",
       "note": "vercel-react-native-skills: React Native/Expo skills from Vercel (official)"

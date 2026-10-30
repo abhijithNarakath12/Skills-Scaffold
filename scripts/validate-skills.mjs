@@ -69,6 +69,7 @@ for (const category of CATEGORIES) {
       if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(c.name ?? '')) problems.push(`${where}: command name "${c.name}" must be lowercase-hyphenated`);
       if (!c.description || !c.prompt) problems.push(`${where}: command "${c.name}" needs description and prompt`);
     }
+    if (meta.run !== undefined && (!meta.run.label || !meta.run.prompt || /[\r\n]/.test(meta.run.prompt))) problems.push(`${where}: run needs label and a single-line prompt`);
     if (meta.rule !== undefined && (typeof meta.rule !== 'string' || meta.rule.length < 20)) problems.push(`${where}: rule must be a sentence`);
     for (const u of meta.upstream ?? []) {
       if (!/^[\w.-]+\/[\w.-]+$/.test(u.repo ?? '')) problems.push(`${where}: upstream repo "${u.repo}" is not owner/name`);
