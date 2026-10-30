@@ -1,0 +1,8 @@
+{
+  "title": "Remix / React Router",
+  "tags": ["frontend", "fullstack", "react", "routing", "ssr", "loaders", "javascript", "typescript"],
+  "detect": {
+    "npm": ["@remix-run/react", "@remix-run/node", "react-router"]
+  },
+  "recommends": ["react"]
+}

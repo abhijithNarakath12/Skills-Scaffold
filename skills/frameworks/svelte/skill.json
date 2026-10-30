@@ -1,0 +1,10 @@
+{
+  "title": "Svelte and SvelteKit",
+  "tags": ["frontend", "ui", "components", "runes", "sveltekit", "ssr", "vite", "javascript", "typescript"],
+  "detect": {
+    "npm": ["svelte", "@sveltejs/kit"],
+    "extensions": [".svelte"],
+    "files": ["svelte.config.js"]
+  },
+  "recommends": ["typescript"]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Ruby on Rails",
+  "tags": ["backend", "ruby", "web", "mvc", "activerecord", "hotwire", "fullstack"],
+  "detect": {
+    "gem": ["rails"],
+    "files": ["config.ru", "Gemfile"]
+  },
+  "recommends": ["ruby"]
+}

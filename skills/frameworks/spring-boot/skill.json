@@ -1,0 +1,8 @@
+{
+  "title": "Spring Boot",
+  "tags": ["backend", "java", "kotlin", "jvm", "rest", "jpa", "spring", "maven", "gradle"],
+  "detect": {
+    "jvm": ["org.springframework.boot"]
+  },
+  "recommends": ["java"]
+}

@@ -271,7 +271,7 @@ def test_create_order(client, user):
 
 ```bash
 flask --app wsgi routes                 # list endpoints and blueprints
-flask --app wsgi db check 2>/dev/null || flask --app wsgi db migrate --dry-run 2>/dev/null   # drift check if Flask-Migrate >= 4; otherwise 'flask db migrate' and expect "No changes"
+flask --app wsgi db check                # Flask-Migrate >= 4: fails if models differ from migrations (run `flask db --help` to confirm)
 pytest -q
 ruff check . && ruff format --check .
 mypy app                                # if configured

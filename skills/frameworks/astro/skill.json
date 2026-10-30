@@ -1,0 +1,10 @@
+{
+  "title": "Astro",
+  "tags": ["frontend", "static-site", "islands", "content", "ssr", "mdx", "javascript", "typescript"],
+  "detect": {
+    "npm": ["astro"],
+    "files": ["astro.config.mjs", "astro.config.ts"],
+    "extensions": [".astro"]
+  },
+  "recommends": ["typescript"]
+}
