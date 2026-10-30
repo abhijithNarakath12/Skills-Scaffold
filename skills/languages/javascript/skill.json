@@ -1,0 +1,37 @@
+{
+  "title": "JavaScript",
+  "tags": [
+    "language",
+    "javascript",
+    "node",
+    "frontend",
+    "esm"
+  ],
+  "detect": {
+    "files": [
+      "package.json"
+    ],
+    "extensions": [
+      ".js",
+      ".mjs",
+      ".cjs"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/javascript-typescript/skills/modern-javascript-patterns",
+      "note": "modern-javascript-patterns: Modern JavaScript patterns from wshobson/agents marketplace"
+    },
+    {
+      "repo": "mcollina/skills",
+      "path": "skills/node",
+      "note": "node: Node.js + TypeScript best practices by Matteo Collina (Node.js TSC)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/javascript-pro",
+      "note": "javascript-pro: JavaScript expert skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

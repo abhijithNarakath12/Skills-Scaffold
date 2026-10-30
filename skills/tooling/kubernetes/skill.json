@@ -1,0 +1,41 @@
+{
+  "title": "Kubernetes",
+  "tags": [
+    "kubernetes",
+    "k8s",
+    "helm",
+    "kustomize",
+    "devops",
+    "infrastructure",
+    "containers"
+  ],
+  "detect": {
+    "files": [
+      "Chart.yaml",
+      "kustomization.yaml",
+      "kustomization.yml",
+      "skaffold.yaml",
+      "values.yaml"
+    ]
+  },
+  "recommends": [
+    "docker"
+  ],
+  "upstream": [
+    {
+      "repo": "LukasNiessen/kubernetes-skill",
+      "path": "",
+      "note": "kubernetes-skill: Kubernetes skill (SKILL.md at repo root, community, 400+ stars)"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/kubernetes-operations/skills/k8s-manifest-generator",
+      "note": "k8s-manifest-generator: Kubernetes manifest generator from wshobson/agents marketplace"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/kubernetes-specialist",
+      "note": "kubernetes-specialist: Kubernetes specialist skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

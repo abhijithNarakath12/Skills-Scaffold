@@ -1,0 +1,39 @@
+{
+  "title": "SQLAlchemy",
+  "tags": [
+    "database",
+    "orm",
+    "sql",
+    "migrations",
+    "python",
+    "backend",
+    "alembic"
+  ],
+  "detect": {
+    "pip": [
+      "sqlalchemy",
+      "alembic",
+      "sqlmodel"
+    ]
+  },
+  "recommends": [
+    "python"
+  ],
+  "upstream": [
+    {
+      "repo": "bm629/agent-skills",
+      "path": "skills/sqlalchemy",
+      "note": "sqlalchemy: SQLAlchemy skill from bm629/agent-skills (community)"
+    },
+    {
+      "repo": "kid-sid/codex-spellbook",
+      "path": "skills/sqlalchemy",
+      "note": "sqlalchemy: SQLAlchemy skill from kid-sid/codex-spellbook (community)"
+    },
+    {
+      "repo": "pavelzw/skill-forge",
+      "path": "recipes/sqlalchemy",
+      "note": "sqlalchemy: SQLAlchemy recipe skill from pavelzw/skill-forge (community)"
+    }
+  ]
+}

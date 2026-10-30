@@ -1,0 +1,42 @@
+{
+  "title": "Apple App Store Review Audit",
+  "tags": [
+    "ios",
+    "ipados",
+    "app-store",
+    "review",
+    "compliance",
+    "privacy",
+    "mobile",
+    "audit"
+  ],
+  "detect": {
+    "files": [
+      "Info.plist",
+      "PrivacyInfo.xcprivacy",
+      "*.xcodeproj",
+      "*.xcworkspace",
+      "Podfile",
+      "*.entitlements",
+      "eas.json"
+    ],
+    "pub": [
+      "flutter"
+    ],
+    "npm": [
+      "expo",
+      "react-native"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/apple-appstore-reviewer",
+      "note": "apple-appstore-reviewer: the community skill this audit was inspired by (GitHub awesome-copilot, MIT)"
+    }
+  ],
+  "run": {
+    "label": "Run App Store review audit",
+    "prompt": "Use the appstore-review skill to audit this entire project for Apple App Store review. Do not change any code. Write the full report with every issue found to docs/reviews/ and then show me the executive summary and issue register."
+  }
+}

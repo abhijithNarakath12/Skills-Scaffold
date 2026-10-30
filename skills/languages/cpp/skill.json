@@ -1,0 +1,43 @@
+{
+  "title": "C++",
+  "tags": [
+    "language",
+    "cpp",
+    "cmake",
+    "native",
+    "systems"
+  ],
+  "detect": {
+    "files": [
+      "CMakeLists.txt",
+      "Makefile",
+      "conanfile.txt",
+      "conanfile.py",
+      "vcpkg.json"
+    ],
+    "extensions": [
+      ".cpp",
+      ".cc",
+      ".cxx",
+      ".hpp",
+      ".h"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "trailofbits/skills",
+      "path": "plugins/modern-cpp/skills/modern-cpp",
+      "note": "modern-cpp: Modern C++ skill by Trail of Bits"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/cpp-pro",
+      "note": "cpp-pro: C++ expert skill from Jeffallan/claude-skills (community)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "cpp",
+      "note": "cpp: C++ skill from Mindrally/skills (community)"
+    }
+  ]
+}

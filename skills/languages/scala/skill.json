@@ -1,0 +1,8 @@
+{
+  "title": "Scala",
+  "tags": ["language", "scala", "sbt", "jvm", "functional"],
+  "detect": {
+    "files": ["build.sbt"],
+    "extensions": [".scala", ".sc"]
+  }
+}

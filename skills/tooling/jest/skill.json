@@ -1,0 +1,36 @@
+{
+  "title": "Jest",
+  "tags": [
+    "testing",
+    "unit-tests",
+    "javascript",
+    "typescript"
+  ],
+  "detect": {
+    "npm": [
+      "jest"
+    ],
+    "files": [
+      "jest.config.js",
+      "jest.config.ts",
+      "jest.config.mjs"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/javascript-typescript-jest",
+      "note": "javascript-typescript-jest: Jest for JS/TS skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "LambdaTest/agent-skills",
+      "path": "jest-skill",
+      "note": "jest-skill: Jest skill from LambdaTest's test-automation skills"
+    },
+    {
+      "repo": "anivar/jest-skill",
+      "path": "",
+      "note": "jest: Jest 29/30 rules skill (SKILL.md at repo root, community)"
+    }
+  ]
+}

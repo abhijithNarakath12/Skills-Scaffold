@@ -1,0 +1,33 @@
+{
+  "title": "Fastify",
+  "tags": [
+    "backend",
+    "node",
+    "http",
+    "api",
+    "json-schema",
+    "typebox",
+    "pino",
+    "typescript"
+  ],
+  "detect": {
+    "npm": [
+      "fastify"
+    ]
+  },
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "mcollina/skills",
+      "path": "skills/fastify",
+      "note": "fastify-best-practices: Fastify skill by Matteo Collina (Fastify creator)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "fastify-typescript",
+      "note": "fastify-typescript: Fastify + TypeScript skill from Mindrally/skills (community)"
+    }
+  ]
+}

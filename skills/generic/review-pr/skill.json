@@ -1,0 +1,27 @@
+{
+  "title": "Code and PR Review",
+  "tags": [
+    "workflow",
+    "code-review",
+    "pull-request",
+    "quality"
+  ],
+  "recommends": [],
+  "upstream": [
+    {
+      "repo": "obra/superpowers",
+      "path": "skills/requesting-code-review",
+      "note": "requesting-code-review: Code review request skill from obra/superpowers"
+    },
+    {
+      "repo": "getsentry/skills",
+      "path": "skills/code-review",
+      "note": "code-review: Code review skill used by the Sentry team"
+    },
+    {
+      "repo": "coderabbitai/skills",
+      "path": "skills/code-review",
+      "note": "code-review: Code review skill from CodeRabbit (official org)"
+    }
+  ]
+}

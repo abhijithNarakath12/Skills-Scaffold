@@ -1,0 +1,38 @@
+{
+  "title": "pytest",
+  "tags": [
+    "testing",
+    "python",
+    "unit-tests",
+    "fixtures"
+  ],
+  "detect": {
+    "pip": [
+      "pytest"
+    ],
+    "files": [
+      "pytest.ini",
+      "conftest.py"
+    ]
+  },
+  "recommends": [
+    "python"
+  ],
+  "upstream": [
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "curated/pytest",
+      "note": "pytest skill from Gentleman Programming community collection"
+    },
+    {
+      "repo": "LambdaTest/agent-skills",
+      "path": "pytest-skill",
+      "note": "pytest-skill: pytest skill from LambdaTest's test-automation skills"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/pytest-coverage",
+      "note": "pytest-coverage: pytest coverage skill from GitHub's awesome-copilot"
+    }
+  ]
+}

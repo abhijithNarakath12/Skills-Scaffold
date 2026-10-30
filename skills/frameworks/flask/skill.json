@@ -1,0 +1,32 @@
+{
+  "title": "Flask",
+  "tags": [
+    "backend",
+    "python",
+    "web",
+    "wsgi",
+    "blueprints",
+    "sqlalchemy",
+    "jinja"
+  ],
+  "detect": {
+    "pip": [
+      "flask"
+    ]
+  },
+  "recommends": [
+    "python"
+  ],
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "flask-python",
+      "note": "flask-python: Flask skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "clawic/skills",
+      "path": "skills/flask",
+      "note": "Flask skill from clawic/skills (community)"
+    }
+  ]
+}

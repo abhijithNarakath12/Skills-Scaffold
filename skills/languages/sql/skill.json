@@ -1,0 +1,38 @@
+{
+  "title": "SQL",
+  "tags": [
+    "language",
+    "sql",
+    "database",
+    "postgresql",
+    "mysql",
+    "sqlite",
+    "migrations"
+  ],
+  "detect": {
+    "files": [
+      "schema.sql",
+      "*.sql"
+    ],
+    "extensions": [
+      ".sql"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/sql-optimization",
+      "note": "sql-optimization: SQL optimization skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "sql-best-practices",
+      "note": "sql-best-practices: SQL best practices from Mindrally/skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/sql-pro",
+      "note": "sql-pro: SQL expert skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

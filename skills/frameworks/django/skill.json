@@ -1,0 +1,40 @@
+{
+  "title": "Django",
+  "tags": [
+    "backend",
+    "python",
+    "web",
+    "orm",
+    "rest",
+    "drf",
+    "fullstack"
+  ],
+  "detect": {
+    "pip": [
+      "django"
+    ],
+    "files": [
+      "manage.py"
+    ]
+  },
+  "recommends": [
+    "python"
+  ],
+  "upstream": [
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/django-expert",
+      "note": "django-expert: Django expert skill from Jeffallan/claude-skills (community)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "django-python",
+      "note": "django-python: Django skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "getsentry/skills",
+      "path": "skills/django-perf-review",
+      "note": "django-perf-review: Django performance review skill used by the Sentry team"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "React Native",
+  "tags": [
+    "mobile",
+    "ios",
+    "android",
+    "react",
+    "expo",
+    "native",
+    "javascript",
+    "typescript"
+  ],
+  "detect": {
+    "npm": [
+      "react-native",
+      "expo"
+    ],
+    "files": [
+      "app.json",
+      "metro.config.js"
+    ]
+  },
+  "recommends": [
+    "react"
+  ],
+  "upstream": [
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/apple-appstore-reviewer",
+      "note": "apple-appstore-reviewer: audits an iOS app's code and metadata for App Store rejection risks and optimizations (GitHub awesome-copilot)"
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/react-native-skills",
+      "note": "vercel-react-native-skills: React Native/Expo skills from Vercel (official)"
+    },
+    {
+      "repo": "callstackincubator/agent-skills",
+      "path": "skills/react-native-best-practices",
+      "note": "react-native-best-practices: React Native best practices from Callstack (RN core contributors)"
+    },
+    {
+      "repo": "expo/skills",
+      "path": "plugins/expo/skills/expo-overview",
+      "note": "expo-overview: Official Expo overview skill from the Expo team"
+    }
+  ]
+}

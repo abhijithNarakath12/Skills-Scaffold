@@ -1,0 +1,40 @@
+{
+  "title": "Astro",
+  "tags": [
+    "frontend",
+    "static-site",
+    "islands",
+    "content",
+    "ssr",
+    "mdx",
+    "javascript",
+    "typescript"
+  ],
+  "detect": {
+    "npm": [
+      "astro"
+    ],
+    "files": [
+      "astro.config.mjs",
+      "astro.config.ts"
+    ],
+    "extensions": [
+      ".astro"
+    ]
+  },
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "astro",
+      "note": "astro: Astro skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "oakoss/agent-skills",
+      "path": "skills/astro",
+      "note": "astro: Astro skill from oakoss/agent-skills (community)"
+    }
+  ]
+}

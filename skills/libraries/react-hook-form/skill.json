@@ -1,0 +1,27 @@
+{
+  "title": "React Hook Form",
+  "tags": [
+    "forms",
+    "validation",
+    "react",
+    "frontend",
+    "accessibility"
+  ],
+  "detect": {
+    "npm": [
+      "react-hook-form"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "PyModel/react-frontend-skills",
+      "path": "skills/react-hook-form",
+      "note": "react-hook-form: React Hook Form skill from PyModel/react-frontend-skills (community)"
+    },
+    {
+      "repo": "Fandhe-AI/agent-reference-skills",
+      "path": "skills/react-hook-form",
+      "note": "react-hook-form: React Hook Form skill from Fandhe-AI/agent-reference-skills (community)"
+    }
+  ]
+}

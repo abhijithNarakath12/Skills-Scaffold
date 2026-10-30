@@ -1,0 +1,41 @@
+{
+  "title": "Ruby on Rails",
+  "tags": [
+    "backend",
+    "ruby",
+    "web",
+    "mvc",
+    "activerecord",
+    "hotwire",
+    "fullstack"
+  ],
+  "detect": {
+    "gem": [
+      "rails"
+    ],
+    "files": [
+      "config.ru",
+      "Gemfile"
+    ]
+  },
+  "recommends": [
+    "ruby"
+  ],
+  "upstream": [
+    {
+      "repo": "igmarin/rails-agent-skills",
+      "path": "skills/rails-feature",
+      "note": "rails-feature: Rails feature workflow from igmarin/rails-agent-skills (community)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "ruby-rails",
+      "note": "ruby-rails: Ruby on Rails skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/rails-expert",
+      "note": "rails-expert: Rails expert skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

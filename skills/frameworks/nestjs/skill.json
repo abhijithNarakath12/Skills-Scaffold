@@ -1,0 +1,37 @@
+{
+  "title": "NestJS",
+  "tags": [
+    "backend",
+    "node",
+    "typescript",
+    "api",
+    "dependency-injection",
+    "rest",
+    "graphql"
+  ],
+  "detect": {
+    "npm": [
+      "@nestjs/core"
+    ]
+  },
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "Kadajett/agent-nestjs-skills",
+      "path": "skills/nestjs-best-practices",
+      "note": "nestjs-best-practices: NestJS best practices from Kadajett/agent-nestjs-skills (community)"
+    },
+    {
+      "repo": "amirtaherkhani/nestjs-skills",
+      "path": "skills/nestjs-architecture-principles",
+      "note": "nestjs-architecture-principles: NestJS architecture principles from amirtaherkhani/nestjs-skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/nestjs-expert",
+      "note": "nestjs-expert: NestJS expert skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

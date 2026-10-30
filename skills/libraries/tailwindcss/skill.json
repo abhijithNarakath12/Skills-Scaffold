@@ -1,0 +1,37 @@
+{
+  "title": "Tailwind CSS",
+  "tags": [
+    "css",
+    "styling",
+    "frontend",
+    "ui",
+    "design-system"
+  ],
+  "detect": {
+    "npm": [
+      "tailwindcss"
+    ],
+    "files": [
+      "tailwind.config.js",
+      "tailwind.config.ts",
+      "tailwind.config.cjs"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "laravel/boost",
+      "path": ".ai/tailwindcss/4/skill/tailwindcss-development",
+      "note": "tailwindcss-development: Tailwind CSS v4 development skill shipped in Laravel Boost (official Laravel)"
+    },
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "curated/tailwind-4",
+      "note": "tailwind-4: Tailwind CSS v4 skill from Gentleman Programming community collection"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/frontend-mobile-development/skills/tailwind-design-system",
+      "note": "tailwind-design-system: Tailwind design system skill from wshobson/agents marketplace"
+    }
+  ]
+}

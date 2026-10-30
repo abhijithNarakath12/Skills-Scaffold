@@ -1,0 +1,40 @@
+{
+  "title": "Remix / React Router",
+  "tags": [
+    "frontend",
+    "fullstack",
+    "react",
+    "routing",
+    "ssr",
+    "loaders",
+    "javascript",
+    "typescript"
+  ],
+  "detect": {
+    "npm": [
+      "@remix-run/react",
+      "@remix-run/node",
+      "react-router"
+    ]
+  },
+  "recommends": [
+    "react"
+  ],
+  "upstream": [
+    {
+      "repo": "remix-run/agent-skills",
+      "path": "skills/react-router-framework-mode",
+      "note": "react-router-framework-mode: Official React Router framework-mode skill from Remix team"
+    },
+    {
+      "repo": "remix-run/agent-skills",
+      "path": "skills/react-router-data-mode",
+      "note": "react-router-data-mode: Official React Router data-mode skill from Remix team"
+    },
+    {
+      "repo": "remix-run/agent-skills",
+      "path": "skills/react-router-declarative-mode",
+      "note": "react-router-declarative-mode: Official React Router declarative-mode skill from Remix team"
+    }
+  ]
+}

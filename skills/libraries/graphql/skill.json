@@ -1,0 +1,47 @@
+{
+  "title": "GraphQL",
+  "tags": [
+    "api",
+    "graphql",
+    "apollo",
+    "backend",
+    "frontend",
+    "codegen",
+    "dataloader"
+  ],
+  "detect": {
+    "npm": [
+      "graphql",
+      "@apollo/server",
+      "@apollo/client",
+      "graphql-yoga",
+      "urql"
+    ],
+    "pip": [
+      "graphene",
+      "strawberry-graphql",
+      "ariadne"
+    ],
+    "extensions": [
+      ".graphql",
+      ".gql"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "apollographql/skills",
+      "path": "skills/graphql-schema",
+      "note": "graphql-schema: Official GraphQL schema design skill from Apollo GraphQL"
+    },
+    {
+      "repo": "apollographql/skills",
+      "path": "skills/graphql-operations",
+      "note": "graphql-operations: Official GraphQL operations skill from Apollo GraphQL"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "graphql",
+      "note": "graphql: GraphQL skill from Mindrally/skills (community)"
+    }
+  ]
+}

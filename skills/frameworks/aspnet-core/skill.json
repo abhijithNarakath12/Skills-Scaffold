@@ -1,0 +1,43 @@
+{
+  "title": "ASP.NET Core",
+  "tags": [
+    "backend",
+    "csharp",
+    "dotnet",
+    "api",
+    "minimal-apis",
+    "mvc",
+    "ef-core",
+    "identity"
+  ],
+  "detect": {
+    "nuget": [
+      "microsoft.net.sdk.web",
+      "microsoft.aspnetcore.app",
+      "microsoft.entityframeworkcore"
+    ],
+    "files": [
+      "appsettings.json"
+    ]
+  },
+  "recommends": [
+    "csharp"
+  ],
+  "upstream": [
+    {
+      "repo": "openai/skills",
+      "path": "skills/.curated/aspnet-core",
+      "note": "aspnet-core: ASP.NET Core skill from OpenAI's curated Codex skills catalog"
+    },
+    {
+      "repo": "dotnet/skills",
+      "path": "plugins/dotnet-aspnetcore/skills/dotnet-webapi",
+      "note": "dotnet-webapi: ASP.NET Core Web API skill from the official dotnet/skills repo"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/aspnet-minimal-api-openapi",
+      "note": "aspnet-minimal-api-openapi: ASP.NET minimal API + OpenAPI skill from GitHub's awesome-copilot"
+    }
+  ]
+}

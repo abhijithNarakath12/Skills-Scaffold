@@ -1,0 +1,41 @@
+{
+  "title": "MongoDB",
+  "tags": [
+    "database",
+    "nosql",
+    "mongodb",
+    "mongoose",
+    "documents"
+  ],
+  "detect": {
+    "npm": [
+      "mongodb",
+      "mongoose"
+    ],
+    "pip": [
+      "pymongo",
+      "motor",
+      "beanie"
+    ],
+    "go": [
+      "go.mongodb.org/mongo-driver"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "mongodb/agent-skills",
+      "path": "skills/mongodb-schema-design",
+      "note": "mongodb-schema-design: Official MongoDB schema design skill from MongoDB"
+    },
+    {
+      "repo": "mongodb/agent-skills",
+      "path": "skills/mongodb-query-optimizer",
+      "note": "mongodb-query-optimizer: Official MongoDB query optimizer skill from MongoDB"
+    },
+    {
+      "repo": "mongodb/agent-skills",
+      "path": "skills/mongodb-connection",
+      "note": "mongodb-connection: Official MongoDB connection skill from MongoDB"
+    }
+  ]
+}

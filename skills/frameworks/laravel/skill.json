@@ -1,0 +1,41 @@
+{
+  "title": "Laravel",
+  "tags": [
+    "backend",
+    "php",
+    "web",
+    "mvc",
+    "eloquent",
+    "blade",
+    "inertia",
+    "fullstack"
+  ],
+  "detect": {
+    "composer": [
+      "laravel/framework"
+    ],
+    "files": [
+      "artisan"
+    ]
+  },
+  "recommends": [
+    "php"
+  ],
+  "upstream": [
+    {
+      "repo": "laravel/boost",
+      "path": ".ai/laravel/skill/laravel-best-practices",
+      "note": "laravel-best-practices: Official Laravel best-practices skill shipped in Laravel Boost"
+    },
+    {
+      "repo": "laravel/agent-skills",
+      "path": "laravel/skills/starter-kit-upgrade",
+      "note": "starter-kit-upgrade: Official Laravel starter-kit upgrade skill from laravel/agent-skills"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/laravel-specialist",
+      "note": "laravel-specialist: Laravel specialist skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

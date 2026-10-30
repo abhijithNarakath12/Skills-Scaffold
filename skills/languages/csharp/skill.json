@@ -1,0 +1,40 @@
+{
+  "title": "C# / .NET",
+  "tags": [
+    "language",
+    "dotnet",
+    "csharp",
+    "backend",
+    "aspnet"
+  ],
+  "detect": {
+    "files": [
+      "*.csproj",
+      "*.sln",
+      "global.json"
+    ],
+    "extensions": [
+      ".cs"
+    ]
+  },
+  "recommends": [
+    "sql"
+  ],
+  "upstream": [
+    {
+      "repo": "dotnet/skills",
+      "path": "plugins/dotnet/skills/csharp-expert",
+      "note": "csharp-expert: C# expert skill from the official dotnet/skills repo"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/dotnet-best-practices",
+      "note": "dotnet-best-practices: .NET best practices from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/csharp-developer",
+      "note": "csharp-developer: C# developer skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

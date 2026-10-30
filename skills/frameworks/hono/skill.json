@@ -1,0 +1,39 @@
+{
+  "title": "Hono",
+  "tags": [
+    "backend",
+    "edge",
+    "cloudflare-workers",
+    "bun",
+    "deno",
+    "node",
+    "api",
+    "rpc",
+    "typescript"
+  ],
+  "detect": {
+    "npm": [
+      "hono"
+    ]
+  },
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "honojs/skills",
+      "path": "skills/hono",
+      "note": "hono: Official Hono skill from the Hono team"
+    },
+    {
+      "repo": "honojs/skills",
+      "path": "skills/hono-jsx",
+      "note": "hono-jsx: Official Hono JSX skill from the Hono team"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "hono-typescript",
+      "note": "hono-typescript: Hono + TypeScript skill from Mindrally/skills (community)"
+    }
+  ]
+}

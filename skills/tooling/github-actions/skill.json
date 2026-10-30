@@ -1,0 +1,42 @@
+{
+  "title": "GitHub Actions",
+  "tags": [
+    "ci",
+    "cd",
+    "github",
+    "workflows",
+    "devops",
+    "automation"
+  ],
+  "detect": {
+    "files": [
+      ".github/workflows",
+      "ci.yml",
+      "ci.yaml",
+      "release.yml",
+      "build.yml",
+      "test.yml",
+      "deploy.yml"
+    ]
+  },
+  "recommends": [
+    "git-workflow"
+  ],
+  "upstream": [
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/github-actions-efficiency",
+      "note": "github-actions-efficiency: GitHub Actions efficiency skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/github-actions-hardening",
+      "note": "github-actions-hardening: GitHub Actions security hardening skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/cicd-automation/skills/github-actions-templates",
+      "note": "github-actions-templates: GitHub Actions templates from wshobson/agents marketplace"
+    }
+  ]
+}

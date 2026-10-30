@@ -1,0 +1,39 @@
+{
+  "title": "Python",
+  "tags": [
+    "language",
+    "python",
+    "backend",
+    "scripting",
+    "data"
+  ],
+  "detect": {
+    "files": [
+      "pyproject.toml",
+      "requirements*.txt",
+      "Pipfile",
+      "setup.py",
+      "setup.cfg"
+    ],
+    "extensions": [
+      ".py"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "trailofbits/skills",
+      "path": "plugins/modern-python/skills/modern-python",
+      "note": "modern-python: Modern Python tooling (uv, ruff, pytest) by Trail of Bits"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/python-development/skills/python-code-style",
+      "note": "python-code-style: Python code style from wshobson/agents marketplace"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/python-pro",
+      "note": "python-pro: Python expert skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

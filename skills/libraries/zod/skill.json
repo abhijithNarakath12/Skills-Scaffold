@@ -1,0 +1,33 @@
+{
+  "title": "Zod",
+  "tags": [
+    "validation",
+    "schema",
+    "typescript",
+    "types",
+    "forms",
+    "api"
+  ],
+  "detect": {
+    "npm": [
+      "zod"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "anivar/zod-skill",
+      "path": "",
+      "note": "zod: Zod v4 rules skill (SKILL.md at repo root, community)"
+    },
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "curated/zod-4",
+      "note": "zod-4: Zod v4 skill from Gentleman Programming community collection"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "zod-schema-validation",
+      "note": "zod-schema-validation: Zod schema validation skill from Mindrally/skills (community)"
+    }
+  ]
+}

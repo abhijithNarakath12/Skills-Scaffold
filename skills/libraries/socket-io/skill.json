@@ -1,0 +1,34 @@
+{
+  "title": "Socket.IO",
+  "tags": [
+    "realtime",
+    "websocket",
+    "nodejs",
+    "backend",
+    "frontend",
+    "events"
+  ],
+  "detect": {
+    "npm": [
+      "socket.io",
+      "socket.io-client"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "websocket-development",
+      "note": "websocket-development: WebSocket development skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/websocket-engineer",
+      "note": "websocket-engineer: WebSocket engineer skill from Jeffallan/claude-skills (community)"
+    },
+    {
+      "repo": "kid-sid/codex-spellbook",
+      "path": "skills/websockets-sse",
+      "note": "websockets-sse: WebSockets/SSE skill from kid-sid/codex-spellbook (community)"
+    }
+  ]
+}

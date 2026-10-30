@@ -1,0 +1,38 @@
+{
+  "title": "PHP",
+  "tags": [
+    "language",
+    "php",
+    "composer",
+    "backend",
+    "web"
+  ],
+  "detect": {
+    "files": [
+      "composer.json"
+    ],
+    "extensions": [
+      ".php"
+    ]
+  },
+  "recommends": [
+    "sql"
+  ],
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "php-development",
+      "note": "php-development: PHP development skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/php-pro",
+      "note": "php-pro: PHP expert skill from Jeffallan/claude-skills (community)"
+    },
+    {
+      "repo": "AnyOrgName/php-skills",
+      "path": "skills/audit/php",
+      "note": "PHP audit skill from AnyOrgName/php-skills (community)"
+    }
+  ]
+}

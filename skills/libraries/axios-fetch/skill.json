@@ -1,0 +1,7 @@
+{
+  "title": "HTTP Clients (fetch, axios, ky, got)",
+  "tags": ["http", "api", "fetch", "axios", "networking", "javascript", "typescript"],
+  "detect": {
+    "npm": ["axios", "ky", "got"]
+  }
+}

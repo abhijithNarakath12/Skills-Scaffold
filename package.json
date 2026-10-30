@@ -1,0 +1,427 @@
+{
+  "name": "agent-skills-manager",
+  "displayName": "Agent Skills Manager",
+  "description": "Add ready-made AI agent skills (SKILL.md) for languages, frameworks, libraries and engineering workflows to your project in one click.",
+  "version": "0.1.0",
+  "publisher": "abhijithNarakath12",
+  "author": {
+    "name": "Abhijith N",
+    "url": "https://github.com/abhijithNarakath12"
+  },
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "agent skills",
+    "SKILL.md",
+    "claude code",
+    "copilot",
+    "cursor",
+    "codex",
+    "ai agents"
+  ],
+  "icon": "media/icon.png",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentSkills.addSkills",
+        "title": "Add Skills to Project...",
+        "category": "Agent Skills",
+        "icon": "$(add)"
+      },
+      {
+        "command": "agentSkills.addRecommended",
+        "title": "Add Recommended Skills for This Project",
+        "category": "Agent Skills",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "agentSkills.addWorkflowSkills",
+        "title": "Add Workflow Skills (plan, design doc, PR review)",
+        "category": "Agent Skills"
+      },
+      {
+        "command": "agentSkills.installSkill",
+        "title": "Install Skill",
+        "category": "Agent Skills",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "agentSkills.installUpstream",
+        "title": "Install Community Version...",
+        "category": "Agent Skills",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "agentSkills.removeSkill",
+        "title": "Remove Skill from Project",
+        "category": "Agent Skills",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "agentSkills.updateInstalled",
+        "title": "Update Installed Skills",
+        "category": "Agent Skills",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "agentSkills.addFromGitHub",
+        "title": "Add Skill from GitHub Repository...",
+        "category": "Agent Skills",
+        "icon": "$(github)"
+      },
+      {
+        "command": "agentSkills.browseRemoteSource",
+        "title": "Browse Community Skill Sources...",
+        "category": "Agent Skills"
+      },
+      {
+        "command": "agentSkills.createSkill",
+        "title": "Create New Skill in Project...",
+        "category": "Agent Skills",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "agentSkills.openSkill",
+        "title": "Open SKILL.md",
+        "category": "Agent Skills",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "agentSkills.refresh",
+        "title": "Refresh",
+        "category": "Agent Skills",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "agentSkills.selectTargets",
+        "title": "Select Target Agents (where skills are installed)...",
+        "category": "Agent Skills",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "agentSkills.syncIntegrations",
+        "title": "Re-apply Always-on Rules and Slash Commands",
+        "category": "Agent Skills",
+        "icon": "$(law)"
+      },
+      {
+        "command": "agentSkills.runSkill",
+        "title": "Run Skill (start agent)",
+        "category": "Agent Skills",
+        "icon": "$(play)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agentSkills",
+          "title": "Agent Skills",
+          "icon": "media/activity-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "agentSkills": [
+        {
+          "id": "agentSkills.installed",
+          "name": "Installed in Project",
+          "icon": "media/activity-icon.svg"
+        },
+        {
+          "id": "agentSkills.recommended",
+          "name": "Recommended for This Project",
+          "icon": "media/activity-icon.svg"
+        },
+        {
+          "id": "agentSkills.catalog",
+          "name": "Skill Catalog",
+          "icon": "media/activity-icon.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "agentSkills.installed",
+        "contents": "No skills installed in this project yet.\n[Add Recommended Skills](command:agentSkills.addRecommended)\n[Browse Catalog](command:agentSkills.addSkills)\nSkills are installed as folders containing a SKILL.md, following the open Agent Skills standard.",
+        "when": "workspaceFolderCount > 0"
+      },
+      {
+        "view": "agentSkills.installed",
+        "contents": "Open a folder to manage its agent skills.\n[Open Folder](command:vscode.openFolder)",
+        "when": "workspaceFolderCount == 0"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "agentSkills.addSkills",
+          "when": "view == agentSkills.catalog || view == agentSkills.installed",
+          "group": "navigation@1"
+        },
+        {
+          "command": "agentSkills.addRecommended",
+          "when": "view == agentSkills.recommended",
+          "group": "navigation@1"
+        },
+        {
+          "command": "agentSkills.updateInstalled",
+          "when": "view == agentSkills.installed",
+          "group": "navigation@2"
+        },
+        {
+          "command": "agentSkills.addFromGitHub",
+          "when": "view == agentSkills.catalog",
+          "group": "navigation@2"
+        },
+        {
+          "command": "agentSkills.selectTargets",
+          "when": "view == agentSkills.installed",
+          "group": "navigation@3"
+        },
+        {
+          "command": "agentSkills.refresh",
+          "when": "view =~ /^agentSkills\\./",
+          "group": "navigation@9"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "agentSkills.runSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /runnable/",
+          "group": "inline@0"
+        },
+        {
+          "command": "agentSkills.installSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /skill-available/",
+          "group": "inline@1"
+        },
+        {
+          "command": "agentSkills.openSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /skill-/",
+          "group": "inline@2"
+        },
+        {
+          "command": "agentSkills.installUpstream",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /has-upstream/",
+          "group": "inline@4"
+        },
+        {
+          "command": "agentSkills.removeSkill",
+          "when": "view == agentSkills.installed && viewItem =~ /skill-installed/",
+          "group": "inline@3"
+        },
+        {
+          "command": "agentSkills.installSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /skill-available/",
+          "group": "1_actions@1"
+        },
+        {
+          "command": "agentSkills.removeSkill",
+          "when": "view == agentSkills.installed && viewItem =~ /skill-installed/",
+          "group": "1_actions@2"
+        },
+        {
+          "command": "agentSkills.openSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /skill-/",
+          "group": "1_actions@3"
+        },
+        {
+          "command": "agentSkills.installUpstream",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /has-upstream/",
+          "group": "1_actions@4"
+        },
+        {
+          "command": "agentSkills.runSkill",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /runnable/",
+          "group": "1_actions@0"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "agentSkills.installSkill",
+          "when": "false"
+        },
+        {
+          "command": "agentSkills.openSkill",
+          "when": "false"
+        },
+        {
+          "command": "agentSkills.refresh",
+          "when": "false"
+        },
+        {
+          "command": "agentSkills.installUpstream",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Agent Skills",
+      "properties": {
+        "agentSkills.targets": {
+          "type": "array",
+          "default": [
+            "claude"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "claude",
+              "universal",
+              "codex",
+              "cursor",
+              "copilot",
+              "gemini",
+              "windsurf",
+              "opencode",
+              "custom"
+            ],
+            "enumDescriptions": [
+              "Claude Code: .claude/skills",
+              "Universal / agent-agnostic: .agents/skills",
+              "OpenAI Codex: .agents/skills",
+              "Cursor: .cursor/skills",
+              "GitHub Copilot: .github/skills",
+              "Gemini CLI: .gemini/skills",
+              "Windsurf: .windsurf/skills",
+              "OpenCode: .opencode/skills",
+              "Custom directory (see agentSkills.customTargetDirectory)"
+            ]
+          },
+          "markdownDescription": "Which agents to install skills for. The first entry is the **primary** target and receives a real copy; other targets are linked to it (or copied, see `#agentSkills.linkSecondaryTargets#`)."
+        },
+        "agentSkills.customTargetDirectory": {
+          "type": "string",
+          "default": ".agent-skills",
+          "description": "Workspace-relative directory used when the 'custom' target is selected."
+        },
+        "agentSkills.linkSecondaryTargets": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "When more than one target is configured, create relative symlinks from secondary targets to the primary copy instead of duplicating files. Falls back to copying if symlinks cannot be created."
+        },
+        "agentSkills.recommendOnOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a one-time suggestion to add recommended skills when a project with a detectable stack is opened."
+        },
+        "agentSkills.remoteSources": {
+          "type": "array",
+          "markdownDescription": "Community GitHub repositories to browse for additional skills. Each entry is `{ \"repo\": \"owner/name\", \"path\": \"skills\", \"ref\": \"main\" }`.",
+          "default": [
+            {
+              "repo": "anthropics/skills",
+              "path": "skills",
+              "label": "Anthropic official skills"
+            },
+            {
+              "repo": "vercel-labs/agent-skills",
+              "path": "skills",
+              "label": "Vercel agent skills (React, Next.js, web)"
+            },
+            {
+              "repo": "obra/superpowers",
+              "path": "skills",
+              "label": "Superpowers (engineering workflows)"
+            },
+            {
+              "repo": "github/awesome-copilot",
+              "path": "skills",
+              "label": "GitHub awesome-copilot skills (large community catalog)"
+            },
+            {
+              "repo": "openai/skills",
+              "path": "skills/.curated",
+              "label": "OpenAI curated skills"
+            }
+          ],
+          "items": {
+            "type": "object",
+            "required": [
+              "repo"
+            ],
+            "properties": {
+              "repo": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "agentSkills.githubToken": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Optional GitHub token used for fetching community skills (raises the API rate limit). Prefer setting the `GITHUB_TOKEN` environment variable instead of storing a token here."
+        },
+        "agentSkills.enforceRules": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "When a skill declares an always-on rule (for example `plan-feature`), write it into the project's agent instruction file (`CLAUDE.md`, `AGENTS.md`, `.cursor/rules`, `.github/copilot-instructions.md`, ...) inside a managed block so the agent follows it on every task."
+        },
+        "agentSkills.createSlashCommands": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Generate project slash commands declared by skills (currently `/design`) for agents that support them (Claude Code, Cursor, Copilot, Gemini CLI, Windsurf, OpenCode)."
+        },
+        "agentSkills.runWith": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "claude-terminal",
+            "copilot-chat",
+            "clipboard"
+          ],
+          "enumDescriptions": [
+            "Claude Code terminal when the primary target is Claude, Copilot Chat when it is Copilot, otherwise clipboard",
+            "Open a terminal and run `claude` with the prompt",
+            "Open Copilot Chat in agent mode with the prompt",
+            "Copy the prompt to the clipboard"
+          ],
+          "markdownDescription": "How the play button on runnable skills (for example the App Store review audit) starts the agent."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "npm run build:catalog && npm run check-types && node esbuild.mjs --production",
+    "build:catalog": "node scripts/build-catalog.mjs",
+    "validate:skills": "node scripts/validate-skills.mjs",
+    "check-types": "tsc --noEmit",
+    "watch": "node esbuild.mjs --watch",
+    "compile-tests": "tsc -p tsconfig.test.json",
+    "test": "npm run build:catalog && npm run validate:skills && npm run compile-tests && node --test \"out/test/**/*.test.js\"",
+    "package": "npm run build && vsce package --no-dependencies",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.90.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.0",
+    "@typescript-eslint/parser": "^7.14.0",
+    "@vscode/vsce": "^3.2.0",
+    "esbuild": "^0.23.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.5.0"
+  }
+}

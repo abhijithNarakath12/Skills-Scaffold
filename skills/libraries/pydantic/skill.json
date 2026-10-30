@@ -1,0 +1,32 @@
+{
+  "title": "Pydantic",
+  "tags": [
+    "validation",
+    "python",
+    "settings",
+    "serialization",
+    "fastapi",
+    "types"
+  ],
+  "detect": {
+    "pip": [
+      "pydantic",
+      "pydantic-settings"
+    ]
+  },
+  "recommends": [
+    "python"
+  ],
+  "upstream": [
+    {
+      "repo": "pydantic/skills",
+      "path": "skills/pydantic",
+      "note": "pydantic: Official Pydantic skill from the Pydantic team"
+    },
+    {
+      "repo": "pydantic/skills",
+      "path": "skills/building-pydantic-ai-agents",
+      "note": "building-pydantic-ai-agents: Official Pydantic AI agents skill from the Pydantic team"
+    }
+  ]
+}
