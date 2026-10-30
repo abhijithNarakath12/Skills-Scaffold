@@ -1,0 +1,8 @@
+{
+  "title": "Java",
+  "tags": ["language", "java", "jvm", "backend", "maven", "gradle"],
+  "detect": {
+    "files": ["pom.xml", "build.gradle", "build.gradle.kts"],
+    "extensions": [".java"]
+  }
+}

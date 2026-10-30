@@ -1,0 +1,9 @@
+{
+  "title": "PHP",
+  "tags": ["language", "php", "composer", "backend", "web"],
+  "detect": {
+    "files": ["composer.json"],
+    "extensions": [".php"]
+  },
+  "recommends": ["sql"]
+}

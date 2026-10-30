@@ -1,0 +1,8 @@
+{
+  "title": "Cypress",
+  "tags": ["testing", "e2e", "browser", "component-tests", "javascript"],
+  "detect": {
+    "npm": ["cypress"],
+    "files": ["cypress.config.ts", "cypress.config.js"]
+  }
+}

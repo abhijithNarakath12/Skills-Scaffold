@@ -1,0 +1,10 @@
+{
+  "title": "Redis",
+  "tags": ["database", "cache", "redis", "queues", "sessions", "rate-limiting"],
+  "detect": {
+    "npm": ["redis", "ioredis"],
+    "pip": ["redis"],
+    "go": ["github.com/redis/go-redis"],
+    "gem": ["redis"]
+  }
+}

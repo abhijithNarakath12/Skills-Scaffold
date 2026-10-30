@@ -1,0 +1,8 @@
+{
+  "title": "Tailwind CSS",
+  "tags": ["css", "styling", "frontend", "ui", "design-system"],
+  "detect": {
+    "npm": ["tailwindcss"],
+    "files": ["tailwind.config.js", "tailwind.config.ts", "tailwind.config.cjs"]
+  }
+}

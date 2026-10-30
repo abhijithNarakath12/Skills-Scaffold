@@ -1,0 +1,8 @@
+{
+  "title": "Dart",
+  "tags": ["language", "dart", "flutter", "pub", "mobile"],
+  "detect": {
+    "files": ["pubspec.yaml"],
+    "extensions": [".dart"]
+  }
+}

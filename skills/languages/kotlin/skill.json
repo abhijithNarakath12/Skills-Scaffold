@@ -1,0 +1,10 @@
+{
+  "title": "Kotlin",
+  "tags": ["language", "kotlin", "jvm", "android", "coroutines", "gradle"],
+  "detect": {
+    "files": ["build.gradle.kts"],
+    "jvm": ["org.jetbrains.kotlin"],
+    "extensions": [".kt", ".kts"]
+  },
+  "recommends": ["java"]
+}

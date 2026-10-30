@@ -1,0 +1,7 @@
+{
+  "title": "Git workflow",
+  "tags": ["git", "version-control", "github", "pull-requests", "workflow"],
+  "detect": {
+    "files": [".gitignore", ".gitattributes"]
+  }
+}

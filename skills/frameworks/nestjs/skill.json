@@ -1,0 +1,8 @@
+{
+  "title": "NestJS",
+  "tags": ["backend", "node", "typescript", "api", "dependency-injection", "rest", "graphql"],
+  "detect": {
+    "npm": ["@nestjs/core"]
+  },
+  "recommends": ["typescript"]
+}

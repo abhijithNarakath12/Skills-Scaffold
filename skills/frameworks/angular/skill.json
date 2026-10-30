@@ -1,0 +1,9 @@
+{
+  "title": "Angular",
+  "tags": ["frontend", "ui", "components", "signals", "rxjs", "standalone", "typescript"],
+  "detect": {
+    "npm": ["@angular/core"],
+    "files": ["angular.json"]
+  },
+  "recommends": ["typescript"]
+}

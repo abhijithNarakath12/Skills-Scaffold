@@ -1,0 +1,9 @@
+{
+  "title": "GraphQL",
+  "tags": ["api", "graphql", "apollo", "backend", "frontend", "codegen", "dataloader"],
+  "detect": {
+    "npm": ["graphql", "@apollo/server", "@apollo/client", "graphql-yoga", "urql"],
+    "pip": ["graphene", "strawberry-graphql", "ariadne"],
+    "extensions": [".graphql", ".gql"]
+  }
+}

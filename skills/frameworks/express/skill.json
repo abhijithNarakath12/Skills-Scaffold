@@ -1,0 +1,8 @@
+{
+  "title": "Express",
+  "tags": ["backend", "node", "http", "api", "rest", "middleware", "javascript"],
+  "detect": {
+    "npm": ["express"]
+  },
+  "recommends": ["javascript"]
+}

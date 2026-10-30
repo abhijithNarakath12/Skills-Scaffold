@@ -1,0 +1,8 @@
+{
+  "title": "Kubernetes",
+  "tags": ["kubernetes", "k8s", "helm", "kustomize", "devops", "infrastructure", "containers"],
+  "detect": {
+    "files": ["Chart.yaml", "kustomization.yaml", "kustomization.yml", "skaffold.yaml", "values.yaml"]
+  },
+  "recommends": ["docker"]
+}

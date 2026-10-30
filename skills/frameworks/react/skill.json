@@ -1,0 +1,12 @@
+{
+  "title": "React",
+  "tags": ["frontend", "ui", "components", "hooks", "javascript", "typescript"],
+  "detect": {
+    "npm": ["react", "react-dom"],
+    "extensions": [".jsx", ".tsx"]
+  },
+  "recommends": ["typescript"],
+  "upstream": [
+    { "repo": "vercel-labs/agent-skills", "path": "skills/react-best-practices", "note": "Vercel's React and Next.js performance guidelines" }
+  ]
+}

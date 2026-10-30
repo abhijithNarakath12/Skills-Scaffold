@@ -1,0 +1,8 @@
+{
+  "title": "GitHub Actions",
+  "tags": ["ci", "cd", "github", "workflows", "devops", "automation"],
+  "detect": {
+    "files": [".github", "ci.yml", "ci.yaml", "release.yml", "build.yml", "test.yml", "deploy.yml"]
+  },
+  "recommends": ["git-workflow"]
+}

@@ -1,0 +1,8 @@
+{
+  "title": "SQLAlchemy",
+  "tags": ["database", "orm", "sql", "migrations", "python", "backend", "alembic"],
+  "detect": {
+    "pip": ["sqlalchemy", "alembic", "sqlmodel"]
+  },
+  "recommends": ["python"]
+}

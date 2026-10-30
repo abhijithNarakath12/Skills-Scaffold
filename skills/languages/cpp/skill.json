@@ -1,0 +1,8 @@
+{
+  "title": "C++",
+  "tags": ["language", "cpp", "cmake", "native", "systems"],
+  "detect": {
+    "files": ["CMakeLists.txt", "Makefile", "conanfile.txt", "conanfile.py", "vcpkg.json"],
+    "extensions": [".cpp", ".cc", ".cxx", ".hpp", ".h"]
+  }
+}

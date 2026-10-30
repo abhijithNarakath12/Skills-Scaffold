@@ -1,0 +1,7 @@
+{
+  "title": "TanStack Query",
+  "tags": ["data-fetching", "caching", "server-state", "react", "vue", "svelte", "frontend"],
+  "detect": {
+    "npm": ["@tanstack/react-query", "@tanstack/vue-query", "@tanstack/svelte-query"]
+  }
+}

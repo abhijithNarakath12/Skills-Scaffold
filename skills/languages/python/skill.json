@@ -1,0 +1,8 @@
+{
+  "title": "Python",
+  "tags": ["language", "python", "backend", "scripting", "data"],
+  "detect": {
+    "files": ["pyproject.toml", "requirements*.txt", "Pipfile", "setup.py", "setup.cfg"],
+    "extensions": [".py"]
+  }
+}

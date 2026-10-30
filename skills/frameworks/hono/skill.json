@@ -1,0 +1,8 @@
+{
+  "title": "Hono",
+  "tags": ["backend", "edge", "cloudflare-workers", "bun", "deno", "node", "api", "rpc", "typescript"],
+  "detect": {
+    "npm": ["hono"]
+  },
+  "recommends": ["typescript"]
+}

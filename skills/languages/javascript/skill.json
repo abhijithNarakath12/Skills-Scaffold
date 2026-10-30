@@ -1,0 +1,8 @@
+{
+  "title": "JavaScript",
+  "tags": ["language", "javascript", "node", "frontend", "esm"],
+  "detect": {
+    "files": ["package.json"],
+    "extensions": [".js", ".mjs", ".cjs"]
+  }
+}

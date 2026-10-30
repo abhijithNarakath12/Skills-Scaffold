@@ -1,0 +1,9 @@
+{
+  "title": "Django",
+  "tags": ["backend", "python", "web", "orm", "rest", "drf", "fullstack"],
+  "detect": {
+    "pip": ["django"],
+    "files": ["manage.py"]
+  },
+  "recommends": ["python"]
+}

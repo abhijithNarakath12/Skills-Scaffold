@@ -1,0 +1,8 @@
+{
+  "title": "Go",
+  "tags": ["language", "go", "golang", "backend", "cli"],
+  "detect": {
+    "files": ["go.mod"],
+    "extensions": [".go"]
+  }
+}

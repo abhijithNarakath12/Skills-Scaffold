@@ -1,0 +1,8 @@
+{
+  "title": "FastAPI",
+  "tags": ["backend", "python", "api", "async", "pydantic", "sqlalchemy", "openapi"],
+  "detect": {
+    "pip": ["fastapi"]
+  },
+  "recommends": ["python"]
+}

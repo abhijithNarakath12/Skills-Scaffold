@@ -1,0 +1,8 @@
+{
+  "title": "Jest",
+  "tags": ["testing", "unit-tests", "javascript", "typescript"],
+  "detect": {
+    "npm": ["jest"],
+    "files": ["jest.config.js", "jest.config.ts", "jest.config.mjs"]
+  }
+}

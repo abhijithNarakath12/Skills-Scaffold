@@ -1,0 +1,9 @@
+{
+  "title": "TypeScript",
+  "tags": ["language", "javascript", "types", "node", "frontend"],
+  "detect": {
+    "npm": ["typescript"],
+    "files": ["tsconfig.json", "tsconfig.*.json"],
+    "extensions": [".ts", ".tsx", ".mts", ".cts"]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "title": "ESLint, Prettier and Biome",
+  "tags": ["linting", "formatting", "eslint", "prettier", "biome", "javascript", "typescript"],
+  "detect": {
+    "npm": ["eslint", "prettier", "@biomejs/biome"],
+    "files": ["eslint.config.js", "eslint.config.mjs", "eslint.config.ts", ".eslintrc.json", ".eslintrc.js", ".prettierrc", "biome.json"]
+  },
+  "recommends": ["typescript"]
+}

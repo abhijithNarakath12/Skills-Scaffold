@@ -1,0 +1,13 @@
+{
+  "title": "PostgreSQL",
+  "tags": ["database", "sql", "postgres", "migrations", "performance"],
+  "detect": {
+    "npm": ["pg", "postgres", "@neondatabase/serverless"],
+    "pip": ["psycopg", "psycopg2", "psycopg2-binary", "asyncpg"],
+    "go": ["github.com/jackc/pgx", "github.com/lib/pq"],
+    "gem": ["pg"],
+    "composer": ["doctrine/dbal"],
+    "nuget": ["npgsql"]
+  },
+  "recommends": ["sql"]
+}

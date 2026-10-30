@@ -1,0 +1,8 @@
+{
+  "title": "Drizzle ORM",
+  "tags": ["database", "orm", "sql", "migrations", "typescript", "backend"],
+  "detect": {
+    "npm": ["drizzle-orm", "drizzle-kit"],
+    "files": ["drizzle.config.ts"]
+  }
+}

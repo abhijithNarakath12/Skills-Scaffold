@@ -1,0 +1,7 @@
+{
+  "title": "Docker",
+  "tags": ["containers", "devops", "build", "compose", "infrastructure"],
+  "detect": {
+    "files": ["Dockerfile", "Dockerfile.*", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml", ".dockerignore"]
+  }
+}

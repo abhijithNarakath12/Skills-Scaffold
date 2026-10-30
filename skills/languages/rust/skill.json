@@ -1,0 +1,8 @@
+{
+  "title": "Rust",
+  "tags": ["language", "rust", "systems", "backend", "cli"],
+  "detect": {
+    "files": ["Cargo.toml"],
+    "extensions": [".rs"]
+  }
+}

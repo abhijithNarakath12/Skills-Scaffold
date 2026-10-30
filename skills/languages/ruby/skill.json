@@ -1,0 +1,8 @@
+{
+  "title": "Ruby",
+  "tags": ["language", "ruby", "gems", "bundler", "backend"],
+  "detect": {
+    "files": ["Gemfile", ".ruby-version", "Rakefile"],
+    "extensions": [".rb"]
+  }
+}

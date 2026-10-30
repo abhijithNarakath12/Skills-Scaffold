@@ -1,0 +1,8 @@
+{
+  "title": "Flask",
+  "tags": ["backend", "python", "web", "wsgi", "blueprints", "sqlalchemy", "jinja"],
+  "detect": {
+    "pip": ["flask"]
+  },
+  "recommends": ["python"]
+}

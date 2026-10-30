@@ -1,0 +1,9 @@
+{
+  "title": "pytest",
+  "tags": ["testing", "python", "unit-tests", "fixtures"],
+  "detect": {
+    "pip": ["pytest"],
+    "files": ["pytest.ini", "conftest.py"]
+  },
+  "recommends": ["python"]
+}

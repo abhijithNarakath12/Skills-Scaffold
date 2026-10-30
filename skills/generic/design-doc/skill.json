@@ -1,0 +1,5 @@
+{
+  "title": "Design Document Before Implementation",
+  "tags": ["workflow", "design", "architecture", "data-structures", "approval-gate", "rfc"],
+  "recommends": ["plan-feature"]
+}

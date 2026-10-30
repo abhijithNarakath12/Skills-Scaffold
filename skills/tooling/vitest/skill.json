@@ -1,0 +1,8 @@
+{
+  "title": "Vitest",
+  "tags": ["testing", "unit-tests", "javascript", "typescript", "vite"],
+  "detect": {
+    "npm": ["vitest"]
+  },
+  "recommends": ["typescript"]
+}

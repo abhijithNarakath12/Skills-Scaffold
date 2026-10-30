@@ -1,0 +1,7 @@
+{
+  "title": "Zustand",
+  "tags": ["state-management", "react", "frontend", "store"],
+  "detect": {
+    "npm": ["zustand"]
+  }
+}

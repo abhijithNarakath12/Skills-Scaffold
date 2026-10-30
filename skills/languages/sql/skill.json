@@ -1,0 +1,8 @@
+{
+  "title": "SQL",
+  "tags": ["language", "sql", "database", "postgresql", "mysql", "sqlite", "migrations"],
+  "detect": {
+    "files": ["schema.sql", "*.sql"],
+    "extensions": [".sql"]
+  }
+}

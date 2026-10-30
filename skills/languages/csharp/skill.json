@@ -1,0 +1,9 @@
+{
+  "title": "C# / .NET",
+  "tags": ["language", "dotnet", "csharp", "backend", "aspnet"],
+  "detect": {
+    "files": ["*.csproj", "*.sln", "global.json"],
+    "extensions": [".cs"]
+  },
+  "recommends": ["sql"]
+}

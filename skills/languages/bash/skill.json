@@ -1,0 +1,8 @@
+{
+  "title": "Bash / Shell",
+  "tags": ["language", "bash", "shell", "zsh", "scripting", "cli", "devops"],
+  "detect": {
+    "files": ["Makefile"],
+    "extensions": [".sh", ".bash", ".zsh"]
+  }
+}

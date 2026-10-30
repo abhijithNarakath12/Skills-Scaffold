@@ -1,0 +1,9 @@
+{
+  "title": "Next.js",
+  "tags": ["frontend", "fullstack", "react", "ssr", "app-router", "server-components", "javascript", "typescript"],
+  "detect": {
+    "npm": ["next"],
+    "files": ["next.config.js", "next.config.mjs", "next.config.ts"]
+  },
+  "recommends": ["react", "typescript"]
+}

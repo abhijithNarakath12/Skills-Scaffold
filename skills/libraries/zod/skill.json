@@ -1,0 +1,7 @@
+{
+  "title": "Zod",
+  "tags": ["validation", "schema", "typescript", "types", "forms", "api"],
+  "detect": {
+    "npm": ["zod"]
+  }
+}

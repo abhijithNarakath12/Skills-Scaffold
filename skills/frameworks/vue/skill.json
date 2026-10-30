@@ -1,0 +1,9 @@
+{
+  "title": "Vue",
+  "tags": ["frontend", "ui", "components", "composition-api", "pinia", "vue-router", "vite", "javascript", "typescript"],
+  "detect": {
+    "npm": ["vue"],
+    "extensions": [".vue"]
+  },
+  "recommends": ["typescript"]
+}

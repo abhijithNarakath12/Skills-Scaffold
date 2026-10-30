@@ -1,0 +1,9 @@
+{
+  "title": "MongoDB",
+  "tags": ["database", "nosql", "mongodb", "mongoose", "documents"],
+  "detect": {
+    "npm": ["mongodb", "mongoose"],
+    "pip": ["pymongo", "motor", "beanie"],
+    "go": ["go.mongodb.org/mongo-driver"]
+  }
+}

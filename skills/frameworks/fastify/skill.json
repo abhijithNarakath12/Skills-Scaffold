@@ -1,0 +1,8 @@
+{
+  "title": "Fastify",
+  "tags": ["backend", "node", "http", "api", "json-schema", "typebox", "pino", "typescript"],
+  "detect": {
+    "npm": ["fastify"]
+  },
+  "recommends": ["typescript"]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Playwright",
+  "tags": ["testing", "e2e", "browser", "component-tests", "javascript", "python"],
+  "detect": {
+    "npm": ["@playwright/test"],
+    "pip": ["playwright", "pytest-playwright"],
+    "files": ["playwright.config.ts", "playwright.config.js"]
+  }
+}

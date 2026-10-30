@@ -1,0 +1,8 @@
+{
+  "title": "Swift",
+  "tags": ["language", "swift", "ios", "macos", "apple", "swiftui"],
+  "detect": {
+    "files": ["Package.swift", "*.xcodeproj", "*.xcworkspace", "Podfile"],
+    "extensions": [".swift"]
+  }
+}
