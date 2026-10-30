@@ -105,7 +105,7 @@ Where a community skill exists for the same topic, the catalog entry records it 
 
 ## Writing your own skills
 
-`Agent Skills: Create New Skill in Project...` scaffolds a `SKILL.md`. Keep the frontmatter `name` equal to the folder name and write a description that says when the skill should be used; agents read only the description to decide whether to load the rest. See `docs/SKILL-AUTHORING.md` in the source repository for the conventions used by the bundled skills and how to contribute one.
+`Agent Skills: Create New Skill in Project...` scaffolds a `SKILL.md`. Keep the frontmatter `name` equal to the folder name and write a description that says when the skill should be used; agents read only the description to decide whether to load the rest. See [docs/SKILL-AUTHORING.md](docs/SKILL-AUTHORING.md) for the conventions used by the bundled skills and how to contribute one.
 
 ## Development
 

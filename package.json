@@ -9,7 +9,14 @@
     "url": "https://github.com/abhijithNarakath12"
   },
   "license": "MIT",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abhijithNarakath12/Skills-Scaffold.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abhijithNarakath12/Skills-Scaffold/issues"
+  },
+  "homepage": "https://github.com/abhijithNarakath12/Skills-Scaffold#readme",
   "engines": {
     "vscode": "^1.90.0"
   },
