@@ -1,5 +1,28 @@
 {
   "title": "Plan Before Implementing",
-  "tags": ["workflow", "planning", "process", "approval-gate"],
-  "recommends": []
+  "tags": [
+    "workflow",
+    "planning",
+    "process",
+    "approval-gate"
+  ],
+  "recommends": [],
+  "upstream": [
+    {
+      "repo": "obra/superpowers",
+      "path": "skills/brainstorming",
+      "note": "brainstorming: Brainstorming-before-coding skill from obra/superpowers"
+    },
+    {
+      "repo": "obra/superpowers",
+      "path": "skills/writing-plans",
+      "note": "writing-plans: Implementation plan writing skill from obra/superpowers"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/create-implementation-plan",
+      "note": "create-implementation-plan: Implementation plan skill from GitHub's awesome-copilot"
+    }
+  ],
+  "rule": "Plan mode is always on. Before implementing ANY change (feature, bug fix, refactor, configuration, dependency, migration), use the `plan-feature` skill: write the plan, present it, and wait for the user's explicit approval. Do not create, edit or delete project files until the plan is approved. Trivial changes get a 3-5 line micro-plan in chat but still need a go-ahead. The only exception is when the user explicitly says to skip planning for that request."
 }

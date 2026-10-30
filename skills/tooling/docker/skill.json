@@ -1,7 +1,38 @@
 {
   "title": "Docker",
-  "tags": ["containers", "devops", "build", "compose", "infrastructure"],
+  "tags": [
+    "containers",
+    "devops",
+    "build",
+    "compose",
+    "infrastructure"
+  ],
   "detect": {
-    "files": ["Dockerfile", "Dockerfile.*", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml", ".dockerignore"]
-  }
+    "files": [
+      "Dockerfile",
+      "Dockerfile.*",
+      "docker-compose.yml",
+      "docker-compose.yaml",
+      "compose.yml",
+      "compose.yaml",
+      ".dockerignore"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "docker/skills",
+      "path": "skills/docker-build-strategies",
+      "note": "docker-build-strategies: Official Docker build strategies skill from Docker"
+    },
+    {
+      "repo": "docker/skills",
+      "path": "skills/docker-compose-patterns",
+      "note": "docker-compose-patterns: Official Docker Compose patterns skill from Docker"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/multi-stage-dockerfile",
+      "note": "multi-stage-dockerfile: Multi-stage Dockerfile skill from GitHub's awesome-copilot"
+    }
+  ]
 }

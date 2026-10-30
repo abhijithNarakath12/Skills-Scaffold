@@ -16,29 +16,34 @@ test('parseGitHubReference accepts short forms and URLs', () => {
 });
 
 function fakeRepo(): { fetcher: Fetcher; calls: string[] } {
-  const tree: Record<string, unknown> = {
-    'skills': [
-      { name: 'pdf', path: 'skills/pdf', type: 'dir', download_url: null },
-      { name: 'README.md', path: 'skills/README.md', type: 'file', download_url: 'raw://skills/README.md' },
-      { name: 'empty', path: 'skills/empty', type: 'dir', download_url: null },
-    ],
-    'skills/pdf': [
-      { name: 'SKILL.md', path: 'skills/pdf/SKILL.md', type: 'file', download_url: 'raw://skills/pdf/SKILL.md' },
-      { name: 'scripts', path: 'skills/pdf/scripts', type: 'dir', download_url: null },
-    ],
-    'skills/pdf/SKILL.md': { name: 'SKILL.md', path: 'skills/pdf/SKILL.md', type: 'file', download_url: 'raw://skills/pdf/SKILL.md' },
-    'skills/pdf/scripts': [{ name: 'run.py', path: 'skills/pdf/scripts/run.py', type: 'file', download_url: 'raw://skills/pdf/scripts/run.py' }],
-    'skills/empty': [{ name: 'notes.txt', path: 'skills/empty/notes.txt', type: 'file', download_url: 'raw://x' }],
-  };
+  const tree = [
+    { path: 'README.md', type: 'blob' },
+    { path: 'skills', type: 'tree' },
+    { path: 'skills/pdf', type: 'tree' },
+    { path: 'skills/pdf/SKILL.md', type: 'blob' },
+    { path: 'skills/pdf/scripts', type: 'tree' },
+    { path: 'skills/pdf/scripts/run.py', type: 'blob' },
+    { path: 'skills/empty/notes.txt', type: 'blob' },
+    { path: 'plugins/a/skills/testing/SKILL.md', type: 'blob' },
+    { path: 'plugins/b/skills/testing/SKILL.md', type: 'blob' },
+  ];
   const raw: Record<string, string> = {
-    'raw://skills/pdf/SKILL.md': '---\nname: pdf\ndescription: Work with PDFs\n---\n# PDF',
-    'raw://skills/pdf/scripts/run.py': 'print(1)',
+    'skills/pdf/SKILL.md': '---\nname: pdf\ndescription: Work with PDFs\n---\n# PDF',
+    'skills/pdf/scripts/run.py': 'print(1)',
+    'plugins/a/skills/testing/SKILL.md': '---\nname: testing\ndescription: A\n---',
+    'plugins/b/skills/testing/SKILL.md': '---\nname: testing\ndescription: B\n---',
   };
   const calls: string[] = [];
   const fetcher: Fetcher = async (url) => {
     calls.push(url);
-    const api = /api\.github\.com\/repos\/o\/r\/contents\/(.*?)(?:\?.*)?$/.exec(url);
-    const body = api ? tree[decodeURIComponent(api[1])] : raw[url];
+    let body: unknown;
+    if (url === 'https://api.github.com/repos/o/r') {
+      body = { default_branch: 'main' };
+    } else if (url === 'https://api.github.com/repos/o/r/git/trees/main?recursive=1') {
+      body = { sha: 'x', tree, truncated: false };
+    } else if (url.startsWith('https://raw.githubusercontent.com/o/r/main/')) {
+      body = raw[decodeURIComponent(url.slice('https://raw.githubusercontent.com/o/r/main/'.length))];
+    }
     const ok = body !== undefined;
     return {
       ok,
@@ -51,12 +56,12 @@ function fakeRepo(): { fetcher: Fetcher; calls: string[] } {
   return { fetcher, calls };
 }
 
-test('lists, describes and downloads remote skills', async () => {
+test('lists skills under a path with two API calls, describes and downloads via raw URLs', async () => {
   const { fetcher, calls } = fakeRepo();
   const client = new GitHubClient('tok', fetcher);
-  const skills = await client.listSkills({ repo: 'o/r', path: 'skills', ref: 'main' });
-  assert.deepEqual(skills.map((s) => s.id), ['pdf']);
-  assert.ok(calls[0].includes('?ref=main'));
+  const skills = await client.listSkills({ repo: 'o/r', path: 'skills' });
+  assert.deepEqual(skills.map((s) => [s.id, s.path, s.ref]), [['pdf', 'skills/pdf', 'main']]);
+  assert.equal(calls.filter((c) => c.startsWith('https://api.github.com')).length, 2);
   const described = await client.describe(skills[0]);
   assert.equal(described.name, 'pdf');
   assert.equal(described.description, 'Work with PDFs');
@@ -68,6 +73,15 @@ test('lists, describes and downloads remote skills', async () => {
   } finally {
     await fs.rm(dest, { recursive: true, force: true });
   }
+  // Tree and ref are cached: no further API calls were needed for describe/download.
+  assert.equal(calls.filter((c) => c.startsWith('https://api.github.com')).length, 2);
+});
+
+test('lists the whole repository and disambiguates duplicate folder names', async () => {
+  const { fetcher } = fakeRepo();
+  const client = new GitHubClient(undefined, fetcher);
+  const skills = await client.listSkills({ repo: 'o/r', ref: 'main' });
+  assert.deepEqual(skills.map((s) => s.id), ['a-skills-testing', 'b-skills-testing', 'pdf']);
 });
 
 test('surfaces rate limiting clearly', async () => {

@@ -1,9 +1,40 @@
 {
   "title": "Angular",
-  "tags": ["frontend", "ui", "components", "signals", "rxjs", "standalone", "typescript"],
+  "tags": [
+    "frontend",
+    "ui",
+    "components",
+    "signals",
+    "rxjs",
+    "standalone",
+    "typescript"
+  ],
   "detect": {
-    "npm": ["@angular/core"],
-    "files": ["angular.json"]
+    "npm": [
+      "@angular/core"
+    ],
+    "files": [
+      "angular.json"
+    ]
   },
-  "recommends": ["typescript"]
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "angular/skills",
+      "path": "angular-developer",
+      "note": "angular-developer: Official Angular developer skill from the Angular team"
+    },
+    {
+      "repo": "angular/skills",
+      "path": "angular-new-app",
+      "note": "angular-new-app: Official Angular new-app scaffolding skill from the Angular team"
+    },
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "curated/angular/core",
+      "note": "angular-core: Angular core skill from Gentleman Programming community collection"
+    }
+  ]
 }

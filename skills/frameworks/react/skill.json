@@ -1,12 +1,41 @@
 {
   "title": "React",
-  "tags": ["frontend", "ui", "components", "hooks", "javascript", "typescript"],
+  "tags": [
+    "frontend",
+    "ui",
+    "components",
+    "hooks",
+    "javascript",
+    "typescript"
+  ],
   "detect": {
-    "npm": ["react", "react-dom"],
-    "extensions": [".jsx", ".tsx"]
+    "npm": [
+      "react",
+      "react-dom"
+    ],
+    "extensions": [
+      ".jsx",
+      ".tsx"
+    ]
   },
-  "recommends": ["typescript"],
+  "recommends": [
+    "typescript"
+  ],
   "upstream": [
-    { "repo": "vercel-labs/agent-skills", "path": "skills/react-best-practices", "note": "Vercel's React and Next.js performance guidelines" }
+    {
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/react-best-practices",
+      "note": "vercel-react-best-practices: React/Next.js performance guidelines from Vercel Engineering (official)"
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "path": "skills/composition-patterns",
+      "note": "vercel-composition-patterns: React composition patterns from Vercel (official)"
+    },
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "curated/react-19",
+      "note": "react-19: React 19 skill from Gentleman Programming community collection"
+    }
   ]
 }

@@ -60,6 +60,10 @@ export async function detectStack(root: string): Promise<DetectedStack> {
         if (IGNORED_DIRS.has(ent.name) || (ent.name.startsWith('.') && depth > 0)) {
           continue;
         }
+        if (depth <= MANIFEST_DEPTH) {
+          // Directories are recorded by workspace-relative path so rules can match e.g. ".github/workflows".
+          stack.files.add(path.relative(root, full).split(path.sep).join('/'));
+        }
         if (depth < SOURCE_SCAN_DEPTH) {
           await walk(full, depth + 1);
         }

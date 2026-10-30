@@ -79,3 +79,17 @@ test('recommend ranks dependency matches above extension matches', async () => {
   assert.deepEqual(recs.map((r) => r.entry.id), ['react', 'ts-only-ext']);
   assert.deepEqual(recs[0].reasons, ['npm: react', 'files with .tsx']);
 });
+
+test('records shallow directories so rules can match .github/workflows', async () => {
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'detect-dirs-'));
+  try {
+    await fs.mkdir(path.join(dir, '.github', 'workflows'), { recursive: true });
+    await fs.writeFile(path.join(dir, '.github', 'workflows', 'ci.yml'), 'on: push');
+    const stack = await detectStack(dir);
+    assert.ok(stack.files.has('.github/workflows'));
+    assert.ok(stack.files.has('ci.yml'));
+    assert.deepEqual(matchRules({ files: ['.github/workflows'] }, stack), ['file: .github/workflows']);
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true });
+  }
+});

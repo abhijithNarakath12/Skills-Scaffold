@@ -1,8 +1,35 @@
 {
   "title": "Vitest",
-  "tags": ["testing", "unit-tests", "javascript", "typescript", "vite"],
+  "tags": [
+    "testing",
+    "unit-tests",
+    "javascript",
+    "typescript",
+    "vite"
+  ],
   "detect": {
-    "npm": ["vitest"]
+    "npm": [
+      "vitest"
+    ]
   },
-  "recommends": ["typescript"]
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "antfu/skills",
+      "path": "skills/vitest",
+      "note": "vitest: Vitest skill from Anthony Fu (Vitest core team)"
+    },
+    {
+      "repo": "LambdaTest/agent-skills",
+      "path": "vitest-skill",
+      "note": "vitest-skill: Vitest skill from LambdaTest's test-automation skills"
+    },
+    {
+      "repo": "JetBrains/skills",
+      "path": "vitest",
+      "note": "vitest: Vitest skill from JetBrains' verified skills collection"
+    }
+  ]
 }

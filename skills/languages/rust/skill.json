@@ -1,8 +1,35 @@
 {
   "title": "Rust",
-  "tags": ["language", "rust", "systems", "backend", "cli"],
+  "tags": [
+    "language",
+    "rust",
+    "systems",
+    "backend",
+    "cli"
+  ],
   "detect": {
-    "files": ["Cargo.toml"],
-    "extensions": [".rs"]
-  }
+    "files": [
+      "Cargo.toml"
+    ],
+    "extensions": [
+      ".rs"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "apollographql/skills",
+      "path": "skills/rust-best-practices",
+      "note": "rust-best-practices: Rust best practices published by Apollo GraphQL"
+    },
+    {
+      "repo": "trailofbits/skills",
+      "path": "plugins/rust-review/skills/rust-review",
+      "note": "rust-review: Rust code review skill by Trail of Bits"
+    },
+    {
+      "repo": "google/rust-skills",
+      "path": "unsafe_rust_review",
+      "note": "unsafe-rust-review: Unsafe Rust review skill published by Google"
+    }
+  ]
 }

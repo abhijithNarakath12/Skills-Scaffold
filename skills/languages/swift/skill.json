@@ -1,8 +1,39 @@
 {
   "title": "Swift",
-  "tags": ["language", "swift", "ios", "macos", "apple", "swiftui"],
+  "tags": [
+    "language",
+    "swift",
+    "ios",
+    "macos",
+    "apple",
+    "swiftui"
+  ],
   "detect": {
-    "files": ["Package.swift", "*.xcodeproj", "*.xcworkspace", "Podfile"],
-    "extensions": [".swift"]
-  }
+    "files": [
+      "Package.swift",
+      "*.xcodeproj",
+      "*.xcworkspace",
+      "Podfile"
+    ],
+    "extensions": [
+      ".swift"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "AvdLee/SwiftUI-Agent-Skill",
+      "path": "skills/swiftui-expert-skill",
+      "note": "swiftui-expert-skill: SwiftUI expert skill by Antoine van der Lee (SwiftLee)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "swift",
+      "note": "swift: Swift skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/swift-expert",
+      "note": "swift-expert: Swift expert skill from Jeffallan/claude-skills (community)"
+    }
+  ]
 }

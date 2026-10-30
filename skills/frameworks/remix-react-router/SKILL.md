@@ -62,7 +62,7 @@ export default [
 ```tsx
 // app/routes/dashboard/project.tsx
 import type { Route } from './+types/project';
-import { data, redirect, Form, useNavigation } from 'react-router';
+import { data, redirect, Form, isRouteErrorResponse, useNavigation } from 'react-router';
 import { requireUser } from '~/lib/auth.server';
 import { db } from '~/lib/db.server';
 

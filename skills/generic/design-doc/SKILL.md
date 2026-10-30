@@ -1,6 +1,6 @@
 ---
 name: design-doc
-description: Write a design document before implementing a feature, and implement only after the document is approved. The document analyses requirements against the existing codebase and records every data structure the feature uses (fields, types, where defined, invariants, persistence), interfaces and APIs, algorithms with time and space complexity, data flow, error handling, testing and rollout. Use when asked for a design doc, tech spec, RFC, or architecture proposal, and for any feature that introduces or changes data models, schemas, APIs, or cross-module behaviour.
+description: Write a design document before implementing a feature, and implement only after the document is approved. The document analyses requirements against the existing codebase and records every data structure the feature uses (fields, types, where defined, invariants, persistence), interfaces and APIs, algorithms with time and space complexity, data flow, error handling, testing and rollout. Use when asked for a design doc, tech spec, RFC, or architecture proposal, when invoked with /design, and for any feature that introduces or changes data models, schemas, APIs, or cross-module behaviour.
 ---
 
 # Design document before implementation
@@ -11,6 +11,7 @@ Contract: **no implementation until the design document is approved.**
 
 ## When to use
 
+- The user invokes `/design <feature>`.
 - The user asks for a design document, tech spec, RFC, architecture proposal, or "how would you build X".
 - A feature adds or changes data structures, database schemas, message formats, public APIs, or background jobs.
 - The work spans several modules or services, or has non-obvious performance, security or migration implications.

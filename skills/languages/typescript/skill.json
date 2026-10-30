@@ -1,9 +1,42 @@
 {
   "title": "TypeScript",
-  "tags": ["language", "javascript", "types", "node", "frontend"],
+  "tags": [
+    "language",
+    "javascript",
+    "types",
+    "node",
+    "frontend"
+  ],
   "detect": {
-    "npm": ["typescript"],
-    "files": ["tsconfig.json", "tsconfig.*.json"],
-    "extensions": [".ts", ".tsx", ".mts", ".cts"]
-  }
+    "npm": [
+      "typescript"
+    ],
+    "files": [
+      "tsconfig.json",
+      "tsconfig.*.json"
+    ],
+    "extensions": [
+      ".ts",
+      ".tsx",
+      ".mts",
+      ".cts"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "mcollina/skills",
+      "path": "skills/typescript-magician",
+      "note": "typescript-magician: TypeScript guidance by Matteo Collina (Node.js TSC, Fastify author)"
+    },
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "curated/typescript",
+      "note": "typescript: Curated TypeScript rules from Gentleman Programming community"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/javascript-typescript/skills/typescript-advanced-types",
+      "note": "typescript-advanced-types: Advanced TypeScript types from wshobson/agents marketplace"
+    }
+  ]
 }

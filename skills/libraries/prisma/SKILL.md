@@ -122,7 +122,7 @@ await prisma.$transaction([prisma.post.deleteMany({ where: { authorId } }), pris
 - Loading relations in a loop (`for (const post of posts) await prisma.user.findUnique(...)`) is the classic N+1. Use `include`/`select` in the parent query, or batch with `findMany({ where: { id: { in: ids } } })`.
 - Prisma's query engine batches `findUnique` calls issued in the same tick (dataloader behaviour), which helps GraphQL resolvers, but explicit `include` is clearer.
 - Relation counts: `_count: { select: { posts: true } }`; aggregates: `aggregate`, `groupBy`.
-- Use `relationLoadStrategy: 'join'` (Prisma 5.9+ preview `relationJoins`, GA in 6.x for PostgreSQL/MySQL) when a single SQL join is cheaper than the default per-table queries; benchmark first.
+- Use `relationLoadStrategy: 'join'` (preview feature `relationJoins`, PostgreSQL/MySQL; check the release notes for GA status on your version) when a single SQL join is cheaper than the default per-table queries; benchmark first.
 - Raw SQL when the query builder cannot express it: `prisma.$queryRaw\`SELECT ... WHERE id = ${id}\`` (tagged template is parameterized). `$queryRawUnsafe` only with constants. Prisma 5.19+ `typedSql` (`prisma/sql/*.sql` + `--sql` flag) gives typed raw queries.
 
 ### Migrations
@@ -191,7 +191,7 @@ const posts = await prisma.post.findMany({
 - Multiple `PrismaClient` instances (one per request or per module) exhausting connection pools, especially in serverless; use the singleton and a pooler (`pgbouncer=true` in the URL, or Accelerate) when deploying to lambdas/edge.
 - Forgetting `prisma generate` after schema changes or in Docker builds (the generated client must be built in the image: run `npx prisma generate` in the Dockerfile and copy `node_modules/.prisma`).
 - `migrate dev` in production or CI; it may reset the database when drift is detected. Use `migrate deploy`.
-- Returning `include`d relations to clients and leaking sensitive fields; prefer `select` or omit fields with `omit` (Prisma 5.16+ preview, GA in 6.x: `omit: { password: true }`).
+- Returning `include`d relations to clients and leaking sensitive fields; prefer `select` or omit fields with `omit: { password: true }` (preview `omitApi` in 5.13+, GA since 6.2).
 - `findMany` with no `take` on large tables.
 - Floating-point arithmetic on `Decimal` results; use `Prisma.Decimal` methods or `decimal.js`.
 - `DateTime` timezone confusion: Prisma stores and returns UTC `Date` objects; convert at the edge.

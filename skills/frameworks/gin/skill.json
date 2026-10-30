@@ -1,0 +1,8 @@
+{
+  "title": "Gin",
+  "tags": ["backend", "go", "golang", "http", "api", "rest", "middleware"],
+  "detect": {
+    "go": ["github.com/gin-gonic/gin"]
+  },
+  "recommends": ["go"]
+}

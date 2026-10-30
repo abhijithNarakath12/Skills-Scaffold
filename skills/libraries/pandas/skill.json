@@ -1,0 +1,36 @@
+{
+  "title": "pandas",
+  "tags": [
+    "data",
+    "dataframe",
+    "python",
+    "analysis",
+    "etl",
+    "data-science"
+  ],
+  "detect": {
+    "pip": [
+      "pandas"
+    ]
+  },
+  "recommends": [
+    "python"
+  ],
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "pandas-best-practices",
+      "note": "pandas-best-practices: pandas best practices from Mindrally/skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/pandas-pro",
+      "note": "pandas-pro: pandas expert skill from Jeffallan/claude-skills (community)"
+    },
+    {
+      "repo": "clawic/skills",
+      "path": "skills/pandas",
+      "note": "Pandas: pandas skill from clawic/skills (community)"
+    }
+  ]
+}

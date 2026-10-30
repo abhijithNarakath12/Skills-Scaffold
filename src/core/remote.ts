@@ -11,26 +11,50 @@ export interface RemoteSource {
 
 export interface RemoteSkill {
   source: RemoteSource;
-  /** Folder name = skill id. */
+  /** Folder name = skill id (made unique when a repo has several folders with the same name). */
   id: string;
-  /** Path of the skill directory inside the repository. */
+  /** Path of the skill directory inside the repository ('' when SKILL.md sits at the repo root). */
   path: string;
+  /** Resolved git ref the listing was taken from. */
+  ref: string;
   name?: string;
   description?: string;
 }
 
-interface GitHubContent {
-  name: string;
+interface TreeEntry {
   path: string;
-  type: 'file' | 'dir' | 'symlink' | 'submodule';
-  download_url: string | null;
+  type: 'blob' | 'tree' | 'commit';
+  size?: number;
 }
 
-export interface Fetcher {
-  (url: string, init?: { headers?: Record<string, string> }): Promise<{ ok: boolean; status: number; json(): Promise<unknown>; text(): Promise<string>; arrayBuffer(): Promise<ArrayBuffer> }>;
+interface TreeResponse {
+  sha: string;
+  tree: TreeEntry[];
+  truncated: boolean;
 }
 
+export interface FetchResponse {
+  ok: boolean;
+  status: number;
+  json(): Promise<unknown>;
+  text(): Promise<string>;
+  arrayBuffer(): Promise<ArrayBuffer>;
+}
+
+export type Fetcher = (url: string, init?: { headers?: Record<string, string> }) => Promise<FetchResponse>;
+
+const API = 'https://api.github.com';
+const RAW = 'https://raw.githubusercontent.com';
+
+/**
+ * Reads skills from GitHub with as few API calls as possible:
+ * one call to resolve the default branch (skipped when a ref is given), one call for the
+ * recursive git tree, and raw.githubusercontent.com downloads (not rate limited like the API).
+ */
 export class GitHubClient {
+  private readonly treeCache = new Map<string, Promise<TreeResponse>>();
+  private readonly refCache = new Map<string, Promise<string>>();
+
   constructor(private readonly token: string | undefined, private readonly fetchImpl: Fetcher = globalThis.fetch as Fetcher) {}
 
   private headers(): Record<string, string> {
@@ -41,86 +65,123 @@ export class GitHubClient {
     return h;
   }
 
-  private async contents(repo: string, repoPath: string, ref?: string): Promise<GitHubContent[]> {
-    const url = `https://api.github.com/repos/${repo}/contents/${encodePath(repoPath)}${ref ? `?ref=${encodeURIComponent(ref)}` : ''}`;
-    const res = await this.fetchImpl(url, { headers: this.headers() });
+  private async api<T>(route: string): Promise<T> {
+    const res = await this.fetchImpl(`${API}${route}`, { headers: this.headers() });
     if (!res.ok) {
-      if (res.status === 403) {
-        throw new Error(`GitHub API rate limit reached while reading ${repo}. Set GITHUB_TOKEN or agentSkills.githubToken.`);
+      if (res.status === 403 || res.status === 429) {
+        throw new Error('GitHub API rate limit reached. Set GITHUB_TOKEN (or agentSkills.githubToken) to raise it.');
       }
-      throw new Error(`GitHub API ${res.status} for ${repo}/${repoPath}`);
+      if (res.status === 404) {
+        throw new Error(`Not found on GitHub: ${route}`);
+      }
+      throw new Error(`GitHub API error ${res.status} for ${route}`);
     }
-    const json = (await res.json()) as GitHubContent | GitHubContent[];
-    return Array.isArray(json) ? json : [json];
+    return (await res.json()) as T;
   }
 
-  private async rawFile(repo: string, filePath: string, ref?: string): Promise<string> {
-    const contents = await this.contents(repo, filePath, ref);
-    const file = contents[0];
-    if (!file || file.type !== 'file' || !file.download_url) {
-      throw new Error(`Not a file: ${repo}/${filePath}`);
+  /** Default branch of a repository, cached. */
+  resolveRef(repo: string, ref?: string): Promise<string> {
+    if (ref) {
+      return Promise.resolve(ref);
     }
-    const res = await this.fetchImpl(file.download_url, { headers: { 'User-Agent': 'agent-skills-manager' } });
+    let p = this.refCache.get(repo);
+    if (!p) {
+      p = this.api<{ default_branch: string }>(`/repos/${repo}`).then((r) => r.default_branch);
+      this.refCache.set(repo, p);
+    }
+    return p;
+  }
+
+  private tree(repo: string, ref: string): Promise<TreeResponse> {
+    const key = `${repo}@${ref}`;
+    let p = this.treeCache.get(key);
+    if (!p) {
+      p = this.api<TreeResponse>(`/repos/${repo}/git/trees/${encodeURIComponent(ref)}?recursive=1`);
+      this.treeCache.set(key, p);
+    }
+    return p;
+  }
+
+  private async raw(repo: string, ref: string, filePath: string): Promise<FetchResponse> {
+    const url = `${RAW}/${repo}/${encodeURIComponent(ref)}/${filePath.split('/').map(encodeURIComponent).join('/')}`;
+    const res = await this.fetchImpl(url, { headers: { 'User-Agent': 'agent-skills-manager' } });
     if (!res.ok) {
-      throw new Error(`Download failed (${res.status}) for ${file.download_url}`);
+      throw new Error(`Download failed (${res.status}) for ${repo}/${filePath}`);
     }
-    return res.text();
+    return res;
   }
 
-  /** Lists skill folders (directories containing SKILL.md) directly under `source.path`. */
+  /** Lists every folder containing a SKILL.md at or below `source.path`. */
   async listSkills(source: RemoteSource): Promise<RemoteSkill[]> {
-    const base = source.path ?? '';
-    const entries = await this.contents(source.repo, base, source.ref);
-    const dirs = entries.filter((e) => e.type === 'dir');
-    const found: RemoteSkill[] = [];
-    // The repo root itself might be a skill.
-    if (entries.some((e) => e.type === 'file' && e.name === 'SKILL.md')) {
-      found.push({ source, id: path.posix.basename(base) || source.repo.split('/')[1], path: base });
+    const ref = await this.resolveRef(source.repo, source.ref);
+    const tree = await this.tree(source.repo, ref);
+    const base = normalizePath(source.path);
+    const prefix = base ? base + '/' : '';
+    const skillFiles = tree.tree.filter((e) => e.type === 'blob' && (e.path === 'SKILL.md' || e.path.endsWith('/SKILL.md')) && (!base || e.path === `${base}/SKILL.md` || e.path.startsWith(prefix)));
+    const found: RemoteSkill[] = skillFiles.map((e) => {
+      const dir = e.path === 'SKILL.md' ? '' : e.path.slice(0, -'/SKILL.md'.length);
+      return { source, id: dir ? path.posix.basename(dir) : source.repo.split('/')[1], path: dir, ref };
+    });
+    disambiguate(found);
+    if (tree.truncated && !found.length) {
+      throw new Error(`${source.repo} is too large to list in one request; point the source at a sub-folder.`);
     }
-    await Promise.all(
-      dirs.map(async (d) => {
-        try {
-          const children = await this.contents(source.repo, d.path, source.ref);
-          if (children.some((c) => c.type === 'file' && c.name === 'SKILL.md')) {
-            found.push({ source, id: d.name, path: d.path });
-          }
-        } catch {
-          // skip unreadable dirs
-        }
-      }),
-    );
     return found.sort((a, b) => a.id.localeCompare(b.id));
   }
 
   /** Reads name/description from a remote SKILL.md. */
   async describe(skill: RemoteSkill): Promise<RemoteSkill> {
-    const text = await this.rawFile(skill.source.repo, path.posix.join(skill.path, 'SKILL.md'), skill.source.ref);
-    const fm = parseFrontmatter(text).data;
+    const res = await this.raw(skill.source.repo, skill.ref, path.posix.join(skill.path, 'SKILL.md'));
+    const fm = parseFrontmatter(await res.text()).data;
     return { ...skill, name: fm.name, description: fm.description };
   }
 
-  /** Downloads a whole skill directory into `dest` (recursively). */
+  /** Downloads a whole skill directory into `dest`. */
   async download(skill: RemoteSkill, dest: string, onFile?: (file: string) => void): Promise<void> {
+    const tree = await this.tree(skill.source.repo, skill.ref);
+    const prefix = skill.path ? skill.path + '/' : '';
+    const files = tree.tree.filter((e) => e.type === 'blob' && e.path.startsWith(prefix) && (prefix || !e.path.includes('/') || true));
+    if (!files.length) {
+      throw new Error(`No files found for ${skill.source.repo}/${skill.path}`);
+    }
     await fs.mkdir(dest, { recursive: true });
-    const entries = await this.contents(skill.source.repo, skill.path, skill.source.ref);
-    for (const entry of entries) {
-      const target = path.join(dest, entry.name);
-      if (entry.type === 'dir') {
-        await this.download({ ...skill, path: entry.path }, target, onFile);
-      } else if (entry.type === 'file' && entry.download_url) {
-        const res = await this.fetchImpl(entry.download_url, { headers: { 'User-Agent': 'agent-skills-manager' } });
-        if (!res.ok) {
-          throw new Error(`Download failed (${res.status}) for ${entry.path}`);
-        }
-        await fs.writeFile(target, Buffer.from(await res.arrayBuffer()));
-        onFile?.(entry.path);
+    for (const file of files) {
+      const rel = file.path.slice(prefix.length);
+      if (rel.includes('..')) {
+        continue; // never write outside dest
+      }
+      const target = path.join(dest, ...rel.split('/'));
+      await fs.mkdir(path.dirname(target), { recursive: true });
+      const res = await this.raw(skill.source.repo, skill.ref, file.path);
+      await fs.writeFile(target, Buffer.from(await res.arrayBuffer()));
+      onFile?.(file.path);
+    }
+  }
+}
+
+/** Gives duplicate folder names (e.g. plugins/a/skills/testing and plugins/b/skills/testing) unique ids using the shortest distinguishing path suffix. */
+function disambiguate(skills: RemoteSkill[]): void {
+  const groups = new Map<string, RemoteSkill[]>();
+  for (const s of skills) {
+    groups.set(s.id, [...(groups.get(s.id) ?? []), s]);
+  }
+  for (const group of groups.values()) {
+    if (group.length < 2) {
+      continue;
+    }
+    const maxDepth = Math.max(...group.map((s) => s.path.split('/').length));
+    for (let k = 2; k <= maxDepth; k++) {
+      const ids = group.map((s) => s.path.split('/').slice(-k).join('-').replace(/[^a-z0-9-]/gi, '-').toLowerCase());
+      if (new Set(ids).size === group.length) {
+        group.forEach((s, i) => (s.id = ids[i]));
+        break;
       }
     }
   }
 }
 
-function encodePath(p: string): string {
-  return p.split('/').filter(Boolean).map(encodeURIComponent).join('/');
+function normalizePath(p: string | undefined): string {
+  return (p ?? '').replace(/^\/+|\/+$/g, '');
 }
 
 /** Parses user input like `owner/repo`, `owner/repo/path/to/skill`, or a GitHub URL (tree/blob links supported). */

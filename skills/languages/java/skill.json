@@ -1,8 +1,38 @@
 {
   "title": "Java",
-  "tags": ["language", "java", "jvm", "backend", "maven", "gradle"],
+  "tags": [
+    "language",
+    "java",
+    "jvm",
+    "backend",
+    "maven",
+    "gradle"
+  ],
   "detect": {
-    "files": ["pom.xml", "build.gradle", "build.gradle.kts"],
-    "extensions": [".java"]
-  }
+    "files": [
+      "pom.xml",
+      "build.gradle",
+      "build.gradle.kts"
+    ],
+    "extensions": [
+      ".java"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/java-development",
+      "note": "java-development: Java development skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "community/java-21",
+      "note": "java-21: Java 21 skill from Gentleman Programming community collection"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/java-architect",
+      "note": "java-architect: Java architect skill from Jeffallan/claude-skills (community)"
+    }
+  ]
 }

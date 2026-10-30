@@ -1,9 +1,41 @@
 {
   "title": "Playwright",
-  "tags": ["testing", "e2e", "browser", "component-tests", "javascript", "python"],
+  "tags": [
+    "testing",
+    "e2e",
+    "browser",
+    "component-tests",
+    "javascript",
+    "python"
+  ],
   "detect": {
-    "npm": ["@playwright/test"],
-    "pip": ["playwright", "pytest-playwright"],
-    "files": ["playwright.config.ts", "playwright.config.js"]
-  }
+    "npm": [
+      "@playwright/test"
+    ],
+    "pip": [
+      "playwright",
+      "pytest-playwright"
+    ],
+    "files": [
+      "playwright.config.ts",
+      "playwright.config.js"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "openai/skills",
+      "path": "skills/.curated/playwright",
+      "note": "playwright: Playwright skill from OpenAI's curated Codex skills catalog"
+    },
+    {
+      "repo": "anthropics/skills",
+      "path": "skills/webapp-testing",
+      "note": "webapp-testing: Playwright-based web app testing skill from Anthropic"
+    },
+    {
+      "repo": "LambdaTest/agent-skills",
+      "path": "playwright-skill",
+      "note": "playwright-skill: Playwright skill from LambdaTest's test-automation skills"
+    }
+  ]
 }

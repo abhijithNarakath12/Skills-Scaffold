@@ -1,13 +1,56 @@
 {
   "title": "PostgreSQL",
-  "tags": ["database", "sql", "postgres", "migrations", "performance"],
+  "tags": [
+    "database",
+    "sql",
+    "postgres",
+    "migrations",
+    "performance"
+  ],
   "detect": {
-    "npm": ["pg", "postgres", "@neondatabase/serverless"],
-    "pip": ["psycopg", "psycopg2", "psycopg2-binary", "asyncpg"],
-    "go": ["github.com/jackc/pgx", "github.com/lib/pq"],
-    "gem": ["pg"],
-    "composer": ["doctrine/dbal"],
-    "nuget": ["npgsql"]
+    "npm": [
+      "pg",
+      "postgres",
+      "@neondatabase/serverless"
+    ],
+    "pip": [
+      "psycopg",
+      "psycopg2",
+      "psycopg2-binary",
+      "asyncpg"
+    ],
+    "go": [
+      "github.com/jackc/pgx",
+      "github.com/lib/pq"
+    ],
+    "gem": [
+      "pg"
+    ],
+    "composer": [
+      "doctrine/dbal"
+    ],
+    "nuget": [
+      "npgsql"
+    ]
   },
-  "recommends": ["sql"]
+  "recommends": [
+    "sql"
+  ],
+  "upstream": [
+    {
+      "repo": "supabase/agent-skills",
+      "path": "skills/supabase-postgres-best-practices",
+      "note": "supabase-postgres-best-practices: Official Postgres best practices skill from Supabase"
+    },
+    {
+      "repo": "neondatabase/postgres-skills",
+      "path": "skills/postgres-best-practices",
+      "note": "postgres-best-practices: Postgres best practices skill from Neon (official org)"
+    },
+    {
+      "repo": "microsoft/postgres-skills",
+      "path": "plugin/skills/postgresql-best-practices",
+      "note": "postgresql-best-practices: Vendor-agnostic PostgreSQL best practices from Microsoft"
+    }
+  ]
 }

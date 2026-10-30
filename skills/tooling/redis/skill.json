@@ -1,10 +1,43 @@
 {
   "title": "Redis",
-  "tags": ["database", "cache", "redis", "queues", "sessions", "rate-limiting"],
+  "tags": [
+    "database",
+    "cache",
+    "redis",
+    "queues",
+    "sessions",
+    "rate-limiting"
+  ],
   "detect": {
-    "npm": ["redis", "ioredis"],
-    "pip": ["redis"],
-    "go": ["github.com/redis/go-redis"],
-    "gem": ["redis"]
-  }
+    "npm": [
+      "redis",
+      "ioredis"
+    ],
+    "pip": [
+      "redis"
+    ],
+    "go": [
+      "github.com/redis/go-redis"
+    ],
+    "gem": [
+      "redis"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "redis/agent-skills",
+      "path": "skills/redis-core",
+      "note": "redis-core: Official Redis core skill from Redis"
+    },
+    {
+      "repo": "redis/agent-skills",
+      "path": "skills/redis-connections",
+      "note": "redis-connections: Official Redis connections skill from Redis"
+    },
+    {
+      "repo": "redis/agent-skills",
+      "path": "skills/redis-search",
+      "note": "redis-search: Official Redis search skill from Redis"
+    }
+  ]
 }

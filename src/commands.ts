@@ -5,6 +5,7 @@ import * as vscode from 'vscode';
 import { CATEGORY_LABELS, withRecommended } from './core/catalog';
 import { isValidSkillName } from './core/frontmatter';
 import { exists, installSkillDir, removeSkill, skillTemplate, type InstallResult } from './core/installer';
+import { applySkillIntegration, removeSkillIntegration } from './core/integration';
 import { GitHubClient, parseGitHubReference, type RemoteSkill, type RemoteSource } from './core/remote';
 import { TARGETS } from './core/targets';
 import type { CatalogEntry, InstallManifest } from './core/types';
@@ -22,6 +23,7 @@ export function registerCommands(service: SkillService): vscode.Disposable[] {
     reg('agentSkills.addRecommended', () => addRecommended(service)),
     reg('agentSkills.addWorkflowSkills', () => addByCategory(service, 'generic')),
     reg('agentSkills.installSkill', (node) => installFromNode(service, node as TreeNode)),
+    reg('agentSkills.installUpstream', (node) => installUpstream(service, node as TreeNode | undefined)),
     reg('agentSkills.removeSkill', (node) => removeFromNode(service, node as TreeNode | undefined)),
     reg('agentSkills.updateInstalled', () => updateInstalled(service)),
     reg('agentSkills.addFromGitHub', () => addFromGitHub(service)),
@@ -30,6 +32,7 @@ export function registerCommands(service: SkillService): vscode.Disposable[] {
     reg('agentSkills.openSkill', (node) => openSkill(service, node as TreeNode)),
     reg('agentSkills.refresh', () => service.refresh()),
     reg('agentSkills.selectTargets', () => selectTargets(service)),
+    reg('agentSkills.syncIntegrations', () => syncIntegrations(service)),
   ];
 }
 
@@ -59,6 +62,9 @@ async function installEntries(service: SkillService, folder: vscode.WorkspaceFol
   service.refresh();
   const added = results.filter((r) => !r.skipped);
   const skipped = results.filter((r) => r.skipped === 'exists');
+  for (const r of results) {
+    service.log(r.skipped ? `Skipped ${r.id} (already present)` : `Installed ${r.id} -> ${r.paths.join(', ')}`);
+  }
   const parts: string[] = [];
   if (added.length) {
     parts.push(`Added ${added.length} skill${added.length === 1 ? '' : 's'} to ${targetSummary(service)}`);
@@ -68,6 +74,10 @@ async function installEntries(service: SkillService, folder: vscode.WorkspaceFol
   }
   if (results.some((r) => r.linkedFallbackToCopy)) {
     parts.push('symlinks were not possible, secondary targets got copies');
+  }
+  const integrated = await integrate(service, folder, entries);
+  if (integrated.length) {
+    parts.push(`updated ${integrated.join(', ')}`);
   }
   const message = parts.join('. ') + '.';
   if (added.length) {
@@ -202,6 +212,15 @@ async function removeFromNode(service: SkillService, node: TreeNode | undefined)
     return;
   }
   const removed = await removeSkill(folder.uri.fsPath, service.targets, id);
+  service.log(`Removed ${id}: ${removed.join(', ') || 'not found'}`);
+  const entry = await service.getEntry(id);
+  if (entry) {
+    const cleaned = await removeSkillIntegration(folder.uri.fsPath, service.targets, entry);
+    const files = [...cleaned.instructionFiles, ...cleaned.commandFiles];
+    if (files.length) {
+      service.log(`Removed rules/commands of ${id} from ${files.join(', ')}`);
+    }
+  }
   service.refresh();
   void vscode.window.showInformationMessage(removed.length ? `Removed ${id} (${removed.length} location${removed.length === 1 ? '' : 's'}).` : `${id} was not found.`);
 }
@@ -274,6 +293,9 @@ async function installRemote(service: SkillService, folder: vscode.WorkspaceFold
     await fs.rm(tmpRoot, { recursive: true, force: true });
   }
   service.refresh();
+  for (const r of results) {
+    service.log(r.skipped ? `Skipped community skill ${r.id} (already present)` : `Installed community skill ${r.id} -> ${r.paths.join(', ')}`);
+  }
   const added = results.filter((r) => !r.skipped).length;
   const skipped = results.length - added;
   void vscode.window.showInformationMessage(`Added ${added} community skill${added === 1 ? '' : 's'} to ${targetSummary(service)}${skipped ? `, ${skipped} already present` : ''}. Review downloaded SKILL.md files before relying on them.`);
@@ -350,6 +372,83 @@ async function addFromGitHub(service: SkillService): Promise<void> {
     await installRemote(service, folder, client, chosen);
   } catch (err) {
     void vscode.window.showErrorMessage(`Could not add skill: ${(err as Error).message}`);
+  }
+}
+
+/** Writes always-on rules and slash commands for the given installed skills; returns touched files. */
+async function integrate(service: SkillService, folder: vscode.WorkspaceFolder, entries: CatalogEntry[]): Promise<string[]> {
+  const rules = service.config.get<boolean>('enforceRules', true);
+  const commands = service.config.get<boolean>('createSlashCommands', true);
+  const touched = new Set<string>();
+  for (const entry of entries) {
+    if (!entry.rule && !entry.commands?.length) {
+      continue;
+    }
+    const res = await applySkillIntegration(folder.uri.fsPath, service.targets, entry, { rules, commands });
+    for (const f of [...res.instructionFiles, ...res.commandFiles]) {
+      touched.add(f);
+    }
+  }
+  if (touched.size) {
+    service.log(`Rules/commands written: ${[...touched].join(', ')}`);
+  }
+  return [...touched];
+}
+
+/** Re-applies rules and slash commands for every installed bundled skill (e.g. after changing targets). */
+async function syncIntegrations(service: SkillService): Promise<void> {
+  const folder = await service.pickWorkspace();
+  if (!folder) {
+    return;
+  }
+  const [installed, catalog] = await Promise.all([service.getInstalled(folder), service.getCatalog()]);
+  const ids = new Set(installed.map((s) => s.id));
+  const entries = catalog.skills.filter((e) => ids.has(e.id));
+  const touched = await integrate(service, folder, entries);
+  void vscode.window.showInformationMessage(touched.length ? `Updated ${touched.join(', ')}.` : 'No installed skill declares rules or slash commands.');
+}
+
+/** Installs a verified community skill covering the same topic as a bundled one. */
+async function installUpstream(service: SkillService, node: TreeNode | undefined): Promise<void> {
+  const folder = await service.pickWorkspace();
+  if (!folder) {
+    return;
+  }
+  const catalog = await service.getCatalog();
+  let entry: CatalogEntry | undefined;
+  if (node?.kind === 'skill') {
+    entry = node.entry;
+  } else if (node?.kind === 'installed') {
+    entry = node.entry;
+  }
+  if (!entry) {
+    const withUpstream = catalog.skills.filter((e) => e.upstream?.length);
+    const pick = await vscode.window.showQuickPick(
+      withUpstream.map((e) => ({ label: e.title ?? e.name, description: `${e.upstream!.length} community version${e.upstream!.length === 1 ? '' : 's'}`, detail: e.description, entry: e })),
+      { title: 'Install a community version of a skill', matchOnDetail: true, placeHolder: 'Pick a topic' },
+    );
+    entry = pick?.entry;
+  }
+  if (!entry?.upstream?.length) {
+    void vscode.window.showInformationMessage('No verified community skill is recorded for this topic. Use "Add Skill from GitHub Repository..." to install one by URL.');
+    return;
+  }
+  const choice = await vscode.window.showQuickPick(
+    entry.upstream.map((u) => ({ label: `$(github) ${u.repo}`, description: u.path || '(repository root)', detail: u.note, upstream: u })),
+    { title: `Community versions of "${entry.title ?? entry.name}"`, matchOnDetail: true, placeHolder: 'Downloaded from GitHub into your project; review before relying on it' },
+  );
+  if (!choice) {
+    return;
+  }
+  const client = new GitHubClient(service.githubToken);
+  try {
+    const ref = await client.resolveRef(choice.upstream.repo, choice.upstream.ref);
+    const source: RemoteSource = { repo: choice.upstream.repo, path: choice.upstream.path, ref };
+    const dir = choice.upstream.path.replace(/\/+$/, '');
+    const skill: RemoteSkill = { source, id: dir ? path.posix.basename(dir) : choice.upstream.repo.split('/')[1], path: dir, ref };
+    await installRemote(service, folder, client, [skill]);
+  } catch (err) {
+    void vscode.window.showErrorMessage(`Could not install community skill: ${(err as Error).message}`);
   }
 }
 

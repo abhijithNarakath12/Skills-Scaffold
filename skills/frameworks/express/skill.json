@@ -1,8 +1,38 @@
 {
   "title": "Express",
-  "tags": ["backend", "node", "http", "api", "rest", "middleware", "javascript"],
+  "tags": [
+    "backend",
+    "node",
+    "http",
+    "api",
+    "rest",
+    "middleware",
+    "javascript"
+  ],
   "detect": {
-    "npm": ["express"]
+    "npm": [
+      "express"
+    ]
   },
-  "recommends": ["javascript"]
+  "recommends": [
+    "javascript"
+  ],
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "express-typescript",
+      "note": "express-typescript: Express + TypeScript skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "ashish7802/awesome-api-skills",
+      "path": "skills/express",
+      "ref": "master",
+      "note": "Express skill from ashish7802/awesome-api-skills (community)"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/javascript-typescript/skills/nodejs-backend-patterns",
+      "note": "nodejs-backend-patterns: Node.js backend patterns from wshobson/agents marketplace"
+    }
+  ]
 }

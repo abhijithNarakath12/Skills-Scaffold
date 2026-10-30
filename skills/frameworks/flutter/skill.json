@@ -1,0 +1,41 @@
+{
+  "title": "Flutter",
+  "tags": [
+    "mobile",
+    "ios",
+    "android",
+    "web",
+    "desktop",
+    "dart",
+    "widgets",
+    "material"
+  ],
+  "detect": {
+    "pub": [
+      "flutter"
+    ],
+    "files": [
+      "pubspec.yaml"
+    ]
+  },
+  "recommends": [
+    "dart"
+  ],
+  "upstream": [
+    {
+      "repo": "flutter/agent-plugins",
+      "path": "skills/flutter-apply-architecture-best-practices",
+      "note": "flutter-apply-architecture-best-practices: Official Flutter architecture best practices skill from the Flutter team"
+    },
+    {
+      "repo": "flutter/agent-plugins",
+      "path": "skills/flutter-add-widget-test",
+      "note": "flutter-add-widget-test: Official Flutter widget testing skill from the Flutter team"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/flutter-expert",
+      "note": "flutter-expert: Flutter expert skill from Jeffallan/claude-skills (community)"
+    }
+  ]
+}

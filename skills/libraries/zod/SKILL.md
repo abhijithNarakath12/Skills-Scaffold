@@ -152,7 +152,7 @@ Create `env.ts` as above, import `env` everywhere instead of `process.env`. For 
 - `z.infer` on a schema with transforms gives the output type; for form default values and `useForm` generics use `z.input`.
 - `z.coerce.boolean()` turning `"false"` into `true`.
 - `z.object` silently stripping unknown keys on strict write APIs (use `strictObject`).
-- Refinements on `z.object` running only after all field checks pass (v3) - cross-field errors appear only after individual field errors are fixed; v4 runs them unless `abortEarly`, but `.refine` on a failed object is still skipped when child issues exist. Structure messages accordingly.
+- Object-level `.refine` does not run while field-level issues exist (v3 behaviour; v4 changed refinement ordering and added an `abort` option, see https://zod.dev/v4/changelog#refinements). Cross-field errors therefore may appear only after individual field errors are fixed; structure messages accordingly.
 - Calling `.optional()` before `.default()` or expecting `.default()` to handle `null` (it only handles `undefined`; use `.nullish()` + transform or `.catch`).
 - Parsing `Date` objects from JSON without `coerce` (they are strings).
 - Huge `z.union` of objects instead of `discriminatedUnion`; slow and unreadable errors.

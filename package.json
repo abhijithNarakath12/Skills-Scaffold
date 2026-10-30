@@ -53,6 +53,12 @@
         "icon": "$(cloud-download)"
       },
       {
+        "command": "agentSkills.installUpstream",
+        "title": "Install Community Version...",
+        "category": "Agent Skills",
+        "icon": "$(globe)"
+      },
+      {
         "command": "agentSkills.removeSkill",
         "title": "Remove Skill from Project",
         "category": "Agent Skills",
@@ -98,6 +104,12 @@
         "title": "Select Target Agents (where skills are installed)...",
         "category": "Agent Skills",
         "icon": "$(settings-gear)"
+      },
+      {
+        "command": "agentSkills.syncIntegrations",
+        "title": "Re-apply Always-on Rules and Slash Commands",
+        "category": "Agent Skills",
+        "icon": "$(law)"
       }
     ],
     "viewsContainers": {
@@ -185,6 +197,11 @@
           "group": "inline@2"
         },
         {
+          "command": "agentSkills.installUpstream",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /has-upstream/",
+          "group": "inline@4"
+        },
+        {
           "command": "agentSkills.removeSkill",
           "when": "view == agentSkills.installed && viewItem =~ /skill-installed/",
           "group": "inline@3"
@@ -203,6 +220,11 @@
           "command": "agentSkills.openSkill",
           "when": "view =~ /^agentSkills\\./ && viewItem =~ /skill-/",
           "group": "1_actions@3"
+        },
+        {
+          "command": "agentSkills.installUpstream",
+          "when": "view =~ /^agentSkills\\./ && viewItem =~ /has-upstream/",
+          "group": "1_actions@4"
         }
       ],
       "commandPalette": [
@@ -216,6 +238,10 @@
         },
         {
           "command": "agentSkills.refresh",
+          "when": "false"
+        },
+        {
+          "command": "agentSkills.installUpstream",
           "when": "false"
         }
       ]
@@ -288,6 +314,16 @@
               "repo": "obra/superpowers",
               "path": "skills",
               "label": "Superpowers (engineering workflows)"
+            },
+            {
+              "repo": "github/awesome-copilot",
+              "path": "skills",
+              "label": "GitHub awesome-copilot skills (large community catalog)"
+            },
+            {
+              "repo": "openai/skills",
+              "path": "skills/.curated",
+              "label": "OpenAI curated skills"
             }
           ],
           "items": {
@@ -315,6 +351,16 @@
           "type": "string",
           "default": "",
           "markdownDescription": "Optional GitHub token used for fetching community skills (raises the API rate limit). Prefer setting the `GITHUB_TOKEN` environment variable instead of storing a token here."
+        },
+        "agentSkills.enforceRules": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "When a skill declares an always-on rule (for example `plan-feature`), write it into the project's agent instruction file (`CLAUDE.md`, `AGENTS.md`, `.cursor/rules`, `.github/copilot-instructions.md`, ...) inside a managed block so the agent follows it on every task."
+        },
+        "agentSkills.createSlashCommands": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Generate project slash commands declared by skills (currently `/design`) for agents that support them (Claude Code, Cursor, Copilot, Gemini CLI, Windsurf, OpenCode)."
         }
       }
     }

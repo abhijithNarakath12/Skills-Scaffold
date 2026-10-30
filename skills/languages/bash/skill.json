@@ -1,8 +1,39 @@
 {
   "title": "Bash / Shell",
-  "tags": ["language", "bash", "shell", "zsh", "scripting", "cli", "devops"],
+  "tags": [
+    "language",
+    "bash",
+    "shell",
+    "zsh",
+    "scripting",
+    "cli",
+    "devops"
+  ],
   "detect": {
-    "files": ["Makefile"],
-    "extensions": [".sh", ".bash", ".zsh"]
-  }
+    "files": [
+      "Makefile"
+    ],
+    "extensions": [
+      ".sh",
+      ".bash",
+      ".zsh"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/shell-scripting/skills/bash-defensive-patterns",
+      "note": "bash-defensive-patterns: Defensive Bash patterns from wshobson/agents marketplace"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "bash-scripting",
+      "note": "bash-scripting: Bash scripting skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "clawic/skills",
+      "path": "skills/bash",
+      "note": "Bash skill from clawic/skills (community)"
+    }
+  ]
 }

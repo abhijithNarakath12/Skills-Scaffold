@@ -1,7 +1,28 @@
 {
   "title": "Redux Toolkit",
-  "tags": ["state-management", "redux", "react", "frontend", "rtk-query"],
+  "tags": [
+    "state-management",
+    "redux",
+    "react",
+    "frontend",
+    "rtk-query"
+  ],
   "detect": {
-    "npm": ["@reduxjs/toolkit", "redux"]
-  }
+    "npm": [
+      "@reduxjs/toolkit",
+      "redux"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "redux-toolkit",
+      "note": "redux-toolkit: Redux Toolkit skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/frontend-mobile-development/skills/react-state-management",
+      "note": "react-state-management: React state management skill from wshobson/agents marketplace"
+    }
+  ]
 }

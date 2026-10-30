@@ -63,7 +63,7 @@ const external = href.startsWith('http');
 - Frontmatter is server-only: top-level `await`, `fetch`, filesystem, secrets are fine. Anything that needs browser state must be a `<script>` or a framework island.
 - `Astro.props` (type with `interface Props`), `Astro.params`, `Astro.url`, `Astro.request`, `Astro.cookies`, `Astro.redirect()`, `Astro.locals`, `Astro.site`, `Astro.slots.has('footer')`.
 - Template: JSX-like expressions, `class:list`, `set:html={html}` (sanitise first), `set:text`, `define:vars={{ color }}` on `<style>`/`<script>`, `is:inline` to skip bundling, `is:global` for unscoped styles.
-- `<script>` tags are hoisted and bundled once per page regardless of how many component instances render. For per-instance behaviour, use a custom element (`class extends HTMLElement`) or `data-*` attributes and query them. For Astro 5 `<script>` tags are no longer hoisted when `is:inline` or when they use `define:vars`.
+- `<script>` tags are hoisted and bundled once per page regardless of how many component instances render. For per-instance behaviour, use a custom element (`class extends HTMLElement`) or `data-*` attributes and query them. A `<script>` with `is:inline` or `define:vars` is not bundled and is emitted where it appears, once per component instance.
 - Layouts are ordinary components in `src/layouts/` rendering `<html>`, `<head>`, `<slot />`. Pass `title`/`description` as props; Markdown pages pick a layout via frontmatter `layout:`.
 
 ### Islands

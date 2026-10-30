@@ -90,6 +90,8 @@ for (const category of CATEGORIES) {
       detect: meta.detect,
       upstream: meta.upstream,
       recommends: meta.recommends,
+      rule: meta.rule,
+      commands: meta.commands,
       dir: `${category}/${id}`,
       version: await hashDir(dir),
     });

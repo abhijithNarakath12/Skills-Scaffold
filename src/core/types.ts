@@ -50,6 +50,18 @@ export interface SkillMeta {
   upstream?: UpstreamSource[];
   /** Skills that should be installed together with this one. */
   recommends?: string[];
+  /** Always-on instruction added to the project's agent instruction file (CLAUDE.md, AGENTS.md, ...) while the skill is installed. */
+  rule?: string;
+  /** Slash commands generated for agents that support project-level commands. */
+  commands?: SkillCommand[];
+}
+
+export interface SkillCommand {
+  /** Command name without the slash, lowercase-hyphenated. */
+  name: string;
+  description: string;
+  /** Prompt body. Use `$ARGUMENTS` where the user's text after the command should go. */
+  prompt: string;
 }
 
 export interface CatalogEntry extends SkillMeta {

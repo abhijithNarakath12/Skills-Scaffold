@@ -1,10 +1,43 @@
 {
   "title": "Kotlin",
-  "tags": ["language", "kotlin", "jvm", "android", "coroutines", "gradle"],
+  "tags": [
+    "language",
+    "kotlin",
+    "jvm",
+    "android",
+    "coroutines",
+    "gradle"
+  ],
   "detect": {
-    "files": ["build.gradle.kts"],
-    "jvm": ["org.jetbrains.kotlin"],
-    "extensions": [".kt", ".kts"]
+    "files": [
+      "build.gradle.kts"
+    ],
+    "jvm": [
+      "org.jetbrains.kotlin"
+    ],
+    "extensions": [
+      ".kt",
+      ".kts"
+    ]
   },
-  "recommends": ["java"]
+  "recommends": [
+    "java"
+  ],
+  "upstream": [
+    {
+      "repo": "Kotlin/kotlin-agent-skills",
+      "path": "skills/kotlin-tooling-java-to-kotlin",
+      "note": "kotlin-tooling-java-to-kotlin: Java-to-Kotlin migration skill from the official Kotlin org"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "kotlin-development",
+      "note": "kotlin-development: Kotlin development skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/kotlin-specialist",
+      "note": "kotlin-specialist: Kotlin specialist skill from Jeffallan/claude-skills (community)"
+    }
+  ]
 }

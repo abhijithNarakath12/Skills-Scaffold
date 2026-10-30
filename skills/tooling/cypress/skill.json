@@ -1,8 +1,36 @@
 {
   "title": "Cypress",
-  "tags": ["testing", "e2e", "browser", "component-tests", "javascript"],
+  "tags": [
+    "testing",
+    "e2e",
+    "browser",
+    "component-tests",
+    "javascript"
+  ],
   "detect": {
-    "npm": ["cypress"],
-    "files": ["cypress.config.ts", "cypress.config.js"]
-  }
+    "npm": [
+      "cypress"
+    ],
+    "files": [
+      "cypress.config.ts",
+      "cypress.config.js"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "cypress-io/ai-toolkit",
+      "path": "skills/cypress-author",
+      "note": "cypress-author: Cypress test authoring skill from the official cypress-io org"
+    },
+    {
+      "repo": "LambdaTest/agent-skills",
+      "path": "cypress-skill",
+      "note": "cypress-skill: Cypress skill from LambdaTest's test-automation skills"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/cypress-flake-fixer",
+      "note": "cypress-flake-fixer: Cypress flake fixer skill from GitHub's awesome-copilot"
+    }
+  ]
 }

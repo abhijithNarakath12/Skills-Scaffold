@@ -1,6 +1,6 @@
 ---
 name: plan-feature
-description: Plan every feature, refactor or non-trivial change before writing code. Produces a written implementation plan (goal, scope, approach, ordered steps, risks, verification) and waits for explicit approval before any implementation starts. Use whenever the user asks to add, build, implement, change, migrate or refactor something that touches more than one file or has more than one reasonable approach.
+description: Plan before writing code, every time. Produces a written implementation plan (goal, scope, approach, ordered steps, risks, verification) and waits for explicit approval before any implementation starts. Use for every request to add, build, implement, fix, change, migrate, configure or refactor something; trivial changes get a short micro-plan but still require a go-ahead.
 ---
 
 # Plan before implementing
@@ -9,17 +9,19 @@ This skill enforces a simple contract: **no implementation until the plan is app
 
 ## When to use
 
-Use this skill when the user asks you to add, build, implement, change, migrate, or refactor something, and any of these is true:
+**Always.** While this skill is installed, every request that would change project files goes through a plan and an approval, including features, bug fixes, refactors, configuration, dependency and migration changes.
 
-- the change touches more than one file or module;
-- there is more than one reasonable way to do it;
-- it changes a public interface, a data model, a schema, a config format, or a dependency;
-- it is likely to take more than ~15 minutes of agent work;
-- the user explicitly asks for a plan.
+Pick the plan size from the change, not whether to plan:
 
-Do **not** use it for one-line fixes, typo corrections, pure questions, or tasks where the user already gave a precise step list and said to just do it. For those, do the work directly.
+| Change | Plan form |
+|---|---|
+| One-line fix, typo, rename, comment, obvious config tweak | **Micro-plan**: 3-5 lines in chat (what, which file(s), how verified). Still wait for a go-ahead. No plan file needed. |
+| Anything touching more than one file, a public interface, a data model, a schema, a dependency, or with more than one reasonable approach | **Full plan** written to `docs/plans/` as described below. |
+| Large feature or unclear data model and interfaces | `design-doc` skill first, then a full plan derived from the approved design. |
 
-If a feature is large or the data model and interfaces are unclear, write a design document first using the `design-doc` skill and then produce the plan from the approved design. The plan is the *how and in what order*; the design document is the *what and why*.
+The only exceptions: pure questions and explanations (no files change), and a request where the user explicitly says to skip planning for that request ("no plan", "just do it, skip the plan"). A standing instruction from the user to skip planning turns this skill off until they turn it back on; record that in the conversation and respect it.
+
+The plan is the *how and in what order*; the design document (`design-doc` skill, `/design`) is the *what and why*.
 
 ## Workflow
 
@@ -85,7 +87,8 @@ When the last step is verified:
 
 | Situation | Action |
 |---|---|
-| Request is a one-liner or trivial | Skip the plan, do it, mention you skipped it |
+| Request is a one-liner or trivial | Micro-plan in chat, wait for go-ahead, then do it |
+| User says "skip the plan" for this request | Do it directly, say that planning was skipped on request |
 | Request needs new data structures or has unclear requirements | `design-doc` first, then plan |
 | User asks a question only | Answer, no plan |
 | User approved but asks for one more thing mid-way | Add a step to the plan, confirm, continue |

@@ -1,9 +1,42 @@
 {
   "title": "Vue",
-  "tags": ["frontend", "ui", "components", "composition-api", "pinia", "vue-router", "vite", "javascript", "typescript"],
+  "tags": [
+    "frontend",
+    "ui",
+    "components",
+    "composition-api",
+    "pinia",
+    "vue-router",
+    "vite",
+    "javascript",
+    "typescript"
+  ],
   "detect": {
-    "npm": ["vue"],
-    "extensions": [".vue"]
+    "npm": [
+      "vue"
+    ],
+    "extensions": [
+      ".vue"
+    ]
   },
-  "recommends": ["typescript"]
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "antfu/skills",
+      "path": "skills/vue",
+      "note": "vue: Vue skill from Anthony Fu (Vue/Vite core team)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "vuejs-typescript-best-practices",
+      "note": "vuejs-typescript-best-practices: Vue + TypeScript best practices from Mindrally/skills (community)"
+    },
+    {
+      "repo": "onmax/nuxt-skills",
+      "path": "skills/vue-best-practices",
+      "note": "vue-best-practices: Vue best practices from onmax/nuxt-skills (Nuxt community, 700+ stars)"
+    }
+  ]
 }

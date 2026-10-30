@@ -1,8 +1,35 @@
 {
   "title": "Go",
-  "tags": ["language", "go", "golang", "backend", "cli"],
+  "tags": [
+    "language",
+    "go",
+    "golang",
+    "backend",
+    "cli"
+  ],
   "detect": {
-    "files": ["go.mod"],
-    "extensions": [".go"]
-  }
+    "files": [
+      "go.mod"
+    ],
+    "extensions": [
+      ".go"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "samber/cc-skills-golang",
+      "path": "skills/golang-code-style",
+      "note": "golang-code-style: Go code style from samber (lo/do author) Golang skills collection"
+    },
+    {
+      "repo": "eduardo-sl/go-agent-skills",
+      "path": "skills/(code-quality)/go-coding-standards",
+      "note": "go-coding-standards: Go coding standards from eduardo-sl/go-agent-skills (community)"
+    },
+    {
+      "repo": "PsiACE/skills",
+      "path": "skills/modular-go",
+      "note": "modular-go: Go package design skill from PsiACE/skills (community)"
+    }
+  ]
 }

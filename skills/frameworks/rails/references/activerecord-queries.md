@@ -79,7 +79,7 @@ Order.where(id: ids).update_all(status: :shipped)   # skips validations, callbac
 Order.where(id: ids).touch_all                      # update updated_at only
 ```
 
-Rails 7.1+: `Order.where(...).update_all` with `returning:` is adapter-specific; check the docs.
+`insert_all`/`upsert_all` accept `returning: %i[id]` on PostgreSQL; check `ActiveRecord::Persistence::ClassMethods` docs for adapter support.
 
 ## Transactions and locking
 

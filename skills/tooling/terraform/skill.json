@@ -1,8 +1,40 @@
 {
   "title": "Terraform / OpenTofu",
-  "tags": ["terraform", "opentofu", "iac", "infrastructure", "devops", "cloud"],
+  "tags": [
+    "terraform",
+    "opentofu",
+    "iac",
+    "infrastructure",
+    "devops",
+    "cloud"
+  ],
   "detect": {
-    "extensions": [".tf", ".tfvars"],
-    "files": ["main.tf", "terraform.tfstate", ".terraform.lock.hcl"]
-  }
+    "extensions": [
+      ".tf",
+      ".tfvars"
+    ],
+    "files": [
+      "main.tf",
+      "terraform.tfstate",
+      ".terraform.lock.hcl"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "hashicorp/agent-skills",
+      "path": "plugins/terraform/skills/terraform-style-guide",
+      "note": "terraform-style-guide: Official Terraform style guide skill from HashiCorp"
+    },
+    {
+      "repo": "antonbabenko/terraform-skill",
+      "path": "skills/terraform-skill",
+      "ref": "master",
+      "note": "terraform-skill: Terraform skill by Anton Babenko (terraform-aws-modules maintainer)"
+    },
+    {
+      "repo": "LukasNiessen/terrashark",
+      "path": "",
+      "note": "terrashark: TerraShark Terraform skill (SKILL.md at repo root, community)"
+    }
+  ]
 }

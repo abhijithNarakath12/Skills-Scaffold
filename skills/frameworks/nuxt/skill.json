@@ -1,9 +1,41 @@
 {
   "title": "Nuxt",
-  "tags": ["frontend", "fullstack", "vue", "ssr", "nitro", "javascript", "typescript"],
+  "tags": [
+    "frontend",
+    "fullstack",
+    "vue",
+    "ssr",
+    "nitro",
+    "javascript",
+    "typescript"
+  ],
   "detect": {
-    "npm": ["nuxt"],
-    "files": ["nuxt.config.ts", "nuxt.config.js"]
+    "npm": [
+      "nuxt"
+    ],
+    "files": [
+      "nuxt.config.ts",
+      "nuxt.config.js"
+    ]
   },
-  "recommends": ["vue"]
+  "recommends": [
+    "vue"
+  ],
+  "upstream": [
+    {
+      "repo": "antfu/skills",
+      "path": "skills/nuxt",
+      "note": "nuxt: Nuxt skill from Anthony Fu (Nuxt core team)"
+    },
+    {
+      "repo": "onmax/nuxt-skills",
+      "path": "skills/nuxt",
+      "note": "nuxt: Nuxt skills collection by onmax (Nuxt community)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "nuxtjs-vue-typescript",
+      "note": "nuxtjs-vue-typescript: Nuxt + Vue + TypeScript skill from Mindrally/skills (community)"
+    }
+  ]
 }

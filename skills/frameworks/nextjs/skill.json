@@ -1,9 +1,46 @@
 {
   "title": "Next.js",
-  "tags": ["frontend", "fullstack", "react", "ssr", "app-router", "server-components", "javascript", "typescript"],
+  "tags": [
+    "frontend",
+    "fullstack",
+    "react",
+    "ssr",
+    "app-router",
+    "server-components",
+    "javascript",
+    "typescript"
+  ],
   "detect": {
-    "npm": ["next"],
-    "files": ["next.config.js", "next.config.mjs", "next.config.ts"]
+    "npm": [
+      "next"
+    ],
+    "files": [
+      "next.config.js",
+      "next.config.mjs",
+      "next.config.ts"
+    ]
   },
-  "recommends": ["react", "typescript"]
+  "recommends": [
+    "react",
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "vercel/next.js",
+      "path": "skills/next-dev-loop",
+      "ref": "canary",
+      "note": "next-dev-loop: Official Next.js workflow skill shipped in the Next.js repo (vercel-labs/next-skills moved here)"
+    },
+    {
+      "repo": "vercel/next.js",
+      "path": "skills/next-cache-components-adoption",
+      "ref": "canary",
+      "note": "next-cache-components-adoption: Official Next.js Cache Components adoption skill (Next.js repo)"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/frontend-mobile-development/skills/nextjs-app-router-patterns",
+      "note": "nextjs-app-router-patterns: Next.js App Router patterns from wshobson/agents marketplace"
+    }
+  ]
 }

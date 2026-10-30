@@ -62,6 +62,8 @@ Guidelines:
 - `detect` keys: `npm`, `pip`, `go`, `cargo`, `jvm` (groupId or groupId:artifactId), `gem`, `composer`, `nuget`, `pub`, `swift`, `files` (names/globs), `extensions`. Matching any rule recommends the skill. Prefer dependency rules over extension rules; extension-only rules should be used for languages.
 - `recommends`: other bundled skill ids installed together with this one (e.g. `nextjs` recommends `react`).
 - `upstream`: real, verified community skills on the same topic. Only list a repo/path you have confirmed exists.
+- `rule` (optional): one paragraph written into the project's agent instruction file (CLAUDE.md, AGENTS.md, Cursor/Windsurf rules, Copilot instructions) while the skill is installed. Use only for behaviour that must apply to every task, such as `plan-feature`.
+- `commands` (optional): `[{ "name": "design", "description": "...", "prompt": "... $ARGUMENTS" }]`. Generates project slash commands for agents that support them; `$ARGUMENTS` is replaced by the agent's own placeholder.
 
 ## Validation
 

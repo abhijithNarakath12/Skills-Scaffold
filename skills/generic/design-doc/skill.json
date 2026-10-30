@@ -1,5 +1,38 @@
 {
   "title": "Design Document Before Implementation",
-  "tags": ["workflow", "design", "architecture", "data-structures", "approval-gate", "rfc"],
-  "recommends": ["plan-feature"]
+  "tags": [
+    "workflow",
+    "design",
+    "architecture",
+    "data-structures",
+    "approval-gate",
+    "rfc"
+  ],
+  "recommends": [
+    "plan-feature"
+  ],
+  "upstream": [
+    {
+      "repo": "anthropics/skills",
+      "path": "skills/doc-coauthoring",
+      "note": "doc-coauthoring: Structured doc/spec/decision-doc co-authoring skill from Anthropic"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/create-architectural-decision-record",
+      "note": "create-architectural-decision-record: ADR creation skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "wshobson/agents",
+      "path": "plugins/documentation-generation/skills/architecture-decision-records",
+      "note": "architecture-decision-records: ADR skill from wshobson/agents marketplace"
+    }
+  ],
+  "commands": [
+    {
+      "name": "design",
+      "description": "Create a design document (data structures, interfaces, complexity, data flow) and wait for approval before implementing",
+      "prompt": "Use the `design-doc` skill. Gather requirements, analyse the codebase, and write the design document for the following feature under docs/design/. Catalogue every data structure (fields, types, where defined, invariants, persistence), the interfaces, algorithms with time and space complexity, data flow, error handling, testing and rollout. Present a summary and stop for approval. Do not implement anything until the design is approved.\n\nFeature: $ARGUMENTS"
+    }
+  ]
 }

@@ -1,7 +1,36 @@
 {
   "title": "TanStack Query",
-  "tags": ["data-fetching", "caching", "server-state", "react", "vue", "svelte", "frontend"],
+  "tags": [
+    "data-fetching",
+    "caching",
+    "server-state",
+    "react",
+    "vue",
+    "svelte",
+    "frontend"
+  ],
   "detect": {
-    "npm": ["@tanstack/react-query", "@tanstack/vue-query", "@tanstack/svelte-query"]
-  }
+    "npm": [
+      "@tanstack/react-query",
+      "@tanstack/vue-query",
+      "@tanstack/svelte-query"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "tanstack-skills/tanstack-skills",
+      "path": "plugins/tanstack-query/skills/tanstack-query",
+      "note": "tanstack-query: TanStack Query skill (unofficial TanStack skills collection)"
+    },
+    {
+      "repo": "oakoss/agent-skills",
+      "path": "skills/tanstack-query",
+      "note": "tanstack-query: TanStack Query skill from oakoss/agent-skills (community)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "react-query",
+      "note": "react-query: React Query skill from Mindrally/skills (community)"
+    }
+  ]
 }

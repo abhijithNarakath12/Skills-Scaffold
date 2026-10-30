@@ -6,6 +6,7 @@ import { CatalogProvider, InstalledProvider, RecommendedProvider } from './views
 export function activate(context: vscode.ExtensionContext): void {
   const service = new SkillService(context);
   context.subscriptions.push(service);
+  service.log(`Agent Skills Manager ${context.extension.packageJSON.version} activated. Targets: ${service.targets.map((t) => t.dir).join(', ')}`);
 
   const catalog = new CatalogProvider(service);
   const recommended = new RecommendedProvider(service);
@@ -36,6 +37,8 @@ async function suggestRecommended(context: vscode.ExtensionContext, service: Ski
   }
   try {
     const [recs, installedSkills] = await Promise.all([service.getRecommendations(folder), service.getInstalled(folder)]);
+    service.log(`Detected in ${folder.name}: ${recs.length ? recs.map((r) => `${r.entry.id} (${r.reasons.join(', ')})`).join('; ') : 'nothing recognisable'}`);
+    service.log(`Installed skills in ${folder.name}: ${installedSkills.length ? installedSkills.map((s) => `${s.id}@${s.target}`).join(', ') : 'none'}`);
     if (!recs.length || installedSkills.length) {
       return;
     }
@@ -54,7 +57,7 @@ async function suggestRecommended(context: vscode.ExtensionContext, service: Ski
     } else if (choice === "Don't ask again") {
       await service.config.update('recommendOnOpen', false, vscode.ConfigurationTarget.Global);
     }
-  } catch {
-    // detection problems should never surface at startup
+  } catch (err) {
+    service.log(`Detection failed: ${(err as Error).message}`);
   }
 }

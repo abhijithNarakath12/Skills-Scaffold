@@ -1,8 +1,38 @@
 {
   "title": "Drizzle ORM",
-  "tags": ["database", "orm", "sql", "migrations", "typescript", "backend"],
+  "tags": [
+    "database",
+    "orm",
+    "sql",
+    "migrations",
+    "typescript",
+    "backend"
+  ],
   "detect": {
-    "npm": ["drizzle-orm", "drizzle-kit"],
-    "files": ["drizzle.config.ts"]
-  }
+    "npm": [
+      "drizzle-orm",
+      "drizzle-kit"
+    ],
+    "files": [
+      "drizzle.config.ts"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "drizzle-orm",
+      "note": "drizzle-orm: Drizzle ORM skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "oakoss/agent-skills",
+      "path": "skills/drizzle-orm",
+      "note": "drizzle-orm: Drizzle ORM skill from oakoss/agent-skills (community)"
+    },
+    {
+      "repo": "leonaaardob/lb-drizzle-skill",
+      "path": "",
+      "ref": "master",
+      "note": "drizzle: Drizzle ORM documentation skill (SKILL.md at repo root, community)"
+    }
+  ]
 }

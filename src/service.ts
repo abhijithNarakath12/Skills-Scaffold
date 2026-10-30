@@ -14,9 +14,11 @@ export class SkillService implements vscode.Disposable {
   private catalog: Catalog | undefined;
   private stackCache = new Map<string, Promise<DetectedStack>>();
   private readonly disposables: vscode.Disposable[] = [];
+  readonly output = vscode.window.createOutputChannel('Agent Skills');
 
   constructor(readonly context: vscode.ExtensionContext) {
     this.disposables.push(
+      this.output,
       vscode.workspace.onDidChangeConfiguration((e) => {
         if (e.affectsConfiguration('agentSkills')) {
           this.refresh();
@@ -113,6 +115,10 @@ export class SkillService implements vscode.Disposable {
   refresh(): void {
     this.stackCache.clear();
     this._onDidChange.fire();
+  }
+
+  log(message: string): void {
+    this.output.appendLine(`[${new Date().toISOString()}] ${message}`);
   }
 
   dispose(): void {

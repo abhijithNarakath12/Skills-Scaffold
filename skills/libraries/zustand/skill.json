@@ -1,7 +1,31 @@
 {
   "title": "Zustand",
-  "tags": ["state-management", "react", "frontend", "store"],
+  "tags": [
+    "state-management",
+    "react",
+    "frontend",
+    "store"
+  ],
   "detect": {
-    "npm": ["zustand"]
-  }
+    "npm": [
+      "zustand"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "curated/zustand-5",
+      "note": "zustand-5: Zustand v5 skill from Gentleman Programming community collection"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "zustand-state-management",
+      "note": "zustand-state-management: Zustand state management skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "oakoss/agent-skills",
+      "path": "skills/zustand",
+      "note": "zustand: Zustand skill from oakoss/agent-skills (community)"
+    }
+  ]
 }

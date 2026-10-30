@@ -169,7 +169,7 @@ export const selectVisibleTodos = createSelector(
 ```
 
 - Parameterised selectors: `createSelector([selectAll, (_s: RootState, id: string) => id], ...)` and call `useAppSelector((s) => selectX(s, id))`. Reselect 5 (RTK 2) memoizes with `weakMapMemoize` by default so multiple arguments work without one-cache-per-instance hacks.
-- RTK 2 dev warning "Selector returned a different result when called with the same parameters" points at an unmemoized selector; fix it.
+- Reselect 5 (RTK 2) dev-mode checks (`inputStabilityCheck`, `identityFunctionCheck`) log a warning when an input selector returns a new reference for the same state or the result function is an identity; fix the selector rather than disabling the check.
 - Lists: have the parent select `ids` and each row select its own entity by id.
 
 ### Side effects outside components

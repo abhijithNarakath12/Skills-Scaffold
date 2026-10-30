@@ -1,8 +1,37 @@
 {
   "title": "Prisma ORM",
-  "tags": ["database", "orm", "sql", "migrations", "typescript", "backend"],
+  "tags": [
+    "database",
+    "orm",
+    "sql",
+    "migrations",
+    "typescript",
+    "backend"
+  ],
   "detect": {
-    "npm": ["prisma", "@prisma/client"],
-    "files": ["schema.prisma"]
-  }
+    "npm": [
+      "prisma",
+      "@prisma/client"
+    ],
+    "files": [
+      "schema.prisma"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "prisma/skills",
+      "path": "prisma-orm-setup",
+      "note": "prisma-orm-setup: Official Prisma ORM setup skill from Prisma"
+    },
+    {
+      "repo": "prisma/skills",
+      "path": "prisma-client-api",
+      "note": "prisma-client-api: Official Prisma Client API skill from Prisma"
+    },
+    {
+      "repo": "prisma/skills",
+      "path": "prisma-postgres-setup",
+      "note": "prisma-postgres-setup: Official Prisma Postgres setup skill from Prisma"
+    }
+  ]
 }

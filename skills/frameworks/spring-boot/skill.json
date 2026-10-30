@@ -1,8 +1,39 @@
 {
   "title": "Spring Boot",
-  "tags": ["backend", "java", "kotlin", "jvm", "rest", "jpa", "spring", "maven", "gradle"],
+  "tags": [
+    "backend",
+    "java",
+    "kotlin",
+    "jvm",
+    "rest",
+    "jpa",
+    "spring",
+    "maven",
+    "gradle"
+  ],
   "detect": {
-    "jvm": ["org.springframework.boot"]
+    "jvm": [
+      "org.springframework.boot"
+    ]
   },
-  "recommends": ["java"]
+  "recommends": [
+    "java"
+  ],
+  "upstream": [
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/java-springboot",
+      "note": "java-springboot: Spring Boot (Java) skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "Gentleman-Programming/Gentleman-Skills",
+      "path": "community/spring-boot-3",
+      "note": "spring-boot-3: Spring Boot 3 skill from Gentleman Programming community collection"
+    },
+    {
+      "repo": "Jeffallan/claude-skills",
+      "path": "skills/spring-boot-engineer",
+      "note": "spring-boot-engineer: Spring Boot engineer skill from Jeffallan/claude-skills (community)"
+    }
+  ]
 }

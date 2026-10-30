@@ -1,8 +1,37 @@
 {
   "title": "Ruby",
-  "tags": ["language", "ruby", "gems", "bundler", "backend"],
+  "tags": [
+    "language",
+    "ruby",
+    "gems",
+    "bundler",
+    "backend"
+  ],
   "detect": {
-    "files": ["Gemfile", ".ruby-version", "Rakefile"],
-    "extensions": [".rb"]
-  }
+    "files": [
+      "Gemfile",
+      ".ruby-version",
+      "Rakefile"
+    ],
+    "extensions": [
+      ".rb"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "Mindrally/skills",
+      "path": "ruby",
+      "note": "ruby: Ruby skill from Mindrally/skills (community)"
+    },
+    {
+      "repo": "clawic/skills",
+      "path": "skills/ruby",
+      "note": "Ruby skill from clawic/skills (community)"
+    },
+    {
+      "repo": "DmitryPogrebnoy/ruby-agent-skills",
+      "path": "plugins/ruby-type-signature-skills/skills/generating-rbs",
+      "note": "generating-rbs: Ruby RBS type-signature generation skill (community)"
+    }
+  ]
 }

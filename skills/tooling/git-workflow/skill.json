@@ -1,7 +1,33 @@
 {
   "title": "Git workflow",
-  "tags": ["git", "version-control", "github", "pull-requests", "workflow"],
+  "tags": [
+    "git",
+    "version-control",
+    "github",
+    "pull-requests",
+    "workflow"
+  ],
   "detect": {
-    "files": [".gitignore", ".gitattributes"]
-  }
+    "files": [
+      ".gitignore",
+      ".gitattributes"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "netresearch/git-workflow-skill",
+      "path": "skills/git-workflow",
+      "note": "git-workflow: Git workflow best practices skill from netresearch (community)"
+    },
+    {
+      "repo": "github/awesome-copilot",
+      "path": "skills/conventional-commit",
+      "note": "conventional-commit: Conventional commit skill from GitHub's awesome-copilot"
+    },
+    {
+      "repo": "obra/superpowers",
+      "path": "skills/using-git-worktrees",
+      "note": "using-git-worktrees: Git worktrees skill from obra/superpowers"
+    }
+  ]
 }

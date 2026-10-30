@@ -1,10 +1,46 @@
 {
   "title": "Svelte and SvelteKit",
-  "tags": ["frontend", "ui", "components", "runes", "sveltekit", "ssr", "vite", "javascript", "typescript"],
+  "tags": [
+    "frontend",
+    "ui",
+    "components",
+    "runes",
+    "sveltekit",
+    "ssr",
+    "vite",
+    "javascript",
+    "typescript"
+  ],
   "detect": {
-    "npm": ["svelte", "@sveltejs/kit"],
-    "extensions": [".svelte"],
-    "files": ["svelte.config.js"]
+    "npm": [
+      "svelte",
+      "@sveltejs/kit"
+    ],
+    "extensions": [
+      ".svelte"
+    ],
+    "files": [
+      "svelte.config.js"
+    ]
   },
-  "recommends": ["typescript"]
+  "recommends": [
+    "typescript"
+  ],
+  "upstream": [
+    {
+      "repo": "spences10/svelte-skills-kit",
+      "path": "plugins/svelte-skills/skills/svelte-runes",
+      "note": "svelte-runes: Svelte 5 runes skill from Scott Spence's svelte-skills-kit"
+    },
+    {
+      "repo": "fubits1/svelte-skills",
+      "path": "plugins/svelte-5/skills/code-style-svelte",
+      "note": "code-style-svelte: Svelte 5 code style skill from fubits1/svelte-skills (community)"
+    },
+    {
+      "repo": "Mindrally/skills",
+      "path": "svelte",
+      "note": "svelte: Svelte skill from Mindrally/skills (community)"
+    }
+  ]
 }

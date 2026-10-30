@@ -206,7 +206,7 @@ class OrderControllerTest {
 class OrderIntegrationTest {
     @Container @ServiceConnection
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
-    @Autowired TestRestTemplate rest;   // or RestTestClient / WebTestClient
+    @Autowired TestRestTemplate rest;   // or WebTestClient (needs spring-webflux on the classpath)
     ...
 }
 ```

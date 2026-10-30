@@ -1,8 +1,30 @@
 {
   "title": "Dart",
-  "tags": ["language", "dart", "flutter", "pub", "mobile"],
+  "tags": [
+    "language",
+    "dart",
+    "flutter",
+    "pub",
+    "mobile"
+  ],
   "detect": {
-    "files": ["pubspec.yaml"],
-    "extensions": [".dart"]
-  }
+    "files": [
+      "pubspec.yaml"
+    ],
+    "extensions": [
+      ".dart"
+    ]
+  },
+  "upstream": [
+    {
+      "repo": "flutter/agent-plugins",
+      "path": "skills/dart-use-pattern-matching",
+      "note": "dart-use-pattern-matching: Dart pattern matching skill from the official Flutter/Dart team"
+    },
+    {
+      "repo": "flutter/agent-plugins",
+      "path": "skills/dart-add-unit-test",
+      "note": "dart-add-unit-test: Dart unit testing skill from the official Flutter/Dart team"
+    }
+  ]
 }
