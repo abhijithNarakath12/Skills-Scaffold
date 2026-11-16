@@ -28,9 +28,10 @@ The plan is the *how and in what order*; the design document (`design-doc` skill
 ### 1. Understand before planning
 
 1. Restate the request in one or two sentences in your own words.
-2. Read the relevant code. Find the entry points, the modules you would touch, existing patterns (naming, error handling, tests, folder layout) and anything that already does something similar.
-3. Identify constraints: language/framework versions, lint and test setup, CI, coding standards in `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md` or similar files.
-4. If something essential is ambiguous and changes the plan materially, ask at most three focused questions **before** writing the plan. Otherwise state your assumptions in the plan and proceed.
+2. **Read the project guidelines.** If `docs/design/project-design.md` exists (or the project's equivalent such as `ARCHITECTURE.md`), read it and note which numbered guidelines apply to this change. When it is approved, the plan must comply with them. If the request conflicts with an approved guideline, stop before planning, explain the conflict, and offer to change the request or to amend the project design with the `design-doc` skill first. If a feature design for this work exists in `docs/design/`, read it too and plan from it.
+3. Read the relevant code. Find the entry points, the modules you would touch, existing patterns (naming, error handling, tests, folder layout) and anything that already does something similar.
+4. Identify constraints: language/framework versions, lint and test setup, CI, coding standards in `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md` or similar files.
+5. If something essential is ambiguous and changes the plan materially, ask at most three focused questions **before** writing the plan. Otherwise state your assumptions in the plan and proceed.
 
 ### 2. Write the plan
 
@@ -41,6 +42,7 @@ Create the plan as a Markdown file so it survives the conversation and can be re
 - Every step must name the files it touches and how it will be verified (test command, manual check, expected output).
 - List risks honestly, including the ones you cannot fully mitigate.
 - Include **Non-goals** so scope creep is visible.
+- Fill the **Project guidelines** section: each applicable guideline and how the plan complies. Micro-plans mention the guidelines in one line when any apply.
 - If there are alternatives, give the one you recommend and a one-line reason for rejecting each other option.
 
 Also print the plan in the chat (or a faithful summary if it is long) so the user does not have to open the file.
@@ -76,6 +78,7 @@ When the last step is verified:
 
 ## Rules
 
+- **The approved project design comes first.** Plans follow its guidelines; a conflict is raised before planning, never worked around.
 - **The plan is the contract.** Scope not in the plan does not get implemented without a conversation.
 - **Keep it reviewable.** If a plan is over ~200 lines, it is probably two plans, or it needs a design document first.
 - **Prefer reversible steps early.** Put schema changes, dependency additions and public API changes in their own steps with explicit verification.
@@ -90,6 +93,7 @@ When the last step is verified:
 | Request is a one-liner or trivial | Micro-plan in chat, wait for go-ahead, then do it |
 | User says "skip the plan" for this request | Do it directly, say that planning was skipped on request |
 | Request needs new data structures or has unclear requirements | `design-doc` first, then plan |
+| Request conflicts with an approved project guideline | Stop, explain, offer to change the request or amend the project design |
 | User asks a question only | Answer, no plan |
 | User approved but asks for one more thing mid-way | Add a step to the plan, confirm, continue |
 | A step fails verification | Fix within the step; if the approach is wrong, stop and re-plan that step |

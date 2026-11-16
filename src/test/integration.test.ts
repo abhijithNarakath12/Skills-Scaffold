@@ -89,3 +89,30 @@ test('apply and remove integration end to end', async () => {
     await fs.rm(ws, { recursive: true, force: true });
   }
 });
+
+test('blocks and commands written by older builds (agent-skills-manager markers) are replaced, not duplicated', async () => {
+  const legacyBlock = '<!-- agent-skills-manager:begin -->\n## Agent skill rules\n\nnote\n\n- **plan-feature**: Old rule text.\n<!-- agent-skills-manager:end -->';
+  const original = `# Project\n\nUse pnpm.\n\n${legacyBlock}\n\n## Footer\n`;
+  assert.deepEqual(readManagedRules(original), [{ id: 'plan-feature', text: 'Old rule text.' }]);
+  const updated = withManagedRules(original, upsertRule(readManagedRules(original), { id: 'design-doc', text: 'Design first.' }));
+  assert.ok(!updated.includes('agent-skills-manager:begin'), 'legacy markers replaced');
+  assert.equal((updated.match(new RegExp(BLOCK_BEGIN, 'g')) ?? []).length, 1);
+  assert.deepEqual(readManagedRules(updated).map((r) => r.id), ['design-doc', 'plan-feature']);
+  assert.ok(updated.startsWith('# Project\n\nUse pnpm.\n\n' + BLOCK_BEGIN));
+  assert.ok(updated.endsWith(BLOCK_END + '\n\n## Footer\n'));
+
+  const ws = await fs.mkdtemp(path.join(os.tmpdir(), 'legacy-'));
+  try {
+    const targets = resolveTargets(['claude'], '');
+    await fs.mkdir(path.join(ws, '.claude/commands'), { recursive: true });
+    await fs.writeFile(path.join(ws, '.claude/commands/design.md'), '<!-- generated-by: agent-skills-manager skill=design-doc -->\nold prompt');
+    const applied = await applySkillIntegration(ws, targets, designEntry, { rules: true, commands: true });
+    assert.deepEqual(applied.commandFiles, ['.claude/commands/design.md'], 'legacy generated command is regenerated');
+    assert.match(await fs.readFile(path.join(ws, '.claude/commands/design.md'), 'utf8'), /Use design-doc for/);
+    await fs.writeFile(path.join(ws, '.claude/commands/design.md'), '<!-- generated-by: agent-skills-manager skill=design-doc -->\nold prompt');
+    const removed = await removeSkillIntegration(ws, targets, designEntry);
+    assert.deepEqual(removed.commandFiles, ['.claude/commands/design.md'], 'legacy generated command is removed');
+  } finally {
+    await fs.rm(ws, { recursive: true, force: true });
+  }
+});

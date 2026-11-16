@@ -1,6 +1,6 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
-import { parseFrontmatter } from './frontmatter';
+import * as fs from "fs/promises";
+import * as path from "path";
+import { parseFrontmatter } from "./frontmatter";
 
 export interface RemoteSource {
   repo: string;
@@ -23,7 +23,7 @@ export interface RemoteSkill {
 
 interface TreeEntry {
   path: string;
-  type: 'blob' | 'tree' | 'commit';
+  type: "blob" | "tree" | "commit";
   size?: number;
 }
 
@@ -41,10 +41,13 @@ export interface FetchResponse {
   arrayBuffer(): Promise<ArrayBuffer>;
 }
 
-export type Fetcher = (url: string, init?: { headers?: Record<string, string> }) => Promise<FetchResponse>;
+export type Fetcher = (
+  url: string,
+  init?: { headers?: Record<string, string> },
+) => Promise<FetchResponse>;
 
-const API = 'https://api.github.com';
-const RAW = 'https://raw.githubusercontent.com';
+const API = "https://api.github.com";
+const RAW = "https://raw.githubusercontent.com";
 
 /**
  * Reads skills from GitHub with as few API calls as possible:
@@ -55,10 +58,16 @@ export class GitHubClient {
   private readonly treeCache = new Map<string, Promise<TreeResponse>>();
   private readonly refCache = new Map<string, Promise<string>>();
 
-  constructor(private readonly token: string | undefined, private readonly fetchImpl: Fetcher = globalThis.fetch as Fetcher) {}
+  constructor(
+    private readonly token: string | undefined,
+    private readonly fetchImpl: Fetcher = globalThis.fetch as Fetcher,
+  ) {}
 
   private headers(): Record<string, string> {
-    const h: Record<string, string> = { 'User-Agent': 'agent-skills-manager', Accept: 'application/vnd.github+json' };
+    const h: Record<string, string> = {
+      "User-Agent": "agent-skills-scaffold",
+      Accept: "application/vnd.github+json",
+    };
     if (this.token) {
       h.Authorization = `Bearer ${this.token}`;
     }
@@ -66,10 +75,14 @@ export class GitHubClient {
   }
 
   private async api<T>(route: string): Promise<T> {
-    const res = await this.fetchImpl(`${API}${route}`, { headers: this.headers() });
+    const res = await this.fetchImpl(`${API}${route}`, {
+      headers: this.headers(),
+    });
     if (!res.ok) {
       if (res.status === 403 || res.status === 429) {
-        throw new Error('GitHub API rate limit reached. Set GITHUB_TOKEN (or agentSkills.githubToken) to raise it.');
+        throw new Error(
+          "GitHub API rate limit reached. Set GITHUB_TOKEN (or agentSkills.githubToken) to raise it.",
+        );
       }
       if (res.status === 404) {
         throw new Error(`Not found on GitHub: ${route}`);
@@ -86,7 +99,9 @@ export class GitHubClient {
     }
     let p = this.refCache.get(repo);
     if (!p) {
-      p = this.api<{ default_branch: string }>(`/repos/${repo}`).then((r) => r.default_branch);
+      p = this.api<{ default_branch: string }>(`/repos/${repo}`).then(
+        (r) => r.default_branch,
+      );
       this.refCache.set(repo, p);
     }
     return p;
@@ -96,17 +111,27 @@ export class GitHubClient {
     const key = `${repo}@${ref}`;
     let p = this.treeCache.get(key);
     if (!p) {
-      p = this.api<TreeResponse>(`/repos/${repo}/git/trees/${encodeURIComponent(ref)}?recursive=1`);
+      p = this.api<TreeResponse>(
+        `/repos/${repo}/git/trees/${encodeURIComponent(ref)}?recursive=1`,
+      );
       this.treeCache.set(key, p);
     }
     return p;
   }
 
-  private async raw(repo: string, ref: string, filePath: string): Promise<FetchResponse> {
-    const url = `${RAW}/${repo}/${encodeURIComponent(ref)}/${filePath.split('/').map(encodeURIComponent).join('/')}`;
-    const res = await this.fetchImpl(url, { headers: { 'User-Agent': 'agent-skills-manager' } });
+  private async raw(
+    repo: string,
+    ref: string,
+    filePath: string,
+  ): Promise<FetchResponse> {
+    const url = `${RAW}/${repo}/${encodeURIComponent(ref)}/${filePath.split("/").map(encodeURIComponent).join("/")}`;
+    const res = await this.fetchImpl(url, {
+      headers: { "User-Agent": "agent-skills-scaffold" },
+    });
     if (!res.ok) {
-      throw new Error(`Download failed (${res.status}) for ${repo}/${filePath}`);
+      throw new Error(
+        `Download failed (${res.status}) for ${repo}/${filePath}`,
+      );
     }
     return res;
   }
@@ -116,41 +141,67 @@ export class GitHubClient {
     const ref = await this.resolveRef(source.repo, source.ref);
     const tree = await this.tree(source.repo, ref);
     const base = normalizePath(source.path);
-    const prefix = base ? base + '/' : '';
-    const skillFiles = tree.tree.filter((e) => e.type === 'blob' && (e.path === 'SKILL.md' || e.path.endsWith('/SKILL.md')) && (!base || e.path === `${base}/SKILL.md` || e.path.startsWith(prefix)));
+    const prefix = base ? base + "/" : "";
+    const skillFiles = tree.tree.filter(
+      (e) =>
+        e.type === "blob" &&
+        (e.path === "SKILL.md" || e.path.endsWith("/SKILL.md")) &&
+        (!base || e.path === `${base}/SKILL.md` || e.path.startsWith(prefix)),
+    );
     const found: RemoteSkill[] = skillFiles.map((e) => {
-      const dir = e.path === 'SKILL.md' ? '' : e.path.slice(0, -'/SKILL.md'.length);
-      return { source, id: dir ? path.posix.basename(dir) : source.repo.split('/')[1], path: dir, ref };
+      const dir =
+        e.path === "SKILL.md" ? "" : e.path.slice(0, -"/SKILL.md".length);
+      return {
+        source,
+        id: dir ? path.posix.basename(dir) : source.repo.split("/")[1],
+        path: dir,
+        ref,
+      };
     });
     disambiguate(found);
     if (tree.truncated && !found.length) {
-      throw new Error(`${source.repo} is too large to list in one request; point the source at a sub-folder.`);
+      throw new Error(
+        `${source.repo} is too large to list in one request; point the source at a sub-folder.`,
+      );
     }
     return found.sort((a, b) => a.id.localeCompare(b.id));
   }
 
   /** Reads name/description from a remote SKILL.md. */
   async describe(skill: RemoteSkill): Promise<RemoteSkill> {
-    const res = await this.raw(skill.source.repo, skill.ref, path.posix.join(skill.path, 'SKILL.md'));
+    const res = await this.raw(
+      skill.source.repo,
+      skill.ref,
+      path.posix.join(skill.path, "SKILL.md"),
+    );
     const fm = parseFrontmatter(await res.text()).data;
     return { ...skill, name: fm.name, description: fm.description };
   }
 
   /** Downloads a whole skill directory into `dest`. */
-  async download(skill: RemoteSkill, dest: string, onFile?: (file: string) => void): Promise<void> {
+  async download(
+    skill: RemoteSkill,
+    dest: string,
+    onFile?: (file: string) => void,
+  ): Promise<void> {
     const tree = await this.tree(skill.source.repo, skill.ref);
-    const prefix = skill.path ? skill.path + '/' : '';
-    const files = tree.tree.filter((e) => e.type === 'blob' && e.path.startsWith(prefix) && (prefix || !e.path.includes('/') || true));
+    const prefix = skill.path ? skill.path + "/" : "";
+    const files = tree.tree.filter(
+      (e) =>
+        e.type === "blob" &&
+        e.path.startsWith(prefix) &&
+        (prefix || !e.path.includes("/") || true),
+    );
     if (!files.length) {
       throw new Error(`No files found for ${skill.source.repo}/${skill.path}`);
     }
     await fs.mkdir(dest, { recursive: true });
     for (const file of files) {
       const rel = file.path.slice(prefix.length);
-      if (rel.includes('..')) {
+      if (rel.includes("..")) {
         continue; // never write outside dest
       }
-      const target = path.join(dest, ...rel.split('/'));
+      const target = path.join(dest, ...rel.split("/"));
       await fs.mkdir(path.dirname(target), { recursive: true });
       const res = await this.raw(skill.source.repo, skill.ref, file.path);
       await fs.writeFile(target, Buffer.from(await res.arrayBuffer()));
@@ -169,9 +220,16 @@ function disambiguate(skills: RemoteSkill[]): void {
     if (group.length < 2) {
       continue;
     }
-    const maxDepth = Math.max(...group.map((s) => s.path.split('/').length));
+    const maxDepth = Math.max(...group.map((s) => s.path.split("/").length));
     for (let k = 2; k <= maxDepth; k++) {
-      const ids = group.map((s) => s.path.split('/').slice(-k).join('-').replace(/[^a-z0-9-]/gi, '-').toLowerCase());
+      const ids = group.map((s) =>
+        s.path
+          .split("/")
+          .slice(-k)
+          .join("-")
+          .replace(/[^a-z0-9-]/gi, "-")
+          .toLowerCase(),
+      );
       if (new Set(ids).size === group.length) {
         group.forEach((s, i) => (s.id = ids[i]));
         break;
@@ -181,23 +239,29 @@ function disambiguate(skills: RemoteSkill[]): void {
 }
 
 function normalizePath(p: string | undefined): string {
-  return (p ?? '').replace(/^\/+|\/+$/g, '');
+  return (p ?? "").replace(/^\/+|\/+$/g, "");
 }
 
 /** Parses user input like `owner/repo`, `owner/repo/path/to/skill`, or a GitHub URL (tree/blob links supported). */
 export function parseGitHubReference(input: string): RemoteSource | undefined {
   const trimmed = input.trim();
-  const url = /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/\s]+)\/([^/\s#?]+)(?:\/(?:tree|blob)\/([^/\s]+)(?:\/([^\s#?]*))?)?/.exec(trimmed);
+  const url =
+    /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/\s]+)\/([^/\s#?]+)(?:\/(?:tree|blob)\/([^/\s]+)(?:\/([^\s#?]*))?)?/.exec(
+      trimmed,
+    );
   if (url) {
-    const repo = `${url[1]}/${url[2].replace(/\.git$/, '')}`;
+    const repo = `${url[1]}/${url[2].replace(/\.git$/, "")}`;
     const ref = url[3];
-    let p = url[4] ?? '';
-    if (p.endsWith('/SKILL.md')) {
-      p = p.slice(0, -'/SKILL.md'.length);
+    let p = url[4] ?? "";
+    if (p.endsWith("/SKILL.md")) {
+      p = p.slice(0, -"/SKILL.md".length);
     }
     return { repo, ref, path: p || undefined };
   }
-  const short = /^([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)(?:@([^/\s]+))?(?:\/(.+))?$/.exec(trimmed);
+  const short =
+    /^([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)(?:@([^/\s]+))?(?:\/(.+))?$/.exec(
+      trimmed,
+    );
   if (short) {
     return { repo: `${short[1]}/${short[2]}`, ref: short[3], path: short[4] };
   }

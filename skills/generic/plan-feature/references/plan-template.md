@@ -3,6 +3,7 @@
 - **Status:** Draft | Approved | In progress | Done
 - **Date:** YYYY-MM-DD
 - **Author:** <agent> for <user>
+- **Project design:** `docs/design/project-design.md` (Approved / Draft / none)
 - **Design document:** <link to docs/design/... if one exists, otherwise "none">
 - **Related:** <issue / ticket / PR links>
 
@@ -24,6 +25,14 @@ What you learned from reading the code that shapes the plan: existing modules to
 
 - `path/to/file.ts` – does X, will be extended.
 - Existing pattern: ...
+
+## Project guidelines
+
+| Guideline | How the plan complies |
+|---|---|
+| G2 API conventions | New endpoint uses the standard error envelope |
+
+Write "No project design" or "No applicable guidelines" when that is the case.
 
 ## Approach
 

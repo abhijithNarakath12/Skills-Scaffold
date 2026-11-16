@@ -1,5 +1,5 @@
 {
-  "name": "agent-skills-manager",
+  "name": "agent-skills-scaffold",
   "displayName": "Agent Skills Manager",
   "description": "Add ready-made AI agent skills (SKILL.md) for languages, frameworks, libraries and engineering workflows to your project in one click.",
   "version": "0.1.0",

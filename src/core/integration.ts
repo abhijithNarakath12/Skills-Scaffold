@@ -1,13 +1,52 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
-import type { TargetInfo } from './targets';
-import type { CatalogEntry, SkillCommand } from './types';
+import * as fs from "fs/promises";
+import * as path from "path";
+import type { TargetInfo } from "./targets";
+import type { CatalogEntry, SkillCommand } from "./types";
 
-export const BLOCK_BEGIN = '<!-- agent-skills-manager:begin -->';
-export const BLOCK_END = '<!-- agent-skills-manager:end -->';
-const BLOCK_HEADING = '## Agent skill rules';
-const BLOCK_NOTE = 'Managed by the Agent Skills Manager extension. Edit the skills themselves rather than this block; it is rewritten when skills are added or removed.';
-const COMMAND_MARKER = 'generated-by: agent-skills-manager';
+export const BLOCK_BEGIN = "<!-- agent-skills-scaffold:begin -->";
+export const BLOCK_END = "<!-- agent-skills-scaffold:end -->";
+const BLOCK_HEADING = "## Agent skill rules";
+const BLOCK_NOTE =
+  "Managed by the Agent Skills Manager extension. Edit the skills themselves rather than this block; it is rewritten when skills are added or removed.";
+const COMMAND_MARKER = "generated-by: agent-skills-scaffold";
+
+/** Marker names written by earlier builds (as "agent-skills-manager"); still recognised so old blocks and commands are replaced, not duplicated. */
+const LEGACY_NAMES = ["agent-skills-manager"];
+const BLOCK_MARKERS = [
+  { begin: BLOCK_BEGIN, end: BLOCK_END },
+  ...LEGACY_NAMES.map((n) => ({ begin: `<!-- ${n}:begin -->`, end: `<!-- ${n}:end -->` })),
+];
+const COMMAND_MARKERS = [COMMAND_MARKER, ...LEGACY_NAMES.map((n) => `generated-by: ${n}`)];
+
+interface BlockRange {
+  start: number;
+  /** Index where the block's inner content starts. */
+  innerStart: number;
+  /** Index of the end marker. */
+  innerEnd: number;
+  /** Index just after the end marker. */
+  end: number;
+}
+
+/** Finds the first managed block written with the current or a legacy marker. */
+function findBlock(text: string): BlockRange | undefined {
+  let best: BlockRange | undefined;
+  for (const m of BLOCK_MARKERS) {
+    const start = text.indexOf(m.begin);
+    const innerEnd = start === -1 ? -1 : text.indexOf(m.end, start);
+    if (start === -1 || innerEnd === -1) {
+      continue;
+    }
+    if (!best || start < best.start) {
+      best = { start, innerStart: start + m.begin.length, innerEnd, end: innerEnd + m.end.length };
+    }
+  }
+  return best;
+}
+
+function isGeneratedCommand(text: string, skillId?: string): boolean {
+  return COMMAND_MARKERS.some((m) => text.includes(skillId ? `${m} skill=${skillId}` : m));
+}
 
 export interface Rule {
   id: string;
@@ -24,58 +63,83 @@ export interface InstructionFile {
 /** The always-on instruction file an agent reads for a target. */
 export function instructionFileFor(target: TargetInfo): InstructionFile {
   switch (target.key) {
-    case 'claude':
-      return { path: 'CLAUDE.md' };
-    case 'cursor':
-      return { path: '.cursor/rules/agent-skills.mdc', header: '---\ndescription: Rules for installed agent skills\nalwaysApply: true\n---\n' };
-    case 'copilot':
-      return { path: '.github/copilot-instructions.md' };
-    case 'gemini':
-      return { path: 'GEMINI.md' };
-    case 'windsurf':
-      return { path: '.windsurf/rules/agent-skills.md', header: '---\ntrigger: always_on\n---\n' };
+    case "claude":
+      return { path: "CLAUDE.md" };
+    case "cursor":
+      return {
+        path: ".cursor/rules/agent-skills.mdc",
+        header:
+          "---\ndescription: Rules for installed agent skills\nalwaysApply: true\n---\n",
+      };
+    case "copilot":
+      return { path: ".github/copilot-instructions.md" };
+    case "gemini":
+      return { path: "GEMINI.md" };
+    case "windsurf":
+      return {
+        path: ".windsurf/rules/agent-skills.md",
+        header: "---\ntrigger: always_on\n---\n",
+      };
     default:
       // universal, codex, opencode, custom
-      return { path: 'AGENTS.md' };
+      return { path: "AGENTS.md" };
   }
 }
 
 /** Parses the rules currently stored in a managed block. */
 export function readManagedRules(text: string): Rule[] {
-  const start = text.indexOf(BLOCK_BEGIN);
-  const end = text.indexOf(BLOCK_END);
-  if (start === -1 || end === -1 || end < start) {
+  const range = findBlock(text);
+  if (!range) {
     return [];
   }
-  const block = text.slice(start + BLOCK_BEGIN.length, end);
+  const block = text.slice(range.innerStart, range.innerEnd);
   const rules: Rule[] = [];
-  for (const m of block.matchAll(/^- \*\*([a-z0-9-]+)\*\*: ([\s\S]*?)(?=\n- \*\*|\n*$)/gm)) {
+  for (const m of block.matchAll(
+    /^- \*\*([a-z0-9-]+)\*\*: ([\s\S]*?)(?=\n- \*\*|\n*$)/gm,
+  )) {
     rules.push({ id: m[1], text: m[2].trim() });
   }
   return rules;
 }
 
 function renderBlock(rules: Rule[]): string {
-  const lines = [BLOCK_BEGIN, BLOCK_HEADING, '', BLOCK_NOTE, '', ...rules.map((r) => `- **${r.id}**: ${r.text}`), BLOCK_END];
-  return lines.join('\n');
+  const lines = [
+    BLOCK_BEGIN,
+    BLOCK_HEADING,
+    "",
+    BLOCK_NOTE,
+    "",
+    ...rules.map((r) => `- **${r.id}**: ${r.text}`),
+    BLOCK_END,
+  ];
+  return lines.join("\n");
 }
 
 /** Returns the file text with the managed block updated to contain exactly `rules`; removes the block when empty. */
-export function withManagedRules(text: string, rules: Rule[], header?: string): string {
-  const start = text.indexOf(BLOCK_BEGIN);
-  const end = text.indexOf(BLOCK_END);
-  const hasBlock = start !== -1 && end !== -1 && end > start;
-  const before = hasBlock ? text.slice(0, start).replace(/\n*$/, '') : text.replace(/\n*$/, '');
-  const after = hasBlock ? text.slice(end + BLOCK_END.length).replace(/^\n*/, '').replace(/\n*$/, '') : '';
+export function withManagedRules(
+  text: string,
+  rules: Rule[],
+  header?: string,
+): string {
+  const range = findBlock(text);
+  const before = range
+    ? text.slice(0, range.start).replace(/\n*$/, "")
+    : text.replace(/\n*$/, "");
+  const after = range
+    ? text
+        .slice(range.end)
+        .replace(/^\n*/, "")
+        .replace(/\n*$/, "")
+    : "";
   if (!rules.length) {
-    const joined = [before, after].filter(Boolean).join('\n\n');
-    return joined ? joined + '\n' : '';
+    const joined = [before, after].filter(Boolean).join("\n\n");
+    return joined ? joined + "\n" : "";
   }
   const block = renderBlock(rules);
   if (!before && !after && header) {
-    return header + '\n' + block + '\n';
+    return header + "\n" + block + "\n";
   }
-  return [before, block, after].filter(Boolean).join('\n\n') + '\n';
+  return [before, block, after].filter(Boolean).join("\n\n") + "\n";
 }
 
 /** Adds or replaces one rule, keeping the others. */
@@ -90,22 +154,56 @@ export interface CommandFile {
 }
 
 /** Project-level slash command files for a target, or [] when the agent has no such mechanism. */
-export function commandFilesFor(target: TargetInfo, skillId: string, command: SkillCommand): CommandFile[] {
+export function commandFilesFor(
+  target: TargetInfo,
+  skillId: string,
+  command: SkillCommand,
+): CommandFile[] {
   const body = `${command.prompt.trim()}\n`;
   const marker = `<!-- ${COMMAND_MARKER} skill=${skillId} -->`;
   switch (target.key) {
-    case 'claude':
-      return [{ path: `.claude/commands/${command.name}.md`, content: `---\ndescription: ${command.description}\nargument-hint: <what to work on>\n---\n${marker}\n\n${body}` }];
-    case 'cursor':
-      return [{ path: `.cursor/commands/${command.name}.md`, content: `${marker}\n\n# /${command.name}\n\n${command.description}\n\n${body.replace(/\$ARGUMENTS/g, 'the request that follows this command')}` }];
-    case 'copilot':
-      return [{ path: `.github/prompts/${command.name}.prompt.md`, content: `---\ndescription: ${command.description}\nagent: agent\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, 'the request that follows this prompt')}` }];
-    case 'gemini':
-      return [{ path: `.gemini/commands/${command.name}.toml`, content: `# ${COMMAND_MARKER} skill=${skillId}\ndescription = ${JSON.stringify(command.description)}\nprompt = """\n${body.replace(/\$ARGUMENTS/g, '{{args}}')}"""\n` }];
-    case 'windsurf':
-      return [{ path: `.windsurf/workflows/${command.name}.md`, content: `---\ndescription: ${command.description}\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, 'the request that follows this workflow')}` }];
-    case 'opencode':
-      return [{ path: `.opencode/command/${command.name}.md`, content: `---\ndescription: ${command.description}\n---\n${marker}\n\n${body}` }];
+    case "claude":
+      return [
+        {
+          path: `.claude/commands/${command.name}.md`,
+          content: `---\ndescription: ${command.description}\nargument-hint: <what to work on>\n---\n${marker}\n\n${body}`,
+        },
+      ];
+    case "cursor":
+      return [
+        {
+          path: `.cursor/commands/${command.name}.md`,
+          content: `${marker}\n\n# /${command.name}\n\n${command.description}\n\n${body.replace(/\$ARGUMENTS/g, "the request that follows this command")}`,
+        },
+      ];
+    case "copilot":
+      return [
+        {
+          path: `.github/prompts/${command.name}.prompt.md`,
+          content: `---\ndescription: ${command.description}\nagent: agent\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, "the request that follows this prompt")}`,
+        },
+      ];
+    case "gemini":
+      return [
+        {
+          path: `.gemini/commands/${command.name}.toml`,
+          content: `# ${COMMAND_MARKER} skill=${skillId}\ndescription = ${JSON.stringify(command.description)}\nprompt = """\n${body.replace(/\$ARGUMENTS/g, "{{args}}")}"""\n`,
+        },
+      ];
+    case "windsurf":
+      return [
+        {
+          path: `.windsurf/workflows/${command.name}.md`,
+          content: `---\ndescription: ${command.description}\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, "the request that follows this workflow")}`,
+        },
+      ];
+    case "opencode":
+      return [
+        {
+          path: `.opencode/command/${command.name}.md`,
+          content: `---\ndescription: ${command.description}\n---\n${marker}\n\n${body}`,
+        },
+      ];
     default:
       return []; // codex / universal / custom: no project-level command files
   }
@@ -117,7 +215,12 @@ export interface IntegrationResult {
 }
 
 /** Writes always-on rules and slash commands for an installed skill across all targets. */
-export async function applySkillIntegration(workspaceRoot: string, targets: TargetInfo[], entry: CatalogEntry, opts: { rules: boolean; commands: boolean }): Promise<IntegrationResult> {
+export async function applySkillIntegration(
+  workspaceRoot: string,
+  targets: TargetInfo[],
+  entry: CatalogEntry,
+  opts: { rules: boolean; commands: boolean },
+): Promise<IntegrationResult> {
   const result: IntegrationResult = { instructionFiles: [], commandFiles: [] };
   const seenInstruction = new Set<string>();
   for (const target of targets) {
@@ -127,7 +230,10 @@ export async function applySkillIntegration(workspaceRoot: string, targets: Targ
         seenInstruction.add(file.path);
         const abs = path.join(workspaceRoot, file.path);
         const current = await readIfExists(abs);
-        const rules = upsertRule(readManagedRules(current), { id: entry.id, text: entry.rule });
+        const rules = upsertRule(readManagedRules(current), {
+          id: entry.id,
+          text: entry.rule,
+        });
         await writeFile(abs, withManagedRules(current, rules, file.header));
         result.instructionFiles.push(file.path);
       }
@@ -137,7 +243,7 @@ export async function applySkillIntegration(workspaceRoot: string, targets: Targ
         for (const cf of commandFilesFor(target, entry.id, command)) {
           const abs = path.join(workspaceRoot, cf.path);
           const current = await readIfExists(abs);
-          if (current && !current.includes(COMMAND_MARKER)) {
+          if (current && !isGeneratedCommand(current)) {
             continue; // never overwrite a command the user wrote themselves
           }
           await writeFile(abs, cf.content);
@@ -150,7 +256,11 @@ export async function applySkillIntegration(workspaceRoot: string, targets: Targ
 }
 
 /** Removes a skill's rule and generated commands from all targets. */
-export async function removeSkillIntegration(workspaceRoot: string, targets: TargetInfo[], entry: Pick<CatalogEntry, 'id' | 'commands'>): Promise<IntegrationResult> {
+export async function removeSkillIntegration(
+  workspaceRoot: string,
+  targets: TargetInfo[],
+  entry: Pick<CatalogEntry, "id" | "commands">,
+): Promise<IntegrationResult> {
   const result: IntegrationResult = { instructionFiles: [], commandFiles: [] };
   const seenInstruction = new Set<string>();
   for (const target of targets) {
@@ -161,8 +271,12 @@ export async function removeSkillIntegration(workspaceRoot: string, targets: Tar
       const current = await readIfExists(abs);
       const rules = readManagedRules(current);
       if (rules.some((r) => r.id === entry.id)) {
-        const next = withManagedRules(current, rules.filter((r) => r.id !== entry.id), file.header);
-        if (next.trim() === '' || next.trim() === (file.header ?? '').trim()) {
+        const next = withManagedRules(
+          current,
+          rules.filter((r) => r.id !== entry.id),
+          file.header,
+        );
+        if (next.trim() === "" || next.trim() === (file.header ?? "").trim()) {
           await fs.rm(abs, { force: true });
         } else {
           await writeFile(abs, next);
@@ -174,7 +288,7 @@ export async function removeSkillIntegration(workspaceRoot: string, targets: Tar
       for (const cf of commandFilesFor(target, entry.id, command)) {
         const abs = path.join(workspaceRoot, cf.path);
         const current = await readIfExists(abs);
-        if (current.includes(`${COMMAND_MARKER} skill=${entry.id}`)) {
+        if (isGeneratedCommand(current, entry.id)) {
           await fs.rm(abs, { force: true });
           result.commandFiles.push(cf.path);
         }
@@ -186,13 +300,13 @@ export async function removeSkillIntegration(workspaceRoot: string, targets: Tar
 
 async function readIfExists(file: string): Promise<string> {
   try {
-    return await fs.readFile(file, 'utf8');
+    return await fs.readFile(file, "utf8");
   } catch {
-    return '';
+    return "";
   }
 }
 
 async function writeFile(file: string, content: string): Promise<void> {
   await fs.mkdir(path.dirname(file), { recursive: true });
-  await fs.writeFile(file, content, 'utf8');
+  await fs.writeFile(file, content, "utf8");
 }

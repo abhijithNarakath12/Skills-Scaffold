@@ -23,7 +23,7 @@ A review is useful when it finds real defects, says exactly where they are, and 
    - a commit range: `git diff <a>..<b>`;
    - the working tree: `git diff` plus `git diff --cached`, and `git status` for untracked files.
 2. Read the PR title, description, linked issues, and commit messages. Write down, in one sentence, what the change claims to do. Everything else in the review is judged against that claim.
-3. If the project has an approved plan or design document for this change (`docs/plans/`, `docs/design/`), read it. Deviations from an approved design are findings.
+3. Read the approved project design (`docs/design/project-design.md`) if it exists, and any plan or feature design for this change (`docs/plans/`, `docs/design/`). Violations of approved project guidelines and deviations from an approved design are findings: Major by default, Blocker when they break data ownership, security or an architectural boundary. Cite the guideline id.
 4. List the changed files grouped by role: production code, tests, config and infra, docs, generated files. Generated files and lockfiles are skimmed, not reviewed line by line.
 
 ### 2. Read, do not skim

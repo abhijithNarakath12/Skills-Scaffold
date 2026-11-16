@@ -24,5 +24,5 @@
       "note": "create-implementation-plan: Implementation plan skill from GitHub's awesome-copilot"
     }
   ],
-  "rule": "Plan mode is always on. Before implementing ANY change (feature, bug fix, refactor, configuration, dependency, migration), use the `plan-feature` skill: write the plan, present it, and wait for the user's explicit approval. Do not create, edit or delete project files until the plan is approved. Trivial changes get a 3-5 line micro-plan in chat but still need a go-ahead. The only exception is when the user explicitly says to skip planning for that request."
+  "rule": "Plan mode is always on. Before implementing ANY change (feature, bug fix, refactor, configuration, dependency, migration), use the `plan-feature` skill: read the approved project design (docs/design/project-design.md) if it exists and follow its guidelines, write the plan, present it, and wait for the user's explicit approval. Do not create, edit or delete project files until the plan is approved. Trivial changes get a 3-5 line micro-plan in chat but still need a go-ahead. The only exception is when the user explicitly says to skip planning for that request."
 }

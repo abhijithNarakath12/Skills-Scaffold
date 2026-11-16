@@ -31,8 +31,9 @@
   "commands": [
     {
       "name": "design",
-      "description": "Create a design document (data structures, interfaces, complexity, data flow) and wait for approval before implementing",
-      "prompt": "Use the `design-doc` skill. Gather requirements, analyse the codebase, and write the design document for the following feature under docs/design/. Catalogue every data structure (fields, types, where defined, invariants, persistence), the interfaces, algorithms with time and space complexity, data flow, error handling, testing and rollout. Present a summary and stop for approval. Do not implement anything until the design is approved.\n\nFeature: $ARGUMENTS"
+      "description": "Design document: '/design project' for the whole-project design and guidelines, '/design <feature>' for a feature design; waits for approval",
+      "prompt": "Use the `design-doc` skill.\n\nIf the request below is empty or is \"project\", use project mode: analyse the whole codebase and create or update the project design document at docs/design/project-design.md, including the architecture, tech stack, core domain model, cross-cutting conventions, complexity budgets and numbered guidelines (G1, G2, ...).\n\nOtherwise use feature mode: first read docs/design/project-design.md if it exists and treat its approved guidelines as binding, then write the feature design document under docs/design/. Catalogue every data structure (fields, types, where defined, invariants, persistence), the interfaces, algorithms with time and space complexity, data flow, error handling, testing, rollout, and a project design conformance table.\n\nPresent a summary and stop for approval. Do not implement anything until the design is approved.\n\nRequest: $ARGUMENTS"
     }
-  ]
+  ],
+  "rule": "The approved project design document (docs/design/project-design.md) is the project's guidelines. Before designing, planning or implementing any feature, read it and follow its numbered guidelines (G1, G2, ...). If a request conflicts with an approved guideline, stop and say so; never deviate without an explicitly approved amendment to the project design. Use the `design-doc` skill for feature designs, and `/design project` to create or update the project design."
 }

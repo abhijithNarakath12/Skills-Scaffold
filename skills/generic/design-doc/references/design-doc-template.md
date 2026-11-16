@@ -7,6 +7,7 @@
 | **Date** | YYYY-MM-DD |
 | **Reviewers** | |
 | **Related** | issue / ticket / plan link / PR |
+| **Project design** | `docs/design/project-design.md` (status) |
 
 ## 1. Summary
 
@@ -44,6 +45,17 @@ Current state of the system, what is missing or wrong, and who is affected. Cite
 ### Assumptions
 
 - A1: ...
+
+### Project design conformance
+
+Project design: `docs/design/project-design.md`, status <Approved YYYY-MM-DD / Draft / none>.
+
+| Guideline | How this design complies | Deviation (needs approved amendment) |
+|---|---|---|
+| G2 API conventions | Uses the standard error envelope and cursor pagination | None |
+| | | |
+
+Core entities from the project domain model used here: <list, with "read" / "changed">.
 
 ## 4. Proposed design
 

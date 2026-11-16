@@ -4,7 +4,8 @@ Use as a lens while reading. Report only items that are actually wrong, with evi
 
 ## Intent and scope
 - Does the change do what the title/description says, all of it, and nothing unrelated?
-- Does it match the approved plan/design document, if one exists?
+- Does it follow the approved project design guidelines (cite G-numbers)?
+- Does it match the approved plan/feature design document, if one exists?
 - Are there leftover debug statements, commented-out code, TODOs without owners, or unrelated reformatting?
 
 ## Correctness

@@ -37,7 +37,12 @@ export interface UpstreamSource {
   note?: string;
 }
 
-export type SkillCategory = 'generic' | 'languages' | 'frameworks' | 'libraries' | 'tooling';
+export type SkillCategory =
+  | "generic"
+  | "languages"
+  | "frameworks"
+  | "libraries"
+  | "tooling";
 
 export interface SkillMeta {
   id: string;
@@ -109,9 +114,12 @@ export interface InstalledSkill {
 }
 
 export interface InstallManifest {
-  installedBy: 'agent-skills-manager';
-  source: { type: 'bundled'; id: string; version: string } | { type: 'github'; repo: string; path: string; ref?: string } | { type: 'local' };
+  installedBy: "agent-skills-scaffold";
+  source:
+    | { type: "bundled"; id: string; version: string }
+    | { type: "github"; repo: string; path: string; ref?: string }
+    | { type: "local" };
   installedAt: string;
 }
 
-export const MANIFEST_FILE = '.agent-skills.json';
+export const MANIFEST_FILE = ".agent-skills.json";
