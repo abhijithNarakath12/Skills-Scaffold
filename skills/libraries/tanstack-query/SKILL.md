@@ -1,6 +1,6 @@
 ---
 name: tanstack-query
-description: Manage server state with TanStack Query v5 (React Query, also Vue/Svelte adapters) - query key design, queryOptions, useQuery/useMutation, invalidation, staleTime and gcTime caching, prefetching and SSR hydration, suspense queries, devtools, and testing. Load when a project depends on @tanstack/react-query, @tanstack/vue-query or @tanstack/svelte-query, or when fetching, caching or mutating server data in components.
+description: Manage server state with TanStack Query v5 (React Query, also Vue/Svelte adapters) - query key design, queryOptions, useQuery/useMutation, invalidation, staleTime and gcTime caching, prefetching and SSR hydration, suspense queries, devtools, and testing. Use when a project depends on @tanstack/react-query, @tanstack/vue-query or @tanstack/svelte-query, or when fetching, caching or mutating server data in components.
 ---
 
 # TanStack Query v5

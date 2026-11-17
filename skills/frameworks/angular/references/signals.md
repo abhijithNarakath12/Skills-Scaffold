@@ -17,6 +17,11 @@ Availability by version (verify against `@angular/core` in `package.json`):
 | `httpResource` | 19.2 | Developer preview |
 | Zoneless change detection | 18 (`provideExperimentalZonelessChangeDetection`), 20 (`provideZonelessChangeDetection`) | Developer preview; stable in 21 |
 
+## Contents
+
+- Decorator to signal migration
+- Patterns
+
 ## Decorator to signal migration
 
 | Legacy | Signal-based | Notes |

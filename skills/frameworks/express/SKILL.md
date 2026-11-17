@@ -5,7 +5,7 @@ description: Build and maintain Express 4/5 HTTP APIs and servers on Node.js, co
 
 # Express
 
-Assumes Express 5 on Node 18+ (Express 5 is the default `npm install express` since late 2024) and notes the differences for Express 4. Check which one is installed before touching error handling or route syntax.
+Assumes Express 5 on Node 18+ (Express 5 is the `latest` tag that `npm install express` installs) and notes the differences for Express 4. Check which one is installed before touching error handling or route syntax.
 
 ## When to use
 

@@ -9,6 +9,29 @@
 | **Related** | issue / ticket / plan link / PR |
 | **Project design** | `docs/design/project-design.md` (status) |
 
+## Contents
+
+- 1. Summary
+- 2. Background and problem
+- 3. Requirements
+- 4. Proposed design
+- 5. Data model
+- 6. Interfaces and APIs
+- 7. Algorithms and complexity
+- 8. Data flow
+- 9. Error handling
+- 10. Security and privacy
+- 11. Performance and scalability
+- 12. Observability
+- 13. Testing strategy
+- 14. Rollout and migration
+- 15. Alternatives considered
+- 16. Open questions
+- 17. Implementation plan
+- 18. Glossary
+- 19. Revision history
+- 20. Implementation notes (filled after approval)
+
 ## 1. Summary
 
 Three to five sentences: the problem, the proposed solution, and the main trade-off. A reader who stops here should know what is being built.

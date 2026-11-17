@@ -1,6 +1,6 @@
 ---
 name: pydantic
-description: Model and validate data with Pydantic v2 - BaseModel and Field, field_validator/model_validator, pydantic-settings for configuration, serialization with model_dump/model_dump_json and computed fields, strict vs lax mode, TypeAdapter, performance tips, and v1-to-v2 migration gotchas. Load when a Python project depends on pydantic or pydantic-settings, or when defining request/response models (FastAPI), config classes, or validating external data.
+description: Model and validate data with Pydantic v2 - BaseModel and Field, field_validator/model_validator, pydantic-settings for configuration, serialization with model_dump/model_dump_json and computed fields, strict vs lax mode, TypeAdapter, performance tips, and v1-to-v2 migration gotchas. Use when a Python project depends on pydantic or pydantic-settings, or when defining request/response models (FastAPI), config classes, or validating external data.
 ---
 
 # Pydantic v2

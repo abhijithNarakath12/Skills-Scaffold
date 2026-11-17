@@ -1,5 +1,14 @@
 # EF Core and integration testing in ASP.NET Core
 
+## Contents
+
+- DbContext lifetime
+- Query translation tips
+- Loading patterns
+- Migrations workflow
+- Integration testing setup
+- Aspire note
+
 ## DbContext lifetime
 
 | Consumer | How to get a context |

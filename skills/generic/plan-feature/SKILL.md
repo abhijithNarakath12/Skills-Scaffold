@@ -64,7 +64,7 @@ Never proceed on silence or on an ambiguous reply.
 After approval:
 
 1. Work through the steps in the order written. Tick each step's checkbox in the plan file as it is completed.
-2. Run the verification listed for each step before moving to the next one. Do not batch all verification to the end.
+2. Run the verification listed for each step before moving to the next one; batched verification at the end hides which step broke. If a check fails, fix it within the step; if the approach itself is wrong, return to Step 2 for that step and get the revision approved.
 3. If reality differs from the plan (a step is unnecessary, a new step is needed, an approach does not work), **say so immediately**, add a short "Deviations" note to the plan, and ask before deviating if the change is significant (new dependency, schema change, different architecture). Small deviations (a helper function, a renamed variable) can be noted without asking.
 4. Keep commits or change sets aligned with plan steps when the user wants commits.
 

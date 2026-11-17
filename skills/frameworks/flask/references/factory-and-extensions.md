@@ -1,5 +1,15 @@
 # Flask factory, extensions and contexts
 
+## Contents
+
+- Recommended layout
+- Factory checklist
+- Common extension init
+- Contexts
+- Flask-SQLAlchemy session rules
+- Test fixtures that scale
+- Deployment notes
+
 ## Recommended layout
 
 ```

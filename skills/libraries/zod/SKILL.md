@@ -1,6 +1,6 @@
 ---
 name: zod
-description: Validate and type data with Zod 3/4 - schema design, z.infer type inference, refinements and transforms, parsing at boundaries (API requests/responses, environment variables, forms), error formatting (flatten/treeifyError), and integration with react-hook-form, tRPC and Hono. Load when a project depends on zod or when validating input, defining DTOs, or deriving TypeScript types from runtime schemas.
+description: Validate and type data with Zod 3/4 - schema design, z.infer type inference, refinements and transforms, parsing at boundaries (API requests/responses, environment variables, forms), error formatting (flatten/treeifyError), and integration with react-hook-form, tRPC and Hono. Use when a project depends on zod or when validating input, defining DTOs, or deriving TypeScript types from runtime schemas.
 ---
 
 # Zod

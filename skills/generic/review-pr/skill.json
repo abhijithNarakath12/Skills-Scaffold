@@ -6,7 +6,17 @@
     "pull-request",
     "quality"
   ],
-  "recommends": [],
+  "recommends": [
+    "design-doc"
+  ],
+  "rule": "Before reviewing any PR or diff, read docs/design/project-design.md first and extract every numbered guideline (G1, G2, ...). Check the diff against every guideline and include a project design conformance table in the review output. This check works in a fresh session with no code context — the project design and the diff are sufficient.",
+  "commands": [
+    {
+      "name": "review",
+      "description": "Review a PR, branch, diff, or working-tree changes; loads project design guidelines first and works in a fresh session",
+      "prompt": "Use the `review-pr` skill.\n\nFirst, read docs/design/project-design.md if it exists and extract every numbered guideline (G1, G2, ...). Also read any feature design or plan document relevant to the target change (docs/plans/, docs/design/). This is the architectural source of truth.\n\nThen obtain the diff for the target below. Evaluate the diff against every project guideline and against the standard review checklist. Write a structured review that begins with a project design conformance table (one row per guideline: id, one-line rule, ✅/❌/— status, evidence from the diff), followed by severity-ranked findings.\n\nIf the full codebase is not available (architecture-first mode), say so explicitly and note which checks were skipped (full-file context, callers/callees, test execution).\n\nTarget: $ARGUMENTS"
+    }
+  ],
   "upstream": [
     {
       "repo": "obra/superpowers",

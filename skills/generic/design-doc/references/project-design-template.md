@@ -9,6 +9,25 @@
 
 > Once approved, the **Guidelines** in section 9 are binding for every feature design, plan, implementation and review. Changing them requires an approved amendment (section 13).
 
+## Contents
+
+- 1. Purpose and product overview
+- 2. Goals, non-goals and constraints
+- 3. System context
+- 4. Architecture
+- 5. Technology stack
+- 6. Core domain model
+- 7. Cross-cutting conventions
+- 8. Quality attributes and budgets
+- 9. Guidelines (binding once approved)
+- 10. Testing strategy
+- 11. Delivery
+- 12. Feature index
+- 13. Decision log and amendments
+- 14. Risks and open questions
+- 15. Glossary
+- 16. Revision history
+
 ## 1. Purpose and product overview
 
 What the product does, for whom, and the outcomes that matter. Three to six sentences.

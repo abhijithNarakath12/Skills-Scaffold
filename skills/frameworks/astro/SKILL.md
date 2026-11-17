@@ -1,6 +1,6 @@
 ---
 name: astro
-description: Build and maintain Astro 4/5 sites: .astro components and layouts, islands architecture with client:* directives and server islands, content collections (Content Layer API), file-based routing and endpoints, SSR adapters and rendering modes, framework integrations (React, Vue, Svelte, Solid), astro:assets images, middleware, actions, and Vitest/Playwright testing. Use when a project depends on astro, has astro.config.mjs/ts, or when editing .astro files.
+description: "Build and maintain Astro 4/5 sites: .astro components and layouts, islands architecture with client:* directives and server islands, content collections (Content Layer API), file-based routing and endpoints, SSR adapters and rendering modes, framework integrations (React, Vue, Svelte, Solid), astro:assets images, middleware, actions, and Vitest/Playwright testing. Use when a project depends on astro, has astro.config.mjs/ts, or when editing .astro files."
 ---
 
 # Astro

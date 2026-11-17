@@ -1,6 +1,6 @@
 ---
 name: tailwindcss
-description: Use Tailwind CSS v4 (with v3 notes) correctly in any frontend project - CSS-first @theme configuration vs tailwind.config.js, utility conventions, responsive and dark variants, component extraction, class sorting with prettier-plugin-tailwindcss, and conditional classes with clsx/cva/tailwind-merge. Load when a project depends on tailwindcss, contains tailwind.config.* or @import "tailwindcss", or when styling with utility classes.
+description: Use Tailwind CSS v4 (with v3 notes) correctly in any frontend project - CSS-first @theme configuration vs tailwind.config.js, utility conventions, responsive and dark variants, component extraction, class sorting with prettier-plugin-tailwindcss, and conditional classes with clsx/cva/tailwind-merge. Use when a project depends on tailwindcss, contains tailwind.config.* or @import "tailwindcss", or when styling with utility classes.
 ---
 
 # Tailwind CSS

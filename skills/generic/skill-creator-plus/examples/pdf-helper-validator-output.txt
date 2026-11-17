@@ -1,0 +1,31 @@
+Skill: examples/pdf-helper (name: Claude_PDF_Helper)
+
+ERROR  FM1    SKILL.md:4  'description' has an unquoted ': ' (or ends with ':'), which YAML reads as a new key, so the frontmatter will not parse. Wrap the value in double quotes.
+ERROR  FM2    SKILL.md:2  name 'Claude_PDF_Helper' may use only lowercase letters, numbers and hyphens.
+ERROR  FM2    SKILL.md:2  name 'Claude_PDF_Helper' contains the reserved word 'claude'. Anthropic does not allow 'anthropic' or 'claude' in a skill name.
+ERROR  ST4    reference/advanced.md:3  reference/details.md is reached only through other reference files (reference/advanced.md:3), never from SKILL.md. Claude may only preview files it reaches that way (for example with head -100). Link it from SKILL.md, or fold its content into the file that needs it.
+ERROR  ST5    reference/api.md  reference/api.md is 124 lines with no contents list in its first 50 lines. Add a '## Contents' list at the top so a partial read still shows everything the file covers.
+ERROR  ST6    SKILL.md:36  link target does not exist: notes.md.
+ERROR  ST7    SKILL.md:30  backslash in a path (scripts\fill_form.py). Use forward slashes; backslash paths fail on Mac and Linux.
+ERROR  CT9    SKILL.md:34  TODO or FIXME left in the skill. Finish or delete it before sharing.
+WARN   FM2    SKILL.md:2  name 'Claude_PDF_Helper' differs from the folder name 'pdf-helper'. Keep them the same so the folder, the slash command and the name all match.
+WARN   FM3    SKILL.md:2  name 'Claude_PDF_Helper' is vague ('helper'). Name the activity instead, for example processing-pdfs or pdf-processing.
+WARN   DS2    SKILL.md:4  description is not in third person (found "I can"). It is injected into the system prompt; write "Processes Excel files", not "I can help" or "You can use this".
+WARN   DS3    SKILL.md:4  description says what the skill does but not when to use it. Add a "Use when ..." clause with the words people actually type.
+WARN   ST6    SKILL.md  backup or old copies sit inside the skill: SKILL.md.bak. Keep backups outside the skill folder so they never load or get shared.
+WARN   ST6    reference/doc2.md  reference/doc2.md is never linked from SKILL.md, so Claude has no reason to open it. Link it from SKILL.md with a line on when to read it, or delete it.
+WARN   CT3    SKILL.md:32  time-sensitive wording ("before August 2025"). It goes stale silently. State the current way; move old ways under an '## Old patterns' heading.
+WARN   SC5    SKILL.md:24  SKILL.md needs the package 'pdfplumber' but no install line was found anywhere in the skill. Add 'pip install pdfplumber' next to the script or code that needs it.
+WARN   SC5    scripts/fill_form.py:5  scripts/fill_form.py needs the package 'pypdf' but no install line was found anywhere in the skill. Add 'pip install pypdf' next to the script or code that needs it.
+WARN   NM2    SKILL.md:20  asks Claude to write out its reasoning ("Think step by step and write"). Newer models (Claude Fable 5, Opus 5.5, Sonnet 5.5) may decline this with the reasoning_extraction refusal. Ask for the answer, or a short explanation of it, instead.
+WARN   NM4    SKILL.md:11  7 capitalised CRITICAL, MUST, ALWAYS or NEVER. Newer models follow brief, plain instructions, and capitals stop standing out when they are everywhere. Keep them for true hard lines and give the reason.
+NOTE   FM4    SKILL.md  claude.ai uploads and the Skills API accept only name, description, license, compatibility, metadata and allowed-tools; any other field makes the upload fail. This skill also uses: version. Fine for Claude Code only.
+NOTE   FM4    SKILL.md:3  Claude Code ignores unknown fields without an error: version. Move them under metadata: to keep them.
+NOTE   ST6    SKILL.md  vague file names: reference/doc2.md. Name files for what they hold, for example form_validation_rules.md, not doc2.md.
+NOTE   WF1    SKILL.md  has a checklist but no go-back line anywhere in the skill. Add one such as 'If the check fails, return to Step 2' so Claude loops instead of pushing on.
+NOTE   SC5    SKILL.md  this skill needs packages outside the standard library (pdfplumber, pypdf). Claude Code and claude.ai can install them; the Claude API has no network access and no runtime installs, so there they must already be available.
+NOTE   HK1    SKILL.md:11,31  words like "must always" mark a rule that must hold every time, and the frontmatter has no hooks. Prose can be skipped or cut by compaction; if the rule truly must hold, enforce it with a hook (frontmatter hooks:).
+
+Passed (no errors or warnings): FM4 FM5 DS1 DS4 ST1 ST2 WF1 HK1
+Result: 8 errors, 11 warnings, 6 notes - fix the errors first.
+Rule IDs match references/audit-checklist.md. Judgment rules are not checked by this script.

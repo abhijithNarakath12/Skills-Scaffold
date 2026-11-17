@@ -1,5 +1,15 @@
 # ActiveRecord query patterns
 
+## Contents
+
+- Loading associations
+- Strict loading
+- Query objects
+- Aggregates, subqueries, window functions
+- Batching and bulk
+- Transactions and locking
+- Performance checklist
+
 ## Loading associations
 
 | Method | SQL | Use when |

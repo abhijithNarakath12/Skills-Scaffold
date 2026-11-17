@@ -47,7 +47,7 @@ test('instruction files and command files per target', () => {
     ['.claude/commands/plan.md'], ['.cursor/commands/plan.md'], ['.github/prompts/plan.prompt.md'], ['.gemini/commands/plan.toml'], ['.windsurf/workflows/plan.md'], ['.opencode/command/plan.md'], [],
   ]);
   const claude = commandFilesFor(targets[0], 'plan-feature', cmd)[0].content;
-  assert.match(claude, /^---\ndescription: Write a plan\n/);
+  assert.match(claude, /^---\ndescription: "Write a plan"\n/);
   assert.match(claude, /\$ARGUMENTS/);
   const gemini = commandFilesFor(targets[3], 'plan-feature', cmd)[0].content;
   assert.match(gemini, /\{\{args\}\}/);

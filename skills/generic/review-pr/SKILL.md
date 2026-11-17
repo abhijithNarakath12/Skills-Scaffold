@@ -7,6 +7,15 @@ description: Review a pull request, branch, commit range or working-tree diff fo
 
 A review is useful when it finds real defects, says exactly where they are, and tells the author what to do. This skill produces that kind of review: evidence-based, ranked by severity, and free of noise.
 
+## Two operating modes
+
+| Mode | Context required | What it can verify |
+|---|---|---|
+| **Full review** | Codebase indexed or available locally | Callers and callees, full file context, test execution, build |
+| **Architecture-first review** | `docs/design/project-design.md` only | Every project guideline against the diff; cannot trace callers or run tests |
+
+**Architecture-first review** is the correct mode for a fresh session, a cross-team review, or any situation where the full codebase is unavailable. The project design produced by `/design project` is the sole architectural source of truth; every numbered guideline (G1, G2, ...) must be checked against the diff even without code context. The reviewer must state explicitly which checks could not be performed.
+
 ## When to use
 
 - "Review this PR / branch / diff / my changes."
@@ -17,13 +26,19 @@ A review is useful when it finds real defects, says exactly where they are, and 
 
 ### 1. Collect the change and its intent
 
-1. Identify the target. In order of preference:
+1. **Load the project design first — always.** Before obtaining the diff or reading any code, read `docs/design/project-design.md`. Extract and list every numbered guideline (`G1`, `G2`, ...) — this list drives the architecture conformance section of the review output. Also read any feature design or plan document relevant to this change (`docs/plans/`, `docs/design/`). Record which guidelines apply.
+
+   - If no project design exists, note this and proceed without architecture conformance checks.
+   - Violations of approved project guidelines are findings: **Major** by default, **Blocker** when they break data ownership, security, or an architectural boundary. Always cite the guideline id.
+
+   > **Architecture-first mode (fresh session / no code context):** The project design and the diff alone are sufficient to perform a complete architectural review. Load the project design as above, then follow steps 2–4 and proceed to step 2 (Read, do not skim) only for the diff itself — not the full codebase. Explicitly note in the review which checks were skipped (full-file context, callers/callees, test execution) and why.
+
+2. Identify the target. In order of preference:
    - a PR number or URL: `gh pr view <n> --json title,body,baseRefName,headRefName,files,commits` and `gh pr diff <n>`;
    - a branch: `git diff <base>...<branch>` (use the merge base; default base is the repository's main branch);
    - a commit range: `git diff <a>..<b>`;
    - the working tree: `git diff` plus `git diff --cached`, and `git status` for untracked files.
-2. Read the PR title, description, linked issues, and commit messages. Write down, in one sentence, what the change claims to do. Everything else in the review is judged against that claim.
-3. Read the approved project design (`docs/design/project-design.md`) if it exists, and any plan or feature design for this change (`docs/plans/`, `docs/design/`). Violations of approved project guidelines and deviations from an approved design are findings: Major by default, Blocker when they break data ownership, security or an architectural boundary. Cite the guideline id.
+3. Read the PR title, description, linked issues, and commit messages. Write down, in one sentence, what the change claims to do. Everything else in the review is judged against that claim.
 4. List the changed files grouped by role: production code, tests, config and infra, docs, generated files. Generated files and lockfiles are skimmed, not reviewed line by line.
 
 ### 2. Read, do not skim
@@ -55,6 +70,8 @@ Use [references/review-template.md](references/review-template.md). Severity lev
 | **Minor** | Edge case, unclear error handling, maintainability debt, misleading naming | Can merge, should fix soon |
 | **Nit** | Style, wording, micro-cleanups | Optional |
 
+**If a project design was loaded in step 1.1**, include a **Project design conformance** section before all other findings. For every extracted guideline, fill one row in the conformance table with: guideline id, its one-sentence rule, compliance status (✅ Compliant / ❌ Violated / — Not applicable), and evidence (`path:line` from the diff, or "not touched by this change"). A `❌ Violated` row becomes a finding at the severity described above. This table must be complete — every guideline has a row even if the diff does not touch that area.
+
 For every finding give: severity, `path:line`, what is wrong, the concrete scenario that triggers it, and a suggested fix (code when short). Group findings by file, blockers first within the summary.
 
 Finish with a verdict: **Approve**, **Approve with minor changes**, or **Request changes**, and one paragraph explaining why. Also list what is good about the change; authors need to know what to keep doing, and reviewers calibrate better when they must name strengths.
@@ -79,6 +96,8 @@ Finish with a verdict: **Approve**, **Approve with minor changes**, or **Request
 
 | Situation | Action |
 |---|---|
+| Fresh session / no code context | Architecture-first mode: load `docs/design/project-design.md`, get the diff, check every guideline; note which checks were skipped |
+| No project design exists | Skip conformance table; proceed with standard checklist only; suggest running `/design project` |
 | No PR, just "review my changes" | Diff working tree against HEAD, include untracked files |
 | Diff is huge (> ~1500 lines) | Review by subsystem, say what you covered and what you did not |
 | Tests do not run locally | Say so explicitly; do not claim they pass |

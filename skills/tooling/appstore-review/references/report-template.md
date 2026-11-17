@@ -11,6 +11,16 @@
 | **Auditor** | <agent> for <user> |
 | **Verdict** | ❌ Not ready / ⚠️ Ready after fixes / ✅ Ready |
 
+## Contents
+
+- 1. Executive summary
+- 2. Issue register
+- 3. Issue details
+- 4. Checklist coverage
+- 5. Unverifiable – confirm manually
+- 6. Submission preparation
+- 7. Fix log (filled as issues are resolved)
+
 ## 1. Executive summary
 
 <Three to five sentences: overall readiness and the most important risks.>

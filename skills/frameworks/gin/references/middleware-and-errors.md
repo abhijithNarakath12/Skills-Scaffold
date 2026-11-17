@@ -1,5 +1,15 @@
 # Gin middleware chain and error handling
 
+## Contents
+
+- How the chain runs
+- Request-scoped values
+- Error middleware pattern
+- Structured logging middleware
+- Recovery
+- Timeouts
+- CORS
+
 ## How the chain runs
 
 ```

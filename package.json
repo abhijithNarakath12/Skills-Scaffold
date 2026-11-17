@@ -414,6 +414,7 @@
     "build": "npm run build:catalog && npm run check-types && node esbuild.mjs --production",
     "build:catalog": "node scripts/build-catalog.mjs",
     "validate:skills": "node scripts/validate-skills.mjs",
+    "audit:skills": "for c in generic languages frameworks libraries tooling; do python3 -I skills/generic/skill-creator-plus/scripts/validate_skill.py --all skills/$c || exit 1; done",
     "check-types": "tsc --noEmit",
     "watch": "node esbuild.mjs --watch",
     "compile-tests": "tsc -p tsconfig.test.json",

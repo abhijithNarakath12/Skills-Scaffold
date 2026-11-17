@@ -1,6 +1,6 @@
 ---
 name: zustand
-description: Manage client state with Zustand 4/5 - creating stores with create/createStore, selectors (and useShallow) to avoid re-renders, the slices pattern, middleware (persist, devtools, immer, subscribeWithSelector), using the store outside React, per-component stores via context, and testing. Load when a project depends on zustand or when adding or refactoring global or shared client state in a React app.
+description: Manage client state with Zustand 4/5 - creating stores with create/createStore, selectors (and useShallow) to avoid re-renders, the slices pattern, middleware (persist, devtools, immer, subscribeWithSelector), using the store outside React, per-component stores via context, and testing. Use when a project depends on zustand or when adding or refactoring global or shared client state in a React app.
 ---
 
 # Zustand

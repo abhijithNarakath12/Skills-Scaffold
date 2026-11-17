@@ -10,6 +10,15 @@ Detect from `pubspec.yaml`, then use that library's idioms. Never introduce a se
 | GetX | `get` | `GetMaterialApp`, `Get.put(Controller())` or bindings | `Obx(() => Text(c.count.value.toString()))`, `GetBuilder` | `c.count.value++`, `update()` |
 | Built-in | none of the above | `InheritedWidget`/constructor injection | `ValueListenableBuilder`, `ListenableBuilder`, `AnimatedBuilder` | `notifier.value = x`, `notifyListeners()` |
 
+## Contents
+
+- Riverpod (2.x, codegen or manual)
+- Provider
+- Bloc / Cubit
+- GetX
+- Built-in (no package)
+- Choosing rebuild scope (all libraries)
+
 ## Riverpod (2.x, codegen or manual)
 
 ```dart

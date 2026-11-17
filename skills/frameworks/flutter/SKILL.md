@@ -1,6 +1,6 @@
 ---
 name: flutter
-description: Build and maintain Flutter 3.x apps in Dart: widget tree and composition, StatelessWidget/StatefulWidget, state management detection and idioms (Riverpod, Provider, Bloc, GetX, built-in ValueNotifier), navigation with go_router, Futures/Streams/isolates, Material 3 theming, platform channels and plugins, widget/integration/golden tests, the flutter CLI and release builds. Use when a project has pubspec.yaml depending on flutter, or when editing .dart files under lib/ or test/.
+description: "Build and maintain Flutter 3.x apps in Dart: widget tree and composition, StatelessWidget/StatefulWidget, state management detection and idioms (Riverpod, Provider, Bloc, GetX, built-in ValueNotifier), navigation with go_router, Futures/Streams/isolates, Material 3 theming, platform channels and plugins, widget/integration/golden tests, the flutter CLI and release builds. Use when a project has pubspec.yaml depending on flutter, or when editing .dart files under lib/ or test/."
 ---
 
 # Flutter

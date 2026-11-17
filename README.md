@@ -57,6 +57,10 @@ The block is delimited by `<!-- agent-skills-scaffold:begin -->` and `<!-- agent
 
 Click the **▶ play button** next to the skill in the Agent Skills view to start the audit directly. It installs the skill if needed, then opens a terminal running `claude` with the audit prompt (Claude Code), opens Copilot Chat in agent mode (Copilot), or copies the prompt to the clipboard (other agents). Change this with `agentSkills.runWith`.
 
+### Skill authoring and audits
+
+`skill-creator-plus` (from [robonuggets/skill-creator-plus](https://github.com/robonuggets/skill-creator-plus), MIT) audits, creates and refines skills against Anthropic's skill authoring best practices. Ask the agent to "audit the skills in this project" or "turn this workflow into a skill". In audit mode it runs a bundled validator (Python 3.8+, standard library only), marks every checklist rule pass, fail or N/A with `file:line` evidence, and changes nothing until you pick which findings to apply. The ▶ play button starts an audit of every installed skill.
+
 ## Where skills are installed
 
 | Target                | Directory                           |

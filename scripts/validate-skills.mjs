@@ -41,6 +41,9 @@ for (const category of CATEGORIES) {
     if (!descLine) problems.push(`${where}: description missing`);
     else if (!/^[|>]/.test(descLine) && descLine.replace(/^["']|["']$/g, '').length < 40) problems.push(`${where}: description too short to be useful for triggering (<40 chars)`);
     if (descLine && descLine.length > 1024) problems.push(`${where}: description longer than 1024 chars`);
+    // A plain YAML scalar cannot contain ": "; Claude Code would load the skill with no fields.
+    if (descLine && !/^["'|>]/.test(descLine) && /: |:$/.test(descLine)) problems.push(`${where}: description contains ": " and must be wrapped in double quotes`);
+    if (descLine && /<[a-zA-Z][^>]*>/.test(descLine)) problems.push(`${where}: description must not contain XML tags`);
     const body = md.slice(fm[0].length);
     if (body.trim().length < 400) problems.push(`${where}: SKILL.md body is very short (<400 chars)`);
     if (body.length > 60000) problems.push(`${where}: SKILL.md body is huge (>60k chars); move material into references/`);

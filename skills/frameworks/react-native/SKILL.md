@@ -1,6 +1,6 @@
 ---
 name: react-native
-description: Build and maintain React Native 0.7x apps with or without Expo (SDK 50+): detecting Expo managed vs bare projects, navigation with expo-router or React Navigation, StyleSheet/NativeWind styling, platform APIs and permissions, list and animation performance (FlatList, FlashList, Reanimated, Gesture Handler), native modules and config plugins, Jest + React Native Testing Library, and builds with EAS, Xcode and Gradle. Use when a project depends on react-native or expo, has app.json/app.config.* with an expo key, metro.config.js, or ios/ and android/ folders.
+description: "Build and maintain React Native 0.7x apps with or without Expo (SDK 50+): detecting Expo managed vs bare projects, navigation with expo-router or React Navigation, StyleSheet/NativeWind styling, platform APIs and permissions, list and animation performance (FlatList, FlashList, Reanimated, Gesture Handler), native modules and config plugins, Jest + React Native Testing Library, and builds with EAS, Xcode and Gradle. Use when a project depends on react-native or expo, has app.json/app.config.* with an expo key, metro.config.js, or ios/ and android/ folders."
 ---
 
 # React Native

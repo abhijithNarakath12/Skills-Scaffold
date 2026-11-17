@@ -1,6 +1,6 @@
 ---
 name: graphql
-description: Design and implement GraphQL APIs and clients - schema design (SDL, nullability, connections), resolvers, N+1 avoidance with DataLoader, Apollo Server and GraphQL Yoga on the server, Apollo Client/urql/Relay on the client, graphql-codegen for types, cursor pagination, error handling, and security (depth/complexity limits, persisted queries, introspection). Load when a project has .graphql/.gql files or depends on graphql, @apollo/server, @apollo/client, graphql-yoga, urql, graphene, strawberry-graphql or ariadne.
+description: Design and implement GraphQL APIs and clients - schema design (SDL, nullability, connections), resolvers, N+1 avoidance with DataLoader, Apollo Server and GraphQL Yoga on the server, Apollo Client/urql/Relay on the client, graphql-codegen for types, cursor pagination, error handling, and security (depth/complexity limits, persisted queries, introspection). Use when a project has .graphql/.gql files or depends on graphql, @apollo/server, @apollo/client, graphql-yoga, urql, graphene, strawberry-graphql or ariadne.
 ---
 
 # GraphQL

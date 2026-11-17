@@ -2,6 +2,13 @@
 
 Use as a lens while reading. Report only items that are actually wrong, with evidence.
 
+## Project design conformance
+- **Load `docs/design/project-design.md` before reading anything else.** Extract the full list of numbered guidelines (`G1`, `G2`, ...).
+- For **every** guideline: does the diff comply? Mark each as compliant, violated, or not applicable (this area of the codebase is not touched by the change). Do not skip a guideline because the diff seems unrelated — verify and mark it N/A explicitly.
+- Does the change match the approved feature design or plan for this work (if one exists in `docs/design/` or `docs/plans/`)?
+- Are any deviations from an approved guideline explicitly approved via a project design amendment? If not, the deviation is a finding (Blocker for security/data-ownership boundaries, Major otherwise). Cite the guideline id.
+- In architecture-first mode (no codebase access): this section is fully checkable from the diff alone and must be completed before any other checklist section.
+
 ## Intent and scope
 - Does the change do what the title/description says, all of it, and nothing unrelated?
 - Does it follow the approved project design guidelines (cite G-numbers)?

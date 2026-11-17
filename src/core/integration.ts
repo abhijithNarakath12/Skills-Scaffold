@@ -166,7 +166,7 @@ export function commandFilesFor(
       return [
         {
           path: `.claude/commands/${command.name}.md`,
-          content: `---\ndescription: ${command.description}\nargument-hint: <what to work on>\n---\n${marker}\n\n${body}`,
+          content: `---\ndescription: ${JSON.stringify(command.description)}\nargument-hint: <what to work on>\n---\n${marker}\n\n${body}`,
         },
       ];
     case "cursor":
@@ -180,7 +180,7 @@ export function commandFilesFor(
       return [
         {
           path: `.github/prompts/${command.name}.prompt.md`,
-          content: `---\ndescription: ${command.description}\nagent: agent\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, "the request that follows this prompt")}`,
+          content: `---\ndescription: ${JSON.stringify(command.description)}\nagent: agent\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, "the request that follows this prompt")}`,
         },
       ];
     case "gemini":
@@ -194,14 +194,14 @@ export function commandFilesFor(
       return [
         {
           path: `.windsurf/workflows/${command.name}.md`,
-          content: `---\ndescription: ${command.description}\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, "the request that follows this workflow")}`,
+          content: `---\ndescription: ${JSON.stringify(command.description)}\n---\n${marker}\n\n${body.replace(/\$ARGUMENTS/g, "the request that follows this workflow")}`,
         },
       ];
     case "opencode":
       return [
         {
           path: `.opencode/command/${command.name}.md`,
-          content: `---\ndescription: ${command.description}\n---\n${marker}\n\n${body}`,
+          content: `---\ndescription: ${JSON.stringify(command.description)}\n---\n${marker}\n\n${body}`,
         },
       ];
     default:

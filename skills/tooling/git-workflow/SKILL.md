@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: Day-to-day git for coding agents: branching, small focused commits with conventional messages, rebase vs merge per repo policy, resolving conflicts, non-interactive history editing, and gh CLI for pull requests. Includes hard safety rules (no force-push to shared branches, no rewriting published history, no committing secrets, no destructive commands without explicit instruction). Use whenever committing, branching, rebasing, resolving conflicts or opening PRs in a git repository.
+description: "Day-to-day git for coding agents: branching, small focused commits with conventional messages, rebase vs merge per repo policy, resolving conflicts, non-interactive history editing, and gh CLI for pull requests. Includes hard safety rules (no force-push to shared branches, no rewriting published history, no committing secrets, no destructive commands without explicit instruction). Use whenever committing, branching, rebasing, resolving conflicts or opening PRs in a git repository."
 ---
 
 # Git workflow

@@ -18,7 +18,7 @@ Follows the [Agent Skills specification](https://agentskills.io/specification):
 ```markdown
 ---
 name: react                # must equal the folder name; lowercase, digits, hyphens
-description: One to three sentences. Say WHAT the skill covers and WHEN an agent should load it. Mention the trigger words (library names, file types, tasks). Max 1024 chars.
+description: One to three sentences, third person. Say WHAT the skill covers, then "Use when ..." with the trigger words people type (library names, file types, tasks). Max 1024 chars, no XML tags. Wrap it in double quotes if it contains ": ".
 ---
 
 # Title
@@ -37,7 +37,8 @@ Guidelines:
 - Agents load only `name` + `description` up front and the body only when relevant, so the description must make triggering obvious.
 - Be concrete and current. Prefer the modern idiom (e.g. React function components + hooks, Python 3.11+ typing, Go 1.22 loop vars, Java 21 records) and say which version the advice assumes.
 - Write for an agent that will **act**: imperative steps, exact commands, file locations, and what "done" looks like.
-- 150–400 lines in `SKILL.md`. Move longer material into `references/` and link it with relative paths (`references/testing.md`). The validator checks links.
+- 150–400 lines in `SKILL.md`. Move longer material into `references/` and link it with relative paths (`references/testing.md`). The validator checks links. A reference file over 100 lines starts with a `## Contents` list, because agents often preview only the top of a file.
+- State the current way, not when it changed ("since late 2024" goes stale silently). Give rules their reason so an agent can apply the intent to cases the rule did not foresee.
 - Always include a **Verification** section with the project's typical commands (and how to discover them: `package.json` scripts, `Makefile`, `pyproject.toml`).
 - Do not invent APIs. If unsure about a detail, describe how to check it (`--help`, docs URL) instead of guessing.
 - No marketing, no history lessons, no generic programming advice that applies to every language.
@@ -70,4 +71,7 @@ Guidelines:
 ```
 npm run validate:skills   # spec and convention checks
 npm run build:catalog     # regenerates skills/catalog.json
+npm run audit:skills      # Anthropic best-practice checks (needs python3)
 ```
+
+`audit:skills` runs the validator bundled with the `skill-creator-plus` skill over every category. Fix every ERROR. Two warnings do not apply to this repo: ST6 flags `skill.json` as an unreferenced file (the installer never copies it), and SC5 asks for `pip install` lines for packages that appear only in example code. For judgment rules (conciseness, freedom vs risk, over-prescriptive wording for newer models), use the skill itself: ask the agent to audit a skill with `skill-creator-plus`, and follow its rule to test before deleting instructions.

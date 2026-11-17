@@ -1,6 +1,6 @@
 ---
 name: svelte
-description: Build and maintain Svelte 5 (runes: $state, $derived, $effect, $props, snippets) and SvelteKit 2 applications, with notes for Svelte 4 legacy syntax; covers routing and layouts, load functions, form actions, server vs client code, stores vs runes, hooks, adapters, Vite, Vitest and Playwright. Use when editing .svelte or .svelte.ts files, or a project that depends on svelte or @sveltejs/kit or has svelte.config.js.
+description: "Build and maintain Svelte 5 (runes: $state, $derived, $effect, $props, snippets) and SvelteKit 2 applications, with notes for Svelte 4 legacy syntax; covers routing and layouts, load functions, form actions, server vs client code, stores vs runes, hooks, adapters, Vite, Vitest and Playwright. Use when editing .svelte or .svelte.ts files, or a project that depends on svelte or @sveltejs/kit or has svelte.config.js."
 ---
 
 # Svelte and SvelteKit

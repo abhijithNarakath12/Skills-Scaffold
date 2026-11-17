@@ -1,0 +1,27 @@
+{
+  "title": "Skill Creator Plus (audit, create and refine skills)",
+  "tags": [
+    "workflow",
+    "skills",
+    "authoring",
+    "audit",
+    "agent-skills",
+    "meta"
+  ],
+  "upstream": [
+    {
+      "repo": "robonuggets/skill-creator-plus",
+      "path": "SKILL.md",
+      "note": "skill-creator-plus: vendored from commit 13446e8 (MIT, RoboNuggets); scripts and references are unmodified"
+    },
+    {
+      "repo": "anthropics/skills",
+      "path": "skills/skill-creator",
+      "note": "skill-creator: Anthropic's own skill for creating and evaluating skills"
+    }
+  ],
+  "run": {
+    "label": "Audit installed skills",
+    "prompt": "Use the skill-creator-plus skill in AUDIT mode on every skill installed in this project. Run its validator on each skill folder, read the skills it flags, and write the findings report. Do not change any skill until I pick which findings to apply."
+  }
+}

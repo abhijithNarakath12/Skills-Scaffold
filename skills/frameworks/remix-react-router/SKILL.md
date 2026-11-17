@@ -1,6 +1,6 @@
 ---
 name: remix-react-router
-description: Build and maintain React Router v7 framework-mode and Remix v2 applications: route configuration and nested routing, loaders and actions, Form/fetcher mutations, error boundaries, sessions and cookies, type-safe route modules, SSR and deployment (Node, Vercel, Cloudflare). Use when a project depends on react-router with @react-router/dev, or on @remix-run/react and @remix-run/node, or when editing app/routes.ts, app/root.tsx or route modules with loader/action exports.
+description: "Build and maintain React Router v7 framework-mode and Remix v2 applications: route configuration and nested routing, loaders and actions, Form/fetcher mutations, error boundaries, sessions and cookies, type-safe route modules, SSR and deployment (Node, Vercel, Cloudflare). Use when a project depends on react-router with @react-router/dev, or on @remix-run/react and @remix-run/node, or when editing app/routes.ts, app/root.tsx or route modules with loader/action exports."
 ---
 
 # Remix and React Router v7

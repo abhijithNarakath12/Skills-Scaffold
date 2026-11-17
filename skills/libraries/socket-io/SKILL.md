@@ -1,6 +1,6 @@
 ---
 name: socket-io
-description: Build realtime features with Socket.IO 4 on server and client - typed events, namespaces and rooms, acknowledgements with timeouts, auth middleware, reconnection and connection state recovery, scaling with the Redis/Postgres/cluster adapters and sticky sessions, binary and volatile events, and testing. Load when a project depends on socket.io or socket.io-client, or when adding WebSocket-style realtime messaging, presence, or live updates.
+description: Build realtime features with Socket.IO 4 on server and client - typed events, namespaces and rooms, acknowledgements with timeouts, auth middleware, reconnection and connection state recovery, scaling with the Redis/Postgres/cluster adapters and sticky sessions, binary and volatile events, and testing. Use when a project depends on socket.io or socket.io-client, or when adding WebSocket-style realtime messaging, presence, or live updates.
 ---
 
 # Socket.IO 4

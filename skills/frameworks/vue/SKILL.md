@@ -1,6 +1,6 @@
 ---
 name: vue
-description: Build and maintain Vue 3 applications with the Composition API and <script setup>, covering reactivity (ref, reactive, computed, watch), single-file components, props/emits/v-model, composables, Pinia stores, Vue Router, Vite tooling, Vitest with Vue Test Utils, and eslint-plugin-vue. Use when editing .vue files or a project that depends on vue, including Nuxt, Vite and Quasar projects.
+description: Build and maintain Vue 3 applications with the Composition API and script setup SFCs, covering reactivity (ref, reactive, computed, watch), single-file components, props/emits/v-model, composables, Pinia stores, Vue Router, Vite tooling, Vitest with Vue Test Utils, and eslint-plugin-vue. Use when editing .vue files or a project that depends on vue, including Nuxt, Vite and Quasar projects.
 ---
 
 # Vue

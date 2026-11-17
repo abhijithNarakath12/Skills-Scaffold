@@ -175,7 +175,7 @@ export async function copyDir(src: string, dest: string): Promise<void> {
 export function skillTemplate(name: string, description: string): string {
   return `---
 name: ${name}
-description: ${description}
+description: ${JSON.stringify(description)}
 ---
 
 # ${name}
